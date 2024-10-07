@@ -10,6 +10,7 @@ require('dotenv').config();
 
 const authRoutes = require('./Routes/authRoutes');
 const blogRoutes = require('./Routes/blogRoutes');
+const sellRoutes = require('./Routes/sellRoutes');
 
 const app = express();
 
@@ -42,6 +43,7 @@ MongoConnect(client =>{
     app.locals.db = client.db('myzameen');
     app.use('/api', authRoutes);
     app.use('/api', blogRoutes);
+    app.use('/api', sellRoutes);
 
     app.listen(3000);
     console.log(client);

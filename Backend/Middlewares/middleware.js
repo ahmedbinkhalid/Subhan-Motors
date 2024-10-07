@@ -32,3 +32,11 @@ exports.isAdmin = (req, res, next) =>{
         res.status(403).json({error: 'Only Admins can perform this action'});
     };
 };
+
+exports.isUser = (req, res, next)=>{
+    if(req.user.role === 'User'){
+        next();
+    }else{
+        res.status(403).json({error: 'Sign to Perform this Action'});
+    }
+}
