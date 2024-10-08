@@ -59,3 +59,25 @@ exports.getCarById = async (req, res, next)=>{
     }           
 };
 
+exports.getBankCars = async (req, res, next)=>{
+    try{
+        const db = req.app.locals.db;
+        const bankCars = await sellModel.getBankCars(db);
+        res.status(200).json(bankCars);
+    } catch(error){
+        console.error('Error during getting bank cars', error);
+        res.status(500).json({error:'Server error'});
+    };
+};
+
+exports.getUsedCars = async (req, res, next)=>{
+    try{
+        const db = req.app.locals.db;
+        const usedCars = await sellModel.getUsedCars(db);
+        res.status(200).json(usedCars);
+    } catch(error){
+        console.error('Error while gettting used cars', error);
+        res.status(500).json({error: 'Server error'});
+    }
+}
+

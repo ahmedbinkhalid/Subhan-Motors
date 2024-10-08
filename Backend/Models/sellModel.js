@@ -32,3 +32,17 @@ exports.getCarById = async (db, id)=>{
         
     };
 };
+
+// get cars by type (Bank released)
+
+exports.getBankCars = async (db)=>{
+    const result = await db.collection('cars').find({status: 'Bank'}).toArray();
+    return result;
+}
+
+// get cars by type (Used released)
+
+exports.getUsedCars = async(db)=>{
+    const result = await db.collection('cars').find({status:'Used'}).toArray();
+    return result;
+}
