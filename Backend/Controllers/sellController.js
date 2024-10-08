@@ -1,4 +1,5 @@
 const sellModel = require('../Models/sellModel');
+const { ObjectId } = require('mongodb');
 
 exports.addCar = async (req, res, next) =>{
     const OwnerId = req.user.id;
@@ -32,3 +33,29 @@ exports.addCar = async (req, res, next) =>{
         console.log("Request Body:", req.body);
     }
 };
+
+exports.getAllCars = async (req, res, next)=>{
+    const db = req.app.locals.db;
+    try{
+        const cars = await sellModel.getAllCars(db);
+        res.status(200).json(cars);
+    }catch(error){
+        res.status(500).json({message: error.message});
+    };
+};
+
+exports.getCarById = async (req, res, next)=>{
+    const db = req.app.locals.db;
+    try{
+        const carId = req.params.id;
+        const car = await sellModel.getCarById(db, carId);
+        if(!car){
+            res.status(404).json({message: 'Car not found'});
+        }else{
+            res.status(200).json(car);
+        }
+    }catch(error){
+        res.status(500).json({message: error.message});
+    }           
+};
+

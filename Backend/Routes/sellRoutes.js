@@ -3,6 +3,8 @@ const router = express.Router();
 const sellController = require('../Controllers/sellController');
 const {isUser, verifyToken} = require('../Middlewares/middleware');
 
-router.post('/cars',verifyToken, isUser, sellController.addCar);
+router.post('/addcars',verifyToken, isUser, sellController.addCar);
+router.get('/getcars', sellController.getAllCars);
+router.get('/getCarById/:id', sellController.getCarById);
 
 module.exports = router;
