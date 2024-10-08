@@ -52,3 +52,15 @@ const MongoDB = require("mongodb");
         await db.collection('pendingblogs').deleteOne({_id: new MongoDB.ObjectId(blogId)});
     };
  };
+
+ // For getting all the Approve blogs to show
+
+ exports.getBlogs = async (db)=>{
+    return await db.collection('approvedblogs').find({status: 'Approved'}).toArray();
+ }
+
+ // For getting blogs by id
+
+ exports.getBlogById = async (db, blogId)=>{
+    return await db.collection('approvedblogs').findOne({_id: new MongoDB.ObjectId(blogId)});
+ }

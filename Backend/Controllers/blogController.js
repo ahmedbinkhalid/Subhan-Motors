@@ -68,3 +68,29 @@ exports.getpendingBlog = async (req, res, next)=>{
         res.staus(500).json({error: 'Server error'});
     }
 };
+
+// Controller for geting all the approved blogs
+
+exports.getApprovedBlogs = async (req, res, next)=>{
+    try{
+        const db = req.app.locals.db;
+        const approvedBlogs = await blogModel.getBlogs(db);
+        res.status(200).json(approvedBlogs);
+    } catch(error){
+        console.error('Error During getting approved blogs', error);
+        res.status(500).json({error: 'Server error'});
+    }
+};
+
+// Controller for getting blog by id 
+exports.getBlogById = async (req, res, next)=>{
+    try{
+        const db = req.app.locals.db;
+        const blogId = req.params.id;
+        const blog = await blogModel.getBlogById(db, blogId);
+        res.status(200).json(blog);
+    } catch(error){
+        console.error('error during fetching blog by id', error);
+        res.status(500).json({error: 'Server Error'});
+    }
+}
