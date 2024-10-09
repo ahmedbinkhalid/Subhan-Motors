@@ -19,3 +19,8 @@ exports.getQuery = async (db)=>{
     const result = await db.collection('quries').find({}).toArray();
     return result;
 }
+
+exports.getQuerryById = async (db, queryId)=>{
+    const result = await db.collection('quries').findOne({_id: new MongoDb.ObjectId(queryId)});
+    return result;
+};

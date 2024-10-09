@@ -13,7 +13,7 @@ exports.postQuery = async (req, res, next) =>{
             phoneNumber,
             email: useremail,
         });
-        res.status(200).json({message: 'Query Submitted Successfuly', queryId: newQuery.insertedId});
+        res.status(200).json({message: 'Query Submitted Successfuly, The Showroom will contact you soon!', queryId: newQuery.insertedId});
 
 
     }catch(error){
@@ -32,4 +32,17 @@ exports.getQuery = async (req, res, next)=>{
         console.error('Error While fetching queries', error);
         res.status(500).json({error: 'Server error'});
     }
+};
+
+exports.getQueryById = async (req, res, next) =>{
+    try{
+        const db = req.app.locals.db;
+        const queryId = req.params.id;
+        const result = await queryModle.getQuerryById(db, queryId);
+        res.status(200).json(result);
+        console.log(result);
+    } catch(error){
+        console.error('Error while fetching Query', error);
+        res.status(500).json({error: 'Server Error'});
+    };
 };
