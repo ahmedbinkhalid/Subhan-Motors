@@ -81,3 +81,16 @@ exports.getUsedCars = async (req, res, next)=>{
     }
 }
 
+exports.SearchCars = async (req, res, next)=>{
+    const SearchKey = req.params.key;
+    try{
+        const db = req.app.locals.db;
+        const results = await sellModel.SearchCars(db, SearchKey);
+        res.status(200).json({message: 'Search results', cars: results});
+    } catch(error){
+        res.status(500).json({ message: error.message });
+        console.log("Search Key:", SearchKey);
+    }
+
+};
+

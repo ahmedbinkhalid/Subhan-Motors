@@ -29,9 +29,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static('public'));
-app.get('/', (req, res) => {
+app.get('/', (req, res, next) => {
     res.sendFile(__dirname + '/public/index.html');
 });
+app.get('/search', (req,res,next)=>{
+    res.sendFile(__dirname + '/public/search.html');
+})
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');

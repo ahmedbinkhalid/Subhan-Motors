@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+        }
+        #results {
+            margin-top: 20px;
+        }
+        .car {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Car Search</h1>
+    <input type="text" id="searchKey" placeholder="Enter car make, model, etc." />
+    <button onclick="searchCars()">Search</button>
+
+    <div id="results"></div>
+
+    <script>
+        async function searchCars() {
+            const searchKey = document.getElementById('searchKey').value.trim(); // Trim whitespace
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+
+            // Check if the search key is empty
+            if (searchKey === '') {
+                resultsDiv.innerHTML = '<p>Kindly type something to search related cars.</p>';
+                return; // Exit the function early
+            }
+
+            try {
+                // Updated fetch URL to include '/api' if necessary
+                const response = await fetch(`/api/searchcars/${encodeURIComponent(searchKey)}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+                if (data.message) {
+                    // Display the message if returned from the server
+                    resultsDiv.innerHTML = `<p>${data.message}</p>`;
+                } else if (data.cars && data.cars.length === 0) {
+                    resultsDiv.innerHTML = '<p>No results found.</p>';
+                } else {
+                    data.cars.forEach(car => {
+                        const carDiv = document.createElement('div');
+                        carDiv.className = 'car';
+                        carDiv.innerHTML = `
+                            <strong>Make:</strong> ${car.make}<br>
+                            <strong>Model:</strong> ${car.model}<br>
+                            <strong>Year:</strong> ${car.year}<br>
+                            <strong>Price:</strong> $${car.price}<br>
+                            <strong>Mileage:</strong> ${car.mileage} km<br>
+                            <strong>Color:</strong> ${car.color}<br>
+                            <strong>Description:</strong> ${car.description}<br>
+                            <strong>Status:</strong> ${car.status}<br>
+                            <strong>Location:</strong> ${car.location}<br>
+                        `;
+                        resultsDiv.appendChild(carDiv);
+                    });
+                }
+            } catch (error) {
+                console.error('Error fetching search results:', error);
+                resultsDiv.innerHTML = '<p>Error fetching search results.</p>';
+            }
+        }
+    </script>
+
+</body>
+</html>

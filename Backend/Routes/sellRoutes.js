@@ -8,5 +8,6 @@ router.get('/getcars', sellController.getAllCars);
 router.get('/getCarById/:id', sellController.getCarById);
 router.get('/usedcars', sellController.getUsedCars);
 router.get('/bankcars', sellController.getBankCars);
+router.get('/searchcars/:key', sellController.SearchCars);
 
 module.exports = router;

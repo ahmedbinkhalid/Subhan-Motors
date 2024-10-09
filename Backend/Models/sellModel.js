@@ -1,4 +1,6 @@
+const { query } = require('express');
 const MongoDB = require('mongodb');
+const Fuse = require('fuse.js');
 
 exports.addCar = async (db, carData)=>{
     try{
@@ -45,4 +47,37 @@ exports.getBankCars = async (db)=>{
 exports.getUsedCars = async(db)=>{
     const result = await db.collection('cars').find({status:'Used'}).toArray();
     return result;
-}
+};
+
+
+exports.SearchCars = async (db, key) => {
+    try {
+        const collection = db.collection('cars');
+        if (!key || key.trim() === '') {
+            return { message: 'Kindly type something to search related cars.' };
+        }
+        
+        // Step 1: Fetch all car data
+        const allCars = await collection.find({}).toArray();
+        
+        // Step 2: Set up Fuse.js options
+        const options = {
+            keys: ['make', 'model', 'year', 'price', 'mileage', 'color', 'description', 'location'],
+            threshold: 0.3, // Adjust threshold for fuzzy matching (0.0 = exact match, 1.0 = no match)
+        };
+        
+        // Step 3: Create a Fuse instance
+        const fuse = new Fuse(allCars, options);
+        
+        // Step 4: Use Fuse.js to search for the key
+        const fuzzyResults = fuse.search(key);
+        
+        // Step 5: Extract the matched items from Fuse.js results
+        const result = fuzzyResults.map(result => result.item);
+
+        return result;
+
+    } catch (error) {
+        throw new Error('Error during searching cars: ' + error.message);
+    }
+};
