@@ -27,13 +27,6 @@ router.get('/auth/google',
 );
 router.get('/auth/google/callback',
     passport.authenticate('google', { failureRedirect: '/login', session: false }),googleLogin
-    // (req, res) => {
-    //     if (!req.user) {
-    //         return res.status(401).json({ message: 'User not authenticated' });
-    //     }
-    //     // Assuming you have a successful login here
-    //     res.json({ message: 'Login successful', user: req.user });
-    // }
 );
 
 

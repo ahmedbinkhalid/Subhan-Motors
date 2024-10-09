@@ -157,7 +157,7 @@ exports.googleLogin = async (req, res, next) => {
     const user = req.user;
     try {
         // Generate JWT token for the user
-        const token = jwt.sign({ id: user._id, role: user.role }, secret, { expiresIn: '1h' });
+        const token = jwt.sign({ id: user._id, role: user.role, email: user.email }, secret, { expiresIn: '1h' });
 
         // Send the token and user info in the response
         res.status(200).json({

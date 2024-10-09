@@ -11,6 +11,7 @@ require('dotenv').config();
 const authRoutes = require('./Routes/authRoutes');
 const blogRoutes = require('./Routes/blogRoutes');
 const sellRoutes = require('./Routes/sellRoutes');
+const queryRoutes = require('./Routes/queryRoutes');
 
 const app = express();
 
@@ -47,6 +48,7 @@ MongoConnect(client =>{
     app.use('/api', authRoutes);
     app.use('/api', blogRoutes);
     app.use('/api', sellRoutes);
+    app.use('/api', queryRoutes);
 
     app.listen(3000);
     console.log(client);
