@@ -40,3 +40,11 @@ exports.isUser = (req, res, next)=>{
         res.status(403).json({error: 'Sign to Perform this Action'});
     }
 }
+
+exports.isAdminorUser = (req, res, next)=>{
+    if(req.user && (req.user.role ==='User' || req.user.role ==='Admin')){
+        next();
+    }else{
+        res.status(403).json({error: 'Login to post add'});
+    }
+}

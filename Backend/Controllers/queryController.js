@@ -13,7 +13,7 @@ exports.postQuery = async (req, res, next) =>{
             phoneNumber,
             email: useremail,
         });
-        res.status(200).json({message: 'Query Submitted Successfuly, The Showroom will contact you soon!', queryId: newQuery.insertedId});
+        res.status(200).json({message: '✅ Query Submitted Successfuly, The Showroom will contact you soon!', queryId: newQuery.insertedId});
 
 
     }catch(error){

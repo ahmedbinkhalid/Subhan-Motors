@@ -7,6 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 require('./passport-config');
 require('dotenv').config();
+const path = require('path');
 
 const authRoutes = require('./Routes/authRoutes');
 const blogRoutes = require('./Routes/blogRoutes');
@@ -30,12 +31,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static('public'));
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res, next) => {
     res.sendFile(__dirname + '/public/index.html');
 });
 app.get('/search', (req,res,next)=>{
     res.sendFile(__dirname + '/public/search.html');
-})
+});
+app.get('/sell', (req, res, next)=>{
+    res.sendFile(__dirname + '/public/sell.html');
+});
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');

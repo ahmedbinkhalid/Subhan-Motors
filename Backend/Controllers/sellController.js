@@ -1,12 +1,15 @@
 const sellModel = require('../Models/sellModel');
 const { ObjectId } = require('mongodb');
+const path = require('path');
+const fs = require('fs');
 
 exports.addCar = async (req, res, next) =>{
-    const OwnerId = req.user.id;
+    // const OwnerId = req.user.id;
     try{
         const db = req.app.locals.db;
+        const images = req.files.map(file => file.filename);
         const carData = {
-            Owner: OwnerId,
+            // Owner: OwnerId,
             PhoneNumber : '03404232435',
             make: req.body.make,
             model: req.body.model,
@@ -20,7 +23,7 @@ exports.addCar = async (req, res, next) =>{
             color: req.body.color,
             location: req.body.location,
             description: req.body.description,
-            images: req.body.images,
+            images: images,
             sellerInfo: req.body.sellerInfo,
             dateAdded: new Date(),
             status: req.body.status // Added status for car type (Used or Bank Released)
@@ -29,8 +32,12 @@ exports.addCar = async (req, res, next) =>{
         res.status(200).json({message:'Car added for sale successfuly', carId: result.instertedId});
 
     } catch(error){
-        res.status(500).json({message: error.message});
+        console.error("Error:", error); // Log the error
+        res.status(500).json({ message: error.message });
         console.log("Request Body:", req.body);
+        console.log("Uploaded Files:", req.files); // Log the uploaded files
+        // res.status(500).json({message: error.message});
+        // console.log("Request Body:", req.body);
     }
 };
 
