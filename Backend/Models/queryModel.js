@@ -1,7 +1,7 @@
 const MongoDb = require('mongodb');
 
 exports.addQurey = async (db, queryData)=>{
-    const {title, content, minPrice, maxPrice,email, phoneNumber} = queryData;
+    const {title, content, minPrice, maxPrice,email, phoneNumber, make, model, enginecapacity, transmission, color, fromYear, toYear} = queryData;
     const query = {
         title,
         content,
@@ -9,7 +9,14 @@ exports.addQurey = async (db, queryData)=>{
         maxPrice,
         email,
         phoneNumber,
-        createdAt: new Date()
+        createdAt: new Date(),
+        make,
+        model, 
+        enginecapacity, 
+        transmission, 
+        color, 
+        fromYear, 
+        toYear
     }
     const result = await db.collection('quries').insertOne(query);
     return result;
