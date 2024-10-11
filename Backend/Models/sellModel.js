@@ -13,6 +13,18 @@ exports.addCar = async (db, carData)=>{
     };
 };
 
+// To add new cars for sale by admin
+
+exports.newCars = async (db, carData)=>{
+    try{
+        const collection = db.collection('newCars');
+        const result = await collection.insertOne(carData);
+        return result;
+    } catch(error){
+        throw new Error('Error during adding new car', error.message);
+    };
+};
+
 exports.getAllCars = async (db) =>{
     try{
         const collection = await db.collection('cars');

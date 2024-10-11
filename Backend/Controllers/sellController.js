@@ -4,12 +4,12 @@ const path = require('path');
 const fs = require('fs');
 
 exports.addCar = async (req, res, next) =>{
-    // const OwnerId = req.user.id;
+    const OwnerId = req.user.id;
     try{
         const db = req.app.locals.db;
         const images = req.files.map(file => file.filename);
         const carData = {
-            // Owner: OwnerId,
+            Owner: OwnerId,
             PhoneNumber : '03404232435',
             make: req.body.make,
             model: req.body.model,
@@ -39,6 +39,36 @@ exports.addCar = async (req, res, next) =>{
         // res.status(500).json({message: error.message});
         // console.log("Request Body:", req.body);
     }
+};
+
+exports.newCars = async (req, res, next)=>{
+    try{
+        const db = req. app.locals.db;
+        const images = req.files.map(file=> file.filename);
+        const carData = {
+            phoneNumber : '03409889631',
+            make : req.body.make,
+            model : req.body.model,
+            releasedDate : req.body.releasedDate,
+            transmission: req.app.transmission,
+            engineType: req.body.engineType,
+            engineCapacity: req.body.engineCapacity,
+            availableColors: req.body.availableColor,
+            locattion: req.body.location,
+            description: req.body.description,
+            images: images,
+            dateAdded : new Date(),
+            startingPrice: req.body.startingPrice,
+            maxPrice: req.body.startingPrice
+        }
+        const result = await sellModel.newCars(db, carData);
+        res.status(200).json({message: 'Car added for sale successfuly', carId: result.instertedId});
+    }catch(error){
+        console.error("Error:", error); // Log the error
+        res.status(500).json({ message: error.message });
+        console.log("Request Body:", req.body);
+        console.log("Uploaded Files:", req.files);
+};
 };
 
 exports.getAllCars = async (req, res, next)=>{

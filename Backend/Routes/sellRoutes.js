@@ -28,6 +28,7 @@ const upload = multer({
 });
 
 router.post('/addcars', verifyToken,isAdminorUser, upload.array('images', 10), sellController.addCar);
+router.post('/postcar', verifyToken, isAdmin, upload.array('images', 10), sellController.newCars);
 router.get('/getcars', sellController.getAllCars);
 router.get('/getCarById/:id', sellController.getCarById);
 router.get('/usedcars', sellController.getUsedCars);

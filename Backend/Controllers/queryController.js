@@ -1,7 +1,7 @@
 const queryModle = require('../Models/queryModel');
 
 exports.postQuery = async (req, res, next) =>{
-    const {title, content, minPrice, maxPrice, phoneNumber} = req.body;
+    const {title, content, minPrice, maxPrice, phoneNumber,make, model, enginecapacity, transmission, color, fromYear, toYear} = req.body;
     const useremail = req.user.email;
     try{
         const db = req.app.locals.db;
@@ -12,6 +12,13 @@ exports.postQuery = async (req, res, next) =>{
             maxPrice,
             phoneNumber,
             email: useremail,
+            make, 
+            model, 
+            enginecapacity, 
+            transmission, 
+            color, 
+            fromYear, 
+            toYear
         });
         res.status(200).json({message: '✅ Query Submitted Successfuly, The Showroom will contact you soon!', queryId: newQuery.insertedId});
 
