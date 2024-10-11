@@ -28,6 +28,8 @@ const upload = multer({
 });
 
 router.post('/addcars', verifyToken,isAdminorUser, upload.array('images', 10), sellController.addCar);
+router.get('/newcars', sellController.getNewCars);
+router.get('/newcars/:id', sellController.getNewCarById);
 router.post('/postcar', verifyToken, isAdmin, upload.array('images', 10), sellController.newCars);
 router.get('/getcars', sellController.getAllCars);
 router.get('/getCarById/:id', sellController.getCarById);

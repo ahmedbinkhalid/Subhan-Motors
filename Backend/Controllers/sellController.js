@@ -81,6 +81,32 @@ exports.getAllCars = async (req, res, next)=>{
     };
 };
 
+// get all new cars
+exports.getNewCars = async (req, res, next)=>{
+    const db = req.app.locals.db;
+    try{
+        const newCars = await sellModel.getNewCars(db);
+        res.status(200).json(newCars);
+    } catch(error){
+        res.status(500).json({message: error.message});
+    };
+};
+// get new Cars by id
+exports.getNewCarById = async (req, res, next)=>{
+    const db = req.app.locals.db;
+    try{
+        carId = req.params.id;
+        const cars = await sellModel.getNewCarsById(db, carId);
+        if(!cars){
+            res.status(404).json({message: 'Car not found'});
+        }else{
+            res.status(200).json(cars);
+        }
+    } catch(error){
+        res.status(500).json({message: error.message});
+    };
+};
+
 exports.getCarById = async (req, res, next)=>{
     const db = req.app.locals.db;
     try{

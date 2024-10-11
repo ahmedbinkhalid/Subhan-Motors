@@ -34,6 +34,30 @@ exports.getAllCars = async (db) =>{
         throw new Error('Error retrieving cars: ', error.message);
     };
 };
+// get all new cars
+
+exports.getNewCars = async (db)=>{
+    try{
+        const collection = await db.collection('newCars');
+        const result = await collection.find({}).toArray();
+        return result;
+    } catch (error){
+        throw new Error('Error retrieving new cars: ', error.message);
+    };
+};
+
+// get new cars by id
+
+exports.getNewCarsById = async (db, id)=>{
+    try{
+        const collection = await db.collection('newCars');
+        const result = await collection.findOne({_id: new MongoDB.ObjectId(id)});
+        return result;
+    } catch(error){
+        console.log(error.message);
+        throw new Error('Error retrieving new car by id: ', error.message);
+    }
+};
 
 exports.getCarById = async (db, id)=>{
     try{
