@@ -2,6 +2,7 @@ const sellModel = require('../Models/sellModel');
 const { ObjectId } = require('mongodb');
 const path = require('path');
 const fs = require('fs');
+const subsController = require('./subsController');
 
 exports.addCar = async (req, res, next) =>{
     const OwnerId = req.user.id;
@@ -30,6 +31,7 @@ exports.addCar = async (req, res, next) =>{
         };
         const result = await sellModel.addCar(db, carData);
         res.status(200).json({message:'Car added for sale successfuly', carId: result.instertedId});
+        await subsController.sendEmailsToSubscribers(db, carData);
 
     } catch(error){
         console.error("Error:", error); // Log the error
@@ -44,7 +46,7 @@ exports.addCar = async (req, res, next) =>{
 exports.newCars = async (req, res, next)=>{
     try{
         const db = req. app.locals.db;
-        const images = req.files.map(file=> file.filename);
+        // const images = req.files.map(file=> file.filename);
         const carData = {
             phoneNumber : '03409889631',
             make : req.body.make,
@@ -56,13 +58,14 @@ exports.newCars = async (req, res, next)=>{
             availableColors: req.body.availableColor,
             locattion: req.body.location,
             description: req.body.description,
-            images: images,
+            images: req.body.images,
             dateAdded : new Date(),
             startingPrice: req.body.startingPrice,
             maxPrice: req.body.startingPrice
         }
         const result = await sellModel.newCars(db, carData);
         res.status(200).json({message: 'Car added for sale successfuly', carId: result.instertedId});
+        await subsController.sendEmailsToSubscribers(db, carData);
     }catch(error){
         console.error("Error:", error); // Log the error
         res.status(500).json({ message: error.message });
