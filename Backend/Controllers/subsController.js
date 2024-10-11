@@ -6,7 +6,7 @@ const pass = process.env.MAIL_PASS;
 
 exports.addSubscriber = async (req, res, next) =>{
     const email = req.body.email;
-    const db = req.app.locals.db;
+    const db = req.app.locals.db;//done
     try{
         await subsModel.addSubscriber(db, email);
         res.status(200).json({message: 'Susbcribed to newletter successfuly'});
