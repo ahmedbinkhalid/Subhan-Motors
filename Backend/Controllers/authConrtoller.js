@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 const secret = process.env.SECRET;
+const mail = process.env.MAIL_LOGIN;
+const pass = process.env.MAIL_PASS;
 
 // Signup Logic
 
@@ -103,8 +105,8 @@ exports.forgotpassword = async (req, res, nex) =>{
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: 'mainishqorrdard@gmail.com',
-                pass: 'bphn prke xphu mgcs',
+                user: mail,
+                pass: pass,
 
             },
         });

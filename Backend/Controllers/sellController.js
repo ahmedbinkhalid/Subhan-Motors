@@ -46,7 +46,7 @@ exports.addCar = async (req, res, next) =>{
 exports.newCars = async (req, res, next)=>{
     try{
         const db = req. app.locals.db;
-        // const images = req.files.map(file=> file.filename);
+        const images = req.files.map(file=> file.filename);
         const carData = {
             phoneNumber : '03409889631',
             make : req.body.make,
@@ -58,7 +58,7 @@ exports.newCars = async (req, res, next)=>{
             availableColors: req.body.availableColor,
             locattion: req.body.location,
             description: req.body.description,
-            images: req.body.images,
+            images: images,
             dateAdded : new Date(),
             startingPrice: req.body.startingPrice,
             maxPrice: req.body.startingPrice

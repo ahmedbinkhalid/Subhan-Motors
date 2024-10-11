@@ -1,5 +1,8 @@
 const subsModel = require('../Models/subscriptionModel');
 const nodemailer = require('nodemailer');
+require('dotenv').config();
+const mail = process.env.MAIL_LOGIN;
+const pass = process.env.MAIL_PASS;
 
 exports.addSubscriber = async (req, res, next) =>{
     const email = req.body.email;
@@ -16,8 +19,8 @@ exports.addSubscriber = async (req, res, next) =>{
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'mainishqorrdard@gmail.com', // Your email address
-        pass: 'bphn prke xphu mgcs'// Your email password
+        user: mail, // Your email address
+        pass: pass, // Your email password
     }
 });
 
