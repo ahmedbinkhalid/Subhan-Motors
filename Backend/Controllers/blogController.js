@@ -3,6 +3,7 @@
 const blogModel = require('../Models/blogModel');
 require('dotenv').config();
 const subsModel = require('../Models/subscriptionModel');
+const nodemailer = require('nodemailer');
 
 exports.submitBlog = async (req, res, next)=>{
     const {title, content, images} = req.body;
@@ -37,6 +38,7 @@ exports.approveBlog = async (req, res, next) =>{
     try{
         const db = req.app.locals.db;
         await blogModel.approveBlog(db, blogId);
+        const blog = await blogModel.getBlogById(db, blogId);
         if (blog) {
             const subs = await subsModel.getSubscriber(db);
             // Set up the email transporter using nodemailer
@@ -56,7 +58,8 @@ exports.approveBlog = async (req, res, next) =>{
                 html: `
                     <h2>${blog.title}</h2>
                     <p>${blog.content}</p>
-                    <p><a href="your_website/blogs/${blogId}">Read the full blog here</a></p>
+                    <p><a href="http://localhost:3000/blogs/${blogId}">Read the full blog here</a></p>
+
                 `,
             };
 
@@ -109,12 +112,33 @@ exports.getApprovedBlogs = async (req, res, next)=>{
     try{
         const db = req.app.locals.db;
         const approvedBlogs = await blogModel.getBlogs(db);
-        res.status(200).json(approvedBlogs);
+        // res.status(200).json(approvedBlogs);
+        const blogsWithTimeAgo = approvedBlogs.map(blog => {
+            const timeAgo = calculateTimeAgo(blog.approvedAt);
+            return { ...blog, timeAgo }; // Add timeAgo to the blog object
+        });
+
+        res.status(200).json(blogsWithTimeAgo);
     } catch(error){
         console.error('Error During getting approved blogs', error);
         res.status(500).json({error: 'Server error'});
     }
 };
+// Helper function to calculate time ago
+function calculateTimeAgo(postDate) {
+    const now = new Date();
+    const timeDiff = Math.abs(now - postDate); // Difference in milliseconds
+
+    const minutes = Math.floor(timeDiff / (1000 * 60));
+    const hours = Math.floor(timeDiff / (1000 * 60 * 60));
+    const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+
+    if (days > 0) return `${days} day(s) ago`;
+    if (hours > 0) return `${hours} hour(s) ago`;
+    if (minutes > 0) return `${minutes} minute(s) ago`;
+    
+    return 'Just now';
+}
 
 // Controller for getting blog by id 
 exports.getBlogById = async (req, res, next)=>{
