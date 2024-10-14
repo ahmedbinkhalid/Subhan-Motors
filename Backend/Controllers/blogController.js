@@ -1,6 +1,8 @@
 // For Sumbitting the blogs
 
 const blogModel = require('../Models/blogModel');
+require('dotenv').config();
+const subsModel = require('../Models/subscriptionModel');
 
 exports.submitBlog = async (req, res, next)=>{
     const {title, content, images} = req.body;
@@ -35,6 +37,38 @@ exports.approveBlog = async (req, res, next) =>{
     try{
         const db = req.app.locals.db;
         await blogModel.approveBlog(db, blogId);
+        if (blog) {
+            const subs = await subsModel.getSubscriber(db);
+            // Set up the email transporter using nodemailer
+            const transporter = nodemailer.createTransport({
+                service: 'gmail', // Example: 'gmail'
+                auth: {
+                    user: process.env.MAIL_LOGIN,
+                    pass: process.env.MAIL_PASS,
+                },
+            });
+
+            // Set up the email options
+            const mailOptions = {
+                from: 'Subhan Motors',
+                to: subs, // You can loop through subscribers here
+                subject: 'New Blog Approved!',
+                html: `
+                    <h2>${blog.title}</h2>
+                    <p>${blog.content}</p>
+                    <p><a href="your_website/blogs/${blogId}">Read the full blog here</a></p>
+                `,
+            };
+
+            // Send the email
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    console.error('Error sending email:', error);
+                    return res.status(500).json({ error: 'Error sending email' });
+                }
+                console.log('Email sent:', info.response);
+            });
+        }
         res.status(200).json({message: 'Blog approved and Published'});
     } catch(error){
         console.error('Error During blog approval', error);
