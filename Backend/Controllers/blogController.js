@@ -18,11 +18,12 @@ exports.submitBlog = async (req, res, next)=>{
 
     try{
         const db = req.app.locals.db;
+        const images = req.files.map(file=> file.filename);
         const newBlog = await blogModel.createBlog(db, {
             title,
             content,
             author: bloggerId,
-            images
+            images: images,
         });
         res.status(200).json({message:'Blog submitted for approval', blogId: newBlog.insteredId})
     } catch(error){
