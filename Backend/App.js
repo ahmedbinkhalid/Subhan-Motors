@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const mongoose = require("mongoose");
 const MongoConnect = require('./util/database');
 const bodyParser = require('body-parser');
 const passport = require('passport');
