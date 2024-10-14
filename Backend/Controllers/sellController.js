@@ -160,3 +160,21 @@ exports.SearchCars = async (req, res, next)=>{
 
 };
 
+
+
+// exports.SearchCars = async (req, res, next)=>{
+//     const key = req.params.key;
+//     const city = req.query.city;
+//     const priceRange = req.query.priceRange;
+//     console.log(`Search Key: ${key}, City: ${city}, Price Range: ${priceRange}`);
+//     try{
+//         const db = req.app.locals.db;
+//         const results = await sellModel.SearchCars(db, city, key, priceRange);
+//         res.status(200).json({message: 'Search results', cars: results});
+//     } catch(error){
+//         res.status(500).json({ message: error.message });
+//         console.log("Search Key:", key);
+//     }
+
+// };
+
