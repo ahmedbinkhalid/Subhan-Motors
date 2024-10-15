@@ -45,6 +45,15 @@ exports.getCarsByOwnerId = async (db, OwnerId)=>{
         throw new Error('Error retrieving cars by owner id: ', error.message);
     }
 };
+// Get delete cars by carId 
+exports.deleteCar = async (db, carId)=>{
+    try{
+        const collection = db.collection('cars');
+        await collection.deleteOne({_id: new MongoDB.ObjectId(carId)})
+    } catch (error){
+        throw new Error('Error deleteing car: ' + error.message);
+    }
+}
 // get all new cars
 
 exports.getNewCars = async (db)=>{
