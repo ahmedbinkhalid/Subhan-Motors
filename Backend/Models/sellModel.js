@@ -54,6 +54,9 @@ exports.deleteCar = async (db, carId)=>{
         throw new Error('Error deleteing car: ' + error.message);
     }
 }
+
+// Update Cars uploaded by users
+exports.updateCar = async (db, carId, carData)=>{};
 // get all new cars
 
 exports.getNewCars = async (db)=>{
