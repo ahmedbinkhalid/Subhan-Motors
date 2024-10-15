@@ -34,6 +34,17 @@ exports.getAllCars = async (db) =>{
         throw new Error('Error retrieving cars: ', error.message);
     };
 };
+
+// get cars by owner id (user can see what they have posted)
+exports.getCarsByOwnerId = async (db, OwnerId)=>{
+    try{
+        const collection = db.collection('cars');
+        const result = await collection.find({Owner: OwnerId}).toArray();
+        return result;
+    } catch (error){
+        throw new Error('Error retrieving cars by owner id: ', error.message);
+    }
+};
 // get all new cars
 
 exports.getNewCars = async (db)=>{
@@ -84,45 +95,6 @@ exports.getUsedCars = async(db)=>{
     const result = await db.collection('cars').find({status:'Used'}).toArray();
     return result;
 };
-
-
-// exports.SearchCars = async (db, key) => {
-//     try {
-//         const collection = db.collection('cars');
-//         const newCarsCollection = db.collection('newCars');
-//         if (!key || key.trim() === '') {
-//             return { message: 'Kindly type something to search related cars.' };
-//         }
-        
-//         // Step 1: Fetch all car data
-//         const allCars = await Promise.all([
-//             collection.find({}).toArray(),
-//             newCarsCollection.find({}).toArray(),
-//         ]);
-//         // const allCars = await collection.find({}).toArray();
-//         const combinedCars = [...allCars[0], ...allCars[1]];
-//         // Step 2: Set up Fuse.js options
-//         const options = {
-//             keys: ['make', 'model', 'year', 'price', 'mileage', 'color', 'description', 'location', 'availableColors'],
-//             threshold: 0.3, // Adjust threshold for fuzzy matching (0.0 = exact match, 1.0 = no match)
-//         };
-        
-//         // Step 3: Create a Fuse instance
-//         const fuse = new Fuse(combinedCars, options);
-        
-//         // Step 4: Use Fuse.js to search for the key
-//         const fuzzyResults = fuse.search(key);
-        
-//         // Step 5: Extract the matched items from Fuse.js results
-//         const result = fuzzyResults.map(result => result.item);
-
-//         return result;
-
-//     } catch (error) {
-//         throw new Error('Error during searching cars: ' + error.message);
-//     }
-// };
-
 // Can delete after trying
 
 exports.SearchCars = async (db, key) => {
@@ -190,6 +162,45 @@ exports.SearchCars = async (db, key) => {
         throw new Error('Error during searching cars: ' + error.message);
     }
 };
+
+
+// exports.SearchCars = async (db, key) => {
+//     try {
+//         const collection = db.collection('cars');
+//         const newCarsCollection = db.collection('newCars');
+//         if (!key || key.trim() === '') {
+//             return { message: 'Kindly type something to search related cars.' };
+//         }
+        
+//         // Step 1: Fetch all car data
+//         const allCars = await Promise.all([
+//             collection.find({}).toArray(),
+//             newCarsCollection.find({}).toArray(),
+//         ]);
+//         // const allCars = await collection.find({}).toArray();
+//         const combinedCars = [...allCars[0], ...allCars[1]];
+//         // Step 2: Set up Fuse.js options
+//         const options = {
+//             keys: ['make', 'model', 'year', 'price', 'mileage', 'color', 'description', 'location', 'availableColors'],
+//             threshold: 0.3, // Adjust threshold for fuzzy matching (0.0 = exact match, 1.0 = no match)
+//         };
+        
+//         // Step 3: Create a Fuse instance
+//         const fuse = new Fuse(combinedCars, options);
+        
+//         // Step 4: Use Fuse.js to search for the key
+//         const fuzzyResults = fuse.search(key);
+        
+//         // Step 5: Extract the matched items from Fuse.js results
+//         const result = fuzzyResults.map(result => result.item);
+
+//         return result;
+
+//     } catch (error) {
+//         throw new Error('Error during searching cars: ' + error.message);
+//     }
+// };
+
 
 
 // Please don't delete it

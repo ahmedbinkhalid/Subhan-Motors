@@ -38,11 +38,18 @@ exports.addCar = async (req, res, next) =>{
         res.status(500).json({ message: error.message });
         console.log("Request Body:", req.body);
         console.log("Uploaded Files:", req.files); // Log the uploaded files
-        // res.status(500).json({message: error.message});
-        // console.log("Request Body:", req.body);
     }
 };
-
+exports.getUserCars = async (req, res, next)=>{
+    const OwnerId = req.user.id;
+    try{
+        const db = req.app.locals.db;
+        const cars = await sellModel.getCarsByOwnerId(db, OwnerId);
+        res.status(200).json(cars);
+    } catch(error){
+        res.status(500).json({message: error.message});
+    }
+}
 exports.newCars = async (req, res, next)=>{
     try{
         const db = req. app.locals.db;

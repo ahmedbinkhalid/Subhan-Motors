@@ -36,5 +36,6 @@ router.get('/getCarById/:id', sellController.getCarById);
 router.get('/usedcars', sellController.getUsedCars);
 router.get('/bankcars', sellController.getBankCars);
 router.get('/searchcars/:key', sellController.SearchCars);
+router.get('/usercars', verifyToken, isUser, sellController.getUserCars);
 
 module.exports = router;
