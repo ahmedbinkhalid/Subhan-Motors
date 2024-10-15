@@ -86,35 +86,103 @@ exports.getUsedCars = async(db)=>{
 };
 
 
+// exports.SearchCars = async (db, key) => {
+//     try {
+//         const collection = db.collection('cars');
+//         const newCarsCollection = db.collection('newCars');
+//         if (!key || key.trim() === '') {
+//             return { message: 'Kindly type something to search related cars.' };
+//         }
+        
+//         // Step 1: Fetch all car data
+//         const allCars = await Promise.all([
+//             collection.find({}).toArray(),
+//             newCarsCollection.find({}).toArray(),
+//         ]);
+//         // const allCars = await collection.find({}).toArray();
+//         const combinedCars = [...allCars[0], ...allCars[1]];
+//         // Step 2: Set up Fuse.js options
+//         const options = {
+//             keys: ['make', 'model', 'year', 'price', 'mileage', 'color', 'description', 'location', 'availableColors'],
+//             threshold: 0.3, // Adjust threshold for fuzzy matching (0.0 = exact match, 1.0 = no match)
+//         };
+        
+//         // Step 3: Create a Fuse instance
+//         const fuse = new Fuse(combinedCars, options);
+        
+//         // Step 4: Use Fuse.js to search for the key
+//         const fuzzyResults = fuse.search(key);
+        
+//         // Step 5: Extract the matched items from Fuse.js results
+//         const result = fuzzyResults.map(result => result.item);
+
+//         return result;
+
+//     } catch (error) {
+//         throw new Error('Error during searching cars: ' + error.message);
+//     }
+// };
+
+// Can delete after trying
+
 exports.SearchCars = async (db, key) => {
     try {
         const collection = db.collection('cars');
         const newCarsCollection = db.collection('newCars');
+        
         if (!key || key.trim() === '') {
             return { message: 'Kindly type something to search related cars.' };
         }
         
-        // Step 1: Fetch all car data
-        const allCars = await Promise.all([
+        // Step 1: Fetch all car data from both collections
+        const [cars, newCars] = await Promise.all([
             collection.find({}).toArray(),
             newCarsCollection.find({}).toArray(),
         ]);
-        // const allCars = await collection.find({}).toArray();
-        const combinedCars = [...allCars[0], ...allCars[1]];
-        // Step 2: Set up Fuse.js options
+
+        // Step 2: Normalize data
+        const normalizeCarData = car => {
+            return {
+                make: car.make || '',           // Default to empty string if the field is missing
+                model: car.model || '',
+                year: car.year || '',
+                price: car.price || 0,          // Default to 0 for numbers
+                mileage: car.mileage || 0,
+                color: car.color || '',
+                description: car.description || '',
+                location: car.location || '',
+                availableColors: car.availableColors || [],  // Default to empty array
+                // Add other fields as necessary
+            };
+        };
+
+        const combinedCars = [
+            ...cars.map(normalizeCarData),
+            ...newCars.map(normalizeCarData)
+        ];
+
+        if (combinedCars.length === 0) {
+            return { message: 'No cars found.' };
+        }
+
+        // Step 3: Set up Fuse.js options
         const options = {
             keys: ['make', 'model', 'year', 'price', 'mileage', 'color', 'description', 'location', 'availableColors'],
             threshold: 0.3, // Adjust threshold for fuzzy matching (0.0 = exact match, 1.0 = no match)
         };
-        
-        // Step 3: Create a Fuse instance
+
+        // Step 4: Create a Fuse instance
         const fuse = new Fuse(combinedCars, options);
-        
-        // Step 4: Use Fuse.js to search for the key
+
+        // Step 5: Use Fuse.js to search for the key
         const fuzzyResults = fuse.search(key);
-        
-        // Step 5: Extract the matched items from Fuse.js results
+
+        // Step 6: Extract the matched items from Fuse.js results
         const result = fuzzyResults.map(result => result.item);
+
+        if (result.length === 0) {
+            return { message: 'No cars matched your search.' };
+        }
 
         return result;
 
@@ -123,6 +191,8 @@ exports.SearchCars = async (db, key) => {
     }
 };
 
+
+// Please don't delete it
 
 // exports.SearchCars = async (db, key, city, priceRange) => {
 //     try {

@@ -56,7 +56,7 @@ exports.newCars = async (req, res, next)=>{
             engineType: req.body.engineType,
             engineCapacity: req.body.engineCapacity,
             availableColors: req.body.availableColor,
-            locattion: req.body.location,
+            location: req.body.location,
             description: req.body.description,
             images: images,
             dateAdded : new Date(),
