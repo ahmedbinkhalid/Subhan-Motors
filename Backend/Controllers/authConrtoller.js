@@ -117,7 +117,8 @@ exports.forgotpassword = async (req, res, nex) =>{
             text: `Your otp for password reset is: ${otp} Its is valid for 10 minutes`
         }
         await transporter.sendMail(mailOptions);
-        res.status(200).json({message: 'Otp sent on your mail'});
+        const otpToken = jwt.sign({ email, otp }, secret, { expiresIn: '10m' });
+        res.status(200).json({message: 'Otp sent on your mail', otpToken});
     } catch (error){
         console.error('Error during password reset', error);
         res.status(500).json({error: 'Server Error'});
@@ -125,14 +126,17 @@ exports.forgotpassword = async (req, res, nex) =>{
 }
 
 exports.resetpassword = async (req, res, next)=>{
-    const {email, otp, newpassword, confirmpassword} = req.body;
+    const {otpToken, otp, newpassword, confirmpassword} = req.body;
     console.log(req.body);
     if(newpassword !==confirmpassword){
         res.status(500).json({error: 'Password does not match'});
     }
 
-    const db = req.app.locals.db;
+    
     try{
+        const decoded = jwt.verify(otpToken, secret);
+        const email = decoded.email;
+        const db = req.app.locals.db;
         const user = await userModel.findUserByEmail(db, email);
         if(!user || user.otp !== parseInt(otp) || new Date() > user.otpExpiration){
             res.status(500).json({error:'Invalid or Expired otp'})
