@@ -7,9 +7,11 @@ import { SellCar } from '../pages/SellCar';
 import { Blogs } from '../pages/Blogs';
 import { Contact } from '../pages/Contact';
 import { Layout } from '../components/organism/AllPagesLayout';
+import { ModalProvider } from '../components/organism/AllPagesLayout/ModalContext';
 
 export const AppRouter : React.FC = () => {
   return (
+    <ModalProvider>
     <Router>
     <Routes>
      
@@ -21,5 +23,6 @@ export const AppRouter : React.FC = () => {
         <Route path='/contact' element = { <Layout><Contact /> </Layout>} />
     </Routes>
 </Router>
+</ModalProvider>
   )
 }

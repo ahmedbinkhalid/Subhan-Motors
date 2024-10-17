@@ -1,14 +1,12 @@
 import React from "react";
 import { HeaderSearchBar } from "../../atoms/HeaderSearchBar";
 import { PageLinks } from "../../atoms/PageLinks";
-import { HeaderProps } from "./types";
 
-export const Header: React.FC<HeaderProps> = ({ openModal }) => {
+export const Header: React.FC = () => {
   return (
     <div className="w-full flex flex-col h-auto lg:justify-between items-center bg-gradient-to-r from-gray-950 via-red-950 to-gray-950 ... text-white max-lg:px-4">
       {/* PageLinks centered at the top */}
-
-      <PageLinks openModal={openModal} />
+      <PageLinks />
 
       {/* Main content: Heading and Search Bar centered vertically */}
       <div className="flex flex-col text-center">
