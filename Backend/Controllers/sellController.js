@@ -41,6 +41,45 @@ exports.addCar = async (req, res, next) =>{
     }
 };
 
+// Edit car data
+
+exports.updateCar = async (req, res, next)=>{
+    const carId = req.params.id;
+    const OwnerId = req.user.id;
+    try{
+        const db = req.app.locals.db;
+        const car = await sellModel.getCarById(db, carId);
+        if (!car) {
+            return res.status(404).json({ message: 'Car not found' });
+        }
+
+        if (car.Owner !== OwnerId) {
+            return res.status(403).json({ message: 'You are not allowed to edit this car' });
+        }
+
+        const updatedData = {
+            make: req.body.make || car.make,
+            model: req.body.model || car.model,
+            year: req.body.year || car.year,
+            price: req.body.price || car.price,
+            mileage: req.body.mileage || car.mileage,
+            condition: req.body.condition || car.condition,
+            transmission: req.body.transmission || car.transmission,
+            engineType: req.body.engineType || car.engineType,
+            engineCapacity: req.body.engineCapacity || car.engineCapacity,
+            color: req.body.color || car.color,
+            location: req.body.location || car.location,
+            description: req.body.description || car.description,
+            sellerInfo: req.body.sellerInfo || car.sellerInfo,
+        };
+
+        await sellModel.updateCar(db, carId, updatedData);
+        res.status(200).json({ message: 'Car updated successfully' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 // To delte car by id by user
 exports.deleteCar = async (req, res, next)=>{
     const carId = req.params.id;

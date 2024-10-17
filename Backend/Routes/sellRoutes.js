@@ -37,6 +37,7 @@ router.get('/usedcars', sellController.getUsedCars);
 router.get('/bankcars', sellController.getBankCars);
 router.get('/searchcars/:key', sellController.SearchCars);
 router.get('/usercars', verifyToken, isUser, sellController.getUserCars);
-router.delete('/deletecar/:id', verifyToken, isUser, sellController.deleteCar)
+router.delete('/deletecar/:id', verifyToken, isUser, sellController.deleteCar);
+router.put('/updatecar/:id', verifyToken, isUser, upload.array('images', 10), sellController.updateCar);
 
 module.exports = router;

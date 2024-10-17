@@ -56,7 +56,12 @@ exports.deleteCar = async (db, carId)=>{
 }
 
 // Update Cars uploaded by users
-exports.updateCar = async (db, carId, carData)=>{};
+exports.updateCar = async (db, carId, updatedData)=>{
+    try{
+        const collection = db.collection('cars');
+        const result = await collection.updateOne({_id: new MongoDB.ObjectId(carId)}, {$set: updatedData });
+    }
+};
 // get all new cars
 
 exports.getNewCars = async (db)=>{
