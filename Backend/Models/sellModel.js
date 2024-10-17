@@ -60,6 +60,9 @@ exports.updateCar = async (db, carId, updatedData)=>{
     try{
         const collection = db.collection('cars');
         const result = await collection.updateOne({_id: new MongoDB.ObjectId(carId)}, {$set: updatedData });
+        return result;
+    } catch (error){
+        throw new Error('Error updating car: ' + error.message);
     }
 };
 // get all new cars
