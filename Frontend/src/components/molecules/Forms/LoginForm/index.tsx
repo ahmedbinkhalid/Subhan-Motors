@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
     <form onSubmit={handleLoginSubmit}>
        <div className="flex flex-col gap-4">
        <h1 className="md:text-3xl text-2xl self-center font-bold leading-none">Login</h1>
-       <p className="self-center text-lg font-medium leading-none"> Welcome Back</p>
+       <p className="self-center text-lg font-medium leading-none text-center"> Welcome Back</p>
       <SignInEmailInput name="email" value={formData.email} onChange={handleInputChange} />
       <PasswordInput name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" />
       <FormSubmissionButton data="Login" />

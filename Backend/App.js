@@ -16,7 +16,18 @@ const subsRoutes = require('./Routes/subsRoutes');
 
 const app = express();
 
+// const allowedOrigins = ['http://localhost:5173'];
+
+// app.use(cors({
+//   origin: allowedOrigins, // Allow requests from your frontend
+//   methods: "GET, POST, PUT, PATCH, DELETE",
+//   credentials: true // Enable cookies and authentication if needed
+// }));
+
 app.use(cors());
+
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

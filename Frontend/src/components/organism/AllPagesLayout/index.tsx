@@ -18,7 +18,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Modal for SignUp or Login */}
       {modalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50 shadow-sm h-auto">
-          <div className="relative w-full max-w-md bg-white rounded-lg shadow-lg py-4 max-md:mx-2">
+          <div className="relative w-full max-w-md bg-white rounded-lg shadow-lg py-4 max-md:mx-3">
             <button
               onClick={closeModal}
               className="cursor-pointer absolute top-4 right-6 text-charcoal-gray text-2xl z-20"

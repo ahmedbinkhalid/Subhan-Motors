@@ -7,7 +7,8 @@ type PasswordInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const PasswordInput: React.FC<PasswordInputProps> = ({
+export const 
+PasswordInput: React.FC<PasswordInputProps> = ({
   placeholder,
   name,
   value,

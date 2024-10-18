@@ -165,12 +165,12 @@ exports.googleLogin = async (req, res, next) => {
         // Generate JWT token for the user
         const token = jwt.sign({ id: user._id, role: user.role, email: user.email }, secret, { expiresIn: '1h' });
 
-        // Send the token and user info in the response
         res.status(200).json({
             message: 'Google Login Successful',
             token,
             user: { id: user._id, name: user.name, role: user.role }
         });
+        // res.redirect(`http://localhost:5173/?token=${token}`);
     } catch (error) {
         console.error('Error During Google Login:', error);
         res.status(500).json({ error: "Server Error" });

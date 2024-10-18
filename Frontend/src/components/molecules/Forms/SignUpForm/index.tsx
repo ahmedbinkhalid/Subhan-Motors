@@ -52,12 +52,12 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
   };
 
   return (
-    <form onSubmit={handleSignupSubmit}>
-      <div className="flex flex-col gap-4">
-        <h1 className="self-center font-bold leading-none py-2 md:text-3xl text-2xl">Sign Up</h1>
-        <p className="self-center text-lg font-semibold leading-none">
+    <div className="flex flex-col md:gap-2 gap-2 py-1">
+      <h1 className="self-center font-bold leading-none md:text-3xl text-2xl">Sign Up</h1>
+        <p className="self-center text-lg font-semibold leading-none py-2">
           Join Us and Explore New Services
         </p>
+      <form onSubmit={handleSignupSubmit} className="flex flex-col md:gap-3 gap-2">
         <FullnameInput name="fullname" value={formData.fullname} onChange={handleInputChange} />
         <SignInEmailInput name="email" value={formData.email} onChange={handleInputChange} />
         <PasswordInput name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" />
@@ -68,8 +68,9 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
           placeholder="Confirm Password"
         />
         <FormSubmissionButton data="Sign Up" />
+    </form>
 
-        <legend className="text-center"> OR </legend>
+    <legend className="text-center"> OR </legend>
       {
         continueWithData.map((objData, index) => (
           <ContinueWithButton
@@ -86,8 +87,8 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
             SignIn
           </span>
         </button>
-      </div>
-    </form>
+        
+    </div>
   );
 };
 

@@ -40,8 +40,8 @@ export const FullnameInput: React.FC<FullnameInputProps> = ({ name, value, onCha
             setIsValid(!isValid); // Keep the invalid state
           }
         }}
-        required
         autoComplete='off'
+        required
       />
     </div>
   );

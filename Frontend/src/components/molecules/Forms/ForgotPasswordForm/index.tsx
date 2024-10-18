@@ -5,11 +5,17 @@ import { FormSubmissionButton } from '../../../atoms/FormSubmissionButton';
 import { forgotPassword } from '../../../services/AuthService';
 import { useModal } from "../../../organism/AllPagesLayout/ModalContext";
 
+// Update the interface to include otpToken
+interface ForgotPasswordResponse {
+  message?: string;
+  error?: string;
+  otpToken?: string; // Add otpToken here
+}
+
 export const ForgotPasswordForm: React.FC = () => {
   const [email, setEmail] = useState(''); // State for the email input
   const [message, setMessage] = useState<string | null>(null);
-  const { openModal} = useModal();
-  // State for success/error message
+  const { openModal } = useModal();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value); // Update email state
@@ -19,13 +25,20 @@ export const ForgotPasswordForm: React.FC = () => {
     e.preventDefault();
 
     // Call the forgot password service
-    const response = await forgotPassword(email);
-    
+    const response: ForgotPasswordResponse = await forgotPassword(email);
+    console.log(response);
+
     // Handle response
     if (response.error) {
       setMessage(response.error); // Set error message
     } else {
       setMessage(response.message || '');
+
+      // Extract otpToken and set it in local storage
+      if (response.otpToken) {
+        localStorage.setItem('otpToken', response.otpToken);
+      }
+
       openModal("newPassword");
     }
   };
