@@ -53,14 +53,16 @@ export const OtpForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className='flex flex-col md:gap-4 gap-1'>
       <img
         src={OTP}
         alt="Reset Password"
         className="object-contain h-48"
       />
-      <h1 className="text-2xl self-center font-bold leading-none py-4">Resetting Your Password!</h1>
-      <OTPInput onChange={handleOtpChange} /> {/* Pass the handler here */}
+      <h1 className="md:text-xl text-lg  self-center font-bold leading-none">Resetting Your Password!</h1>
+      <p className="self-center text-lg font-medium leading-none text-center"> We Help you Resetting your Password </p>
+      <form onSubmit={handleSubmit} className=' flex flex-col md:gap-4 gap-1 pb-2'>
+      <OTPInput onChange={handleOtpChange} /> 
       <PasswordInput
         placeholder="Enter a new Password ..."
         name="newPassword"
@@ -76,5 +78,6 @@ export const OtpForm: React.FC = () => {
       <FormSubmissionButton data="Reset" />
       {message && <p className="text-center mt-4">{message}</p>} {/* Display message */}
     </form>
+    </div>
   );
 };

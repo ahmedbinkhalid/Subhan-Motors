@@ -44,17 +44,17 @@ export const ForgotPasswordForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className='px-10'>
+    <form onSubmit={handleSubmit} className=''>
       <div className="flex flex-col gap-4">
         <div className='h-auto flex justify-center items-center mt-6 pt-4'>
           <img
             src={forgotPasswordIcon}
             alt="forgotPassword"
-            className="object-contain h-32 md:h-48 lg:h-64" // Adjusted image heights for responsiveness
+            className="object-contain h-32 md:h-44 lg:h-48 2xl:h-64" // Adjusted image heights for responsiveness
           />
         </div>
         <h1 className="text-2xl self-center font-bold leading-none">Forgot Password</h1>
-        <p className="opacity-75 self-center text-lg font-medium leading-none text-center">
+        <p className="opacity-75 self-center text-lg font-medium leading-none text-center mb-2">
           We help you reset your password!
         </p>
         <SignInEmailInput 
