@@ -33,7 +33,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange }) => {
   };
 
   return (
-    <div className="flex justify-center space-x-2">
+    <div className="flex justify-center space-x-4">
       {otp.map((_, index) => (
         <input
           key={index}
@@ -43,7 +43,7 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange }) => {
           onChange={(e) => handleChange(e.target.value, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           ref={(el) => (inputRefs.current[index] = el)}
-          className="w-12 h-12 text-center text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-regal-red"
+          className="w-12 h-12 text-center text-lg border-b-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-regal-red"
         />
       ))}
     </div>
