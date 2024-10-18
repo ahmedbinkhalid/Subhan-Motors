@@ -5,12 +5,12 @@ const fs = require('fs');
 const subsController = require('./subsController');
 
 exports.addCar = async (req, res, next) =>{
-    const OwnerId = req.user.id;
+    // const OwnerId = req.user.id;
     try{
         const db = req.app.locals.db;
         const images = req.files.map(file => file.filename);
         const carData = {
-            Owner: OwnerId,
+            Owner: "Ahmed",
             PhoneNumber : '03404232435',
             make: req.body.make,
             model: req.body.model,
