@@ -1,5 +1,7 @@
-interface UsedCarsForSaleResponse {
-    sellCarsData: object[]; // Assuming this is an array of car objects
+import { CarData } from "../../molecules/FeaturedCardsLayout";
+
+export interface UsedCarsForSaleResponse {
+    sellCarsData: CarData[]; // Ensure this is CarData[]
     error?: string;
 }
 
@@ -13,13 +15,23 @@ export const UsedCarsForSale = async (): Promise<UsedCarsForSaleResponse> => {
         });
 
         if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+            throw new Error("Failed to fetch");
         }
 
         const data = await response.json();
-        return { sellCarsData: data }; // Adjust based on the actual structure of your data
+        
+        // Assuming `data` is an array of car objects, map it to CarData[]
+        const formattedData: CarData[] = data.map((item) => ({
+            images: item.images,
+            model: item.model,
+            make : item.make,
+            price: item.price,
+            location: item.location,
+        }));
+
+        return { sellCarsData: formattedData }; // Return the correctly formatted data
     } catch (error) {
-        console.error("Error during getting Sell Cars Data: ", error);
+        console.error("Error during fetching used cars:", error);
         return { sellCarsData: [], error: "An error occurred during fetching used cars." };
     }
 };
