@@ -58,6 +58,9 @@ app.get('/blogs',(req,res,next)=>{
 app.get('/blogs/:id',(req,res,next)=>{
     res.sendFile(__dirname + '/public/blogDetails.html');
 });
+app.get('/usedcars',(req,res,next)=>{
+    res.sendFile(__dirname + '/public/usedcars.html');
+});
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
