@@ -86,7 +86,6 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
     currentIndex + cardsPerPage > totalCards
       ? totalCards
       : currentIndex + cardsPerPage
-    // ok
   );
 
   return (
