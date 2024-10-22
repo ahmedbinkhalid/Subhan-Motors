@@ -5,9 +5,9 @@ export interface UsedCarsForSaleResponse {
     error?: string;
 }
 
-export const UsedCarsForSale = async (): Promise<UsedCarsForSaleResponse> => {
+export const UsedCarsForSale = async (apiEnd : string): Promise<UsedCarsForSaleResponse> => {
     try {
-        const response = await fetch("http://localhost:5000/api/usedcars", {
+        const response = await fetch(`http://localhost:5000/api/${apiEnd}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -20,12 +20,14 @@ export const UsedCarsForSale = async (): Promise<UsedCarsForSaleResponse> => {
 
         const data = await response.json();
         
-        // Assuming `data` is an array of car objects, map it to CarData[]
-        const formattedData: CarData[] = data.map((item) => ({
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const formattedData: CarData[] = data.map((item : any) => ({
             images: item.images,
             model: item.model,
             make : item.make,
             price: item.price,
+            startingPrice : item.startingPrice,
+            maxPrice : item.maxPrice,
             location: item.location,
         }));
 

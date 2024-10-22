@@ -6,7 +6,7 @@ import { FeaturedCardLayoutProps } from "./types";
 import {
   UsedCarsForSale,
   UsedCarsForSaleResponse,
-} from "../../api/UsedCarsForSale";
+} from "../../apis/UsedCarsForSale";
 
 // Define the type for car data
 export interface CarData {
@@ -14,6 +14,8 @@ export interface CarData {
   make: string;
   model: string;
   price: string;
+  startingPrice : string;
+  maxPrice : string;
   location: string;
 }
 
@@ -28,7 +30,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
   // Fetch the cars data when the component mounts
   useEffect(() => {
     const fetchData = async () => {
-      const response: UsedCarsForSaleResponse = await UsedCarsForSale();
+      const response: UsedCarsForSaleResponse = await UsedCarsForSale(managedBy.includes("Brand") ? "newcars" : managedBy.includes("Used") ? "usedcars" : "bankcars");
       if (!response.error) {
         setSellCarsData(response.sellCarsData); // Set the formatted car data
       } else {
@@ -114,10 +116,10 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
           return (
             <FeaturedCarsCard
               key={index}
-              carImage={data.images.length > 0 ? data.images[0] : ""} // Conditional rendering
+              carImage={data.images ? data.images[0] : ""}
               carMake={data.make}
               carModel={data.model}
-              carPrice={data.price}
+              carPrice={managedBy.includes("Brand") ? data.startingPrice + data.maxPrice : data.price}
               carCity={data.location}
             />
           );

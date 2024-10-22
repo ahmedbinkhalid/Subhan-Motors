@@ -10,8 +10,8 @@ export const FeaturedCarsCard  : React.FC  <FeaturedCarsCardProps> = ({carImage,
         className='object-fill h-56 w-auto rounded-md'/>
         <div className="mx-4 gap-6 py-4">
         <h1 className='md:text-xl text-lg text-charcoal-gray font-semibold'>{carMake}, {carModel} </h1>
-        <p className='md:text-lg text-base text-blue-variant font-medium'> {carPrice} </p>
-        <p className='md:text-base text-sm text-charcoal-gray font-normal'> {carCity} </p>
+        <p className='md:text-lg text-base text-blue-variant font-medium'> Rs.  {carPrice} </p>
+        <p className='md:text-base text-sm text-charcoal-gray font-normal'> Location : {carCity} </p>
         </div>
     </div>
   )
