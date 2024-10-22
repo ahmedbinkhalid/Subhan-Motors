@@ -48,7 +48,7 @@
         <input type="text" name="make" placeholder="Car Make" required>
         <input type="text" name="model" placeholder="Car Model" required>
         <input type="number" name="year" placeholder="Year" required>
-        <input type="number" name="price" placeholder="Price" required>
+        <!-- <input type="number" name="price" placeholder="Price" required> -->
         <input type="number" name="mileage" placeholder="Mileage" required>
         <select name="condition" required>
             <option value="">Select Condition</option>
@@ -84,7 +84,7 @@
             const formData = new FormData(form);
 
             try {
-                const response = await fetch('/api/addcars', {
+                const response = await fetch('/api/postcar', {
                     method: 'POST',
                     body: formData,
                     headers: {
