@@ -14,7 +14,7 @@ const limiter = rateLimit({
     }
 });
 
-// router.use(limiter);
+router.use(limiter);
 
 router.post('/signup', signUp);
 router.post('/login', login);
