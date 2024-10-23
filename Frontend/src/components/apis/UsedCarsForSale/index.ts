@@ -30,7 +30,6 @@ export const UsedCarsForSale = async (apiEnd : string): Promise<UsedCarsForSaleR
             maxPrice : item.maxPrice,
             location: item.location,
         }));
-
         return { sellCarsData: formattedData }; // Return the correctly formatted data
     } catch (error) {
         console.error("Error during fetching used cars:", error);

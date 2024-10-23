@@ -39,7 +39,7 @@ const limiter = ratelimit({
     }
 });
 // Applying the rate limit on all the routes in this router
-router.use(limiter);
+// router.use(limiter);
 
 router.post('/submit', verifyToken, isBlogger , upload.array('images', 10), submitBlog);
 router.post('/approve', verifyToken, isAdmin,approveBlog);

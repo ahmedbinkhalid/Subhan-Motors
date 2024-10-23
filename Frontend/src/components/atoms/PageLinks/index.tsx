@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useModal } from "../../organism/AllPagesLayout/ModalContext"; 
 import { TbLogout2 } from "react-icons/tb";
 import {jwtDecode} from "jwt-decode"; // Correct default import
+import { FaUserShield } from "react-icons/fa6";
 
 // Define the type of your JWT token payload
 interface UserToken {
@@ -42,12 +43,13 @@ export const PageLinks: React.FC = () => {
   }, []);
 
   return (
-    <header className="container mx-auto flex flex-col items-center bg-transparent px-4 py-1">
+    <header className="container mx-auto flex flex-col items-center bg-transparent px-4 py-2">
       {/* SignUp and SignIn Container */}
-      <div className="w-full max-w-5xl flex justify-end max-lg:justify-center items-center md:px-3 gap-4">
+      <div className="w-full max-w-5xl flex justify-end max-lg:justify-center items-center md:px-3 gap-3">
         {isLoggedIn ? (
           <>
             {/* Display the user's name instead of 'Welcome back!' */}
+            <FaUserShield size={32} className="text-regal-red" />
             <p className="text-lg mt-2">Welcome, {userName || 'User'}</p>
             <button
               className="py-1 cursor-pointer z-10 border-b border-transparent hover:mb-1 transition duration-100"
@@ -57,7 +59,7 @@ export const PageLinks: React.FC = () => {
                 setUserName(null); // Clear userName state
               }}
             >
-              <TbLogout2 size={24} className="text-regal-red hover:text-white mt-2" />
+              <TbLogout2 size={28} className="text-regal-red hover:text-white mt-2" />
             </button>
           </>
         ) : (

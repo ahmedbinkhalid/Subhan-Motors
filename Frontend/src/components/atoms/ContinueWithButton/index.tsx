@@ -31,7 +31,7 @@
 //   );
 // };import React from "react";
 import { ContinueWithProps } from "./types";
-import { googleLogin } from "../../services/AuthService";
+import { googleLogin } from "../../apis/AuthServices/GoogleLogin";
 
 export const ContinueWithButton: React.FC<ContinueWithProps> = ({
   icon,

@@ -15,7 +15,8 @@ PasswordInput: React.FC<PasswordInputProps> = ({
   onChange,
 }) => {
   const [visibility, setVisibility] = useState(false);
-  const [isValid, setIsValid] = useState(true); // Track password validity
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isValid, setIsValid] = useState(true);
 
   const validatePassword = (password: string) => {
     const minLength = 8;
@@ -39,15 +40,17 @@ PasswordInput: React.FC<PasswordInputProps> = ({
     setVisibility(!visibility); // Toggle the visibility
   };
 
+
   return (
-    <div className={`flex p-2 px-4 border-[0.5px] ${isValid ? 'border-[#37474F]' : 'border-red-500'} rounded-md w-full h-full gap-14`}>
+    <div className={`flex p-2 px-4 border-[0.5px] border-[#37474F] rounded-md w-full h-full gap-14`}>
       <input
         type={visibility ? "text" : "password"}
-        placeholder={isValid ? placeholder : "choose 8 characters strong password "}
+        placeholder={placeholder}
         name={name}
         value={value}
         onChange={handleChange}
-        className={`text-base w-full bg-transparent placeholder:text-sm outline-none placeholder:opacity-75 ${!isValid ? 'placeholder-red-500 placeholder:text-xs' : ''}`}
+        className={`text-base w-full bg-transparent placeholder:text-sm outline-none placeholder:opacity-75`}
+        autoComplete="off" 
         required
       />
       <p

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { signup } from "../../../services/AuthService";
+import { signup } from "../../../apis/AuthServices/SignUp";
 import { FullnameInput } from "../../../atoms/FullnameInput";
 import { SignInEmailInput } from "../../../atoms/SignInEmailInput";
 import { PasswordInput } from "../../../atoms/PasswordInput";

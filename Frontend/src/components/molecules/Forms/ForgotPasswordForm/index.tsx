@@ -2,39 +2,35 @@ import React, { useState } from 'react';
 import { forgotPassword as forgotPasswordIcon } from '../../../../assets/icons';
 import { SignInEmailInput } from '../../../atoms/SignInEmailInput';
 import { FormSubmissionButton } from '../../../atoms/FormSubmissionButton';
-import { forgotPassword } from '../../../services/AuthService';
+import { forgotPassword } from '../../../apis/AuthServices/ForgotPassword';
 import { useModal } from "../../../organism/AllPagesLayout/ModalContext";
 
-// Update the interface to include otpToken
 interface ForgotPasswordResponse {
   message?: string;
   error?: string;
-  otpToken?: string; // Add otpToken here
+  otpToken?: string;
 }
 
 export const ForgotPasswordForm: React.FC = () => {
-  const [email, setEmail] = useState(''); // State for the email input
+  const [email, setEmail] = useState(''); 
   const [message, setMessage] = useState<string | null>(null);
   const { openModal } = useModal();
 
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value); // Update email state
+    setEmail(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Call the forgot password service
     const response: ForgotPasswordResponse = await forgotPassword(email);
     console.log(response);
 
-    // Handle response
     if (response.error) {
-      setMessage(response.error); // Set error message
+      setMessage(response.error); 
     } else {
       setMessage(response.message || '');
 
-      // Extract otpToken and set it in local storage
       if (response.otpToken) {
         localStorage.setItem('otpToken', response.otpToken);
       }
@@ -50,7 +46,7 @@ export const ForgotPasswordForm: React.FC = () => {
           <img
             src={forgotPasswordIcon}
             alt="forgotPassword"
-            className="object-contain h-32 md:h-44 lg:h-48 2xl:h-64" // Adjusted image heights for responsiveness
+            className="object-contain h-32 md:h-44 lg:h-48 2xl:h-64" 
           />
         </div>
         <h1 className="text-2xl self-center font-bold leading-none">Forgot Password</h1>
@@ -66,7 +62,7 @@ export const ForgotPasswordForm: React.FC = () => {
         <FormSubmissionButton 
           data="Continue" 
         />
-        {message && <p className="text-center mt-4">{message}</p>} {/* Display success/error message */}
+        {message && <p className="text-center mt-4">{message}</p>} 
       </div>
     </form>
   );

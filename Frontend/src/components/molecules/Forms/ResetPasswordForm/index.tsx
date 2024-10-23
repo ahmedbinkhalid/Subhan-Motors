@@ -3,7 +3,7 @@ import { OTP } from '../../../../assets/icons';
 import OTPInput from '../../../atoms/OTPInput';
 import { PasswordInput } from '../../../atoms/PasswordInput';
 import { FormSubmissionButton } from '../../../atoms/FormSubmissionButton';
-import { resetPassword } from '../../../services/AuthService';
+import { resetPassword } from '../../../apis/AuthServices/ResetPassword';
 import { useModal } from "../../../organism/AllPagesLayout/ModalContext";
 
 export const OtpForm: React.FC = () => {

@@ -24,6 +24,7 @@ export const SignInEmailInput: React.FC<SignInEmailInputProps> = ({
         value={value}
         onChange={onChange}
         className="text-base w-full placeholder:text-sm outline-none placeholder:opacity-75 bg-transparent"
+        autoComplete="off" 
         required
       />
     </div>

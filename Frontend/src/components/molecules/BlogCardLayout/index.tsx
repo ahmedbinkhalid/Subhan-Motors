@@ -1,8 +1,24 @@
-import React from 'react';
-import { BlogCardsData } from './constants';
+import React, { useEffect, useState } from 'react';
+// import { BlogCardsData } from './constants';
 import { BlogCard } from '../../atoms/BlogCard';
+import { blogsCardsData, BlogsDataResponse } from '../../apis/Blogs/types';
+import { Blogs } from '../../apis/Blogs';
 
 export const BlogCardLayout : React.FC = () => {
+  const [blogCardsData, setBlogCardsData] = useState<blogsCardsData[]>([])
+   useEffect(() => {
+    const fetchData = async () => {
+      const response: BlogsDataResponse = await Blogs();
+      if (!response.error) {
+        setBlogCardsData(response.blogsData);
+        // console.log(response.blogsData); // Set the formatted car dat
+      } else {
+        console.error(response.error);
+      }
+    };
+    fetchData();
+  },[]);
+
   return (
     <section className="relative flex my-4 flex-col w-full bg-slate-50 rounded-lg pb-16 pt-4">
 
@@ -16,12 +32,13 @@ export const BlogCardLayout : React.FC = () => {
       <main className='grid lg:grid-cols-2 grid-cols-1 gap-10 md:px-16 px-2'>
         <div className="">
             {
-                BlogCardsData.slice(0,1).map((data, index) => (
+                blogCardsData.slice(0,1).map((data, index) => (
                     <BlogCard
                     key={index}
-                    blogImage = {data.blogImage}
-                    blogTitle = {data.blogTitle}
-                    blogDescription = {data.blogDescription}
+                    blogImage = {data.images === null ? "" : data.images[0]}
+                    blogTitle = {data.title}
+                    blogDescription = {data.content}
+                    timeAgo={data.timeAgo}
                     />
                 ))
             }
@@ -29,12 +46,13 @@ export const BlogCardLayout : React.FC = () => {
 
         <div className='grid md:grid-cols-2 grid-cols-1 gap-6'>
         {
-                BlogCardsData.slice(1,3).map((data, index) => (
+                blogCardsData.slice(1,3).map((data, index) => (
                     <BlogCard
                     key={index}
-                    blogImage = {data.blogImage}
-                    blogTitle = {data.blogTitle}
-                    blogDescription = {data.blogDescription}
+                    blogImage = {data.images === null ? "" : data.images[0]}
+                    blogTitle = {data.title}
+                    blogDescription = {data.content}
+                    timeAgo={data.timeAgo}
                     />
                 ))
             }

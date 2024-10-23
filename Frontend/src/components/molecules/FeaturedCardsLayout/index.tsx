@@ -38,7 +38,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
       }
     };
     fetchData();
-  }, []);
+  }, [managedBy]);
 
   const totalCards = sellCarsData.length;
 
@@ -112,7 +112,6 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
       <div className="flex gap-5 overflow-hidden">
         {visibleCards.map((data, index) => {
-          console.log("Rendering Card Data:", data); // Log each card data
           return (
             <FeaturedCarsCard
               key={index}

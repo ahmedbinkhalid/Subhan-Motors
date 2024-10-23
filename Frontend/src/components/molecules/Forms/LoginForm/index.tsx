@@ -1,7 +1,7 @@
 // src/components/forms/LoginForm.tsx
 
 import React, { useState } from "react";
-import { login } from "../../../services/AuthService";
+import { login } from "../../../apis/AuthServices/Login";
 import { SignInEmailInput } from "../../../atoms/SignInEmailInput";  
 import { PasswordInput } from "../../../atoms/PasswordInput";
 import { FormSubmissionButton } from "../../../atoms/FormSubmissionButton";

@@ -5,6 +5,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
   blogImage,
   blogTitle,
   blogDescription,
+  timeAgo
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -39,6 +40,10 @@ export const BlogCard: React.FC<BlogCardProps> = ({
           {isExpanded ? "Read Less" : "Read More"}
         </button>
       </div>
+
+      <p className="text-sm font-sans font-medium text-charcoal-gray my-6 mx-6">
+        Posted: {timeAgo}
+      </p>
     </div>
   );
 };

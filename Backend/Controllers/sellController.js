@@ -5,7 +5,7 @@ const fs = require('fs');
 const subsController = require('./subsController');
 
 exports.addCar = async (req, res, next) =>{
-    // const OwnerId = req.user.id;
+    const OwnerId = req.user.id;
     try{
         const db = req.app.locals.db;
         const images = req.files.map(file => file.filename);

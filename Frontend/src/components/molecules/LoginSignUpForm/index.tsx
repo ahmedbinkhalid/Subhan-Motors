@@ -3,7 +3,7 @@ import React from "react";
 import LoginForm from "../Forms/LoginForm";
 import SignUpForm from "../Forms/SignUpForm";
 import { useModal } from "../../organism/AllPagesLayout/ModalContext";
-import { OtpForm } from "../Forms/OtpForm";
+import { OtpForm } from "../Forms/ResetPasswordForm";
 import { ForgotPasswordForm } from "../Forms/ForgotPasswordForm";
 
 export const LoginSignUpForm: React.FC = () => {
