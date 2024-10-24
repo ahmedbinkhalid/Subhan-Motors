@@ -123,6 +123,10 @@ export const PageLinks: React.FC = () => {
               <li className="cursor-pointer hover:mt-1">
                 <Link to="/contact">Contact</Link>
               </li>
+              {isLoggedIn ? 
+              <li className="cursor-pointer hover:mt-1">
+                <Link to="/contact"> My Adds </Link>
+              </li> : "" }
             </ul>
           </nav>
 
