@@ -21,7 +21,7 @@ export const CarInformationDescription: React.FC<CarInformationInputProps> = ({
         name={id_name}
         value={value}
         onChange={onChange}
-        className="mt-3 block w-full p-2 border border-gray-300 rounded-md"
+        className="mt-3 block w-full p-2 border border-gray-300 rounded-md outline-none"
         placeholder={placeHolder}
         rows={4}
       />

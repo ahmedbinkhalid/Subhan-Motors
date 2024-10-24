@@ -24,14 +24,14 @@ export const FullnameInput: React.FC<FullnameInputProps> = ({ name, value, onCha
   };
 
   return (
-    <div className={`py-2 px-4 border-[0.5px] ${!isValid || isFocused ? 'border-red-500' : 'border-[#37474F]'} rounded-md w-full h-full`}>
+    <div className="py-2 px-4 border-[0.5px] rounded-md w-full h-full">
       <input
         type="text"
         name={name}
         value={value}
         onChange={handleChange}
         placeholder={isValid ? "Full Name" : "Input must include 4 to 5 Alphabets."} // Change placeholder on error
-        className={`text-base w-full placeholder:text-sm outline-none bg-white ${!isValid ? 'placeholder-red-400 placeholder:text-xs' : ''} focus:border-red-500`} // Always set bg-white
+        className={`text-base w-full placeholder:text-sm outline-none bg-transparent`} // Always set bg-white
         onFocus={() => setIsFocused(true)} // Set focus state to true on focus
         onBlur={() => {
           setIsFocused(false); // Reset focus state on blur

@@ -119,7 +119,7 @@ const CarInformationForm: React.FC = () => {
         <CarInformationDropDown
           label="Engine Type"
           name="engineType"
-          options={['Petrol', 'Diesel', 'Electric', 'Hybrid']}
+          options={['Petrol', 'Diesel', 'LPG', 'Electric', 'Hybrid']}
           value={formData.engineType}
           onChange={handleChange}
         />
@@ -155,19 +155,6 @@ const CarInformationForm: React.FC = () => {
          placeHolder="Enter Details About your Car"
          id_name='description'
         />
-        {/* Description */}
-        {/* <div className="col-span-2">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="mt-3 block w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Enter description"
-            rows={4}
-          />
-        </div> */}
 
       </form>
 

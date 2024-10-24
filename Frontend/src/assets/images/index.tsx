@@ -10,6 +10,10 @@ import headerBg1 from "./headerBg1.jpg";
 import carDeal from "./cardDeal.jpg";
 import testimonial1 from "./testimonial1.jpg";
 import carDeal2 from "./carDeal2.jpg";
+import team1 from "./team-1.jpg";
+import team2 from "./team-2.jpg";
+import team3 from "./team-3.jpg";
+import team4 from "./team-4.jpg";
 
 
 export {
@@ -24,5 +28,9 @@ export {
     headerBg1,
     carDeal,
     testimonial1,
-    carDeal2
+    carDeal2,
+    team1,
+    team2,
+    team3,
+    team4
 };
