@@ -21,7 +21,7 @@ exports.getVisitorCountInLast24Hours = async (db) => {
 };
 
 exports.getLiveVisitorCount = async (db) => {
-    const fiveMinutesAgo = new Date(new Date().getTime() - 0.1 * 60 * 1000); // 5 minutes
+    const fiveMinutesAgo = new Date(new Date().getTime() - 5 * 60 * 1000); // 5 minutes
     const count = await db.collection('visitorLogs').countDocuments({ Timestamp: { $gte: fiveMinutesAgo } });
     return count;
 };

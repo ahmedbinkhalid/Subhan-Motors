@@ -6,8 +6,6 @@ const router = express.Router();
 
 router.use(visitorController.logVisitor);
 
-router.post('/', visitorController.logVisitor);
-
  // Route to get daily visitors count (for admin)
  router.get('/daily', (req, res) => visitorController.getDailyVisitors(req, res));
 

@@ -63,7 +63,9 @@ app.get('/usedcars',(req,res,next)=>{
 app.get('/visitor', (req, res) => {
     res.sendFile(__dirname + '/public/visitor.html');
 });
-
+app.get('/news', (req, res) => {
+    res.sendFile(__dirname + '/public/news.html');
+});
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -84,3 +86,14 @@ MongoConnect(client =>{
     app.listen(5000);
     console.log(client);
 });
+
+// Poll the live visitor count every second
+setInterval(async () => {
+    try {
+        const liveVisitorCount = await visitorController.getLiveVisitors({ app });
+        console.log('Live Visitor Count:', liveVisitorCount.liveVisitors);
+        return liveVisitorCount;
+    } catch (error) {
+        console.error('Error fetching live visitor count:', error);
+    }
+}, 1000);
