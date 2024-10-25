@@ -7,14 +7,19 @@ const session = require('express-session');
 require('./passport-config');
 require('dotenv').config();
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./Routes/authRoutes');
 const blogRoutes = require('./Routes/blogRoutes');
 const sellRoutes = require('./Routes/sellRoutes');
 const queryRoutes = require('./Routes/queryRoutes');
 const subsRoutes = require('./Routes/subsRoutes');
+const visitorRoutes = require('./Routes/visitorRoutes');
+const visitorController = require('./Controllers/visitorController');
+
 
 const app = express();
+app.use(cookieParser());
 
 app.use(cors());
 
@@ -29,6 +34,7 @@ app.use(session({
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: { maxAge: 3600000 } // Cookie valid for 1 hour
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -53,6 +59,11 @@ app.get('/blogs/:id',(req,res,next)=>{
 app.get('/usedcars',(req,res,next)=>{
     res.sendFile(__dirname + '/public/usedcars.html');
 });
+
+app.get('/visitor', (req, res) => {
+    res.sendFile(__dirname + '/public/visitor.html');
+});
+
 app.use((req, res, next)=>{
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
@@ -62,11 +73,13 @@ app.use((req, res, next)=>{
 
 MongoConnect(client =>{
     app.locals.db = client.db('myzameen');
+    app.use(visitorController.logVisitor);
     app.use('/api', authRoutes);
     app.use('/api', blogRoutes);
     app.use('/api', sellRoutes);
     app.use('/api', queryRoutes);
     app.use('/api', subsRoutes);
+    app.use('/api', visitorRoutes);
 
     app.listen(5000);
     console.log(client);
