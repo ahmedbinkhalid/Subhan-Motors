@@ -24,6 +24,7 @@ export const CarInformationDescription: React.FC<CarInformationInputProps> = ({
         className="mt-3 block w-full p-2 border border-gray-300 rounded-md outline-none"
         placeholder={placeHolder}
         rows={4}
+        required
       />
     </div>
   );

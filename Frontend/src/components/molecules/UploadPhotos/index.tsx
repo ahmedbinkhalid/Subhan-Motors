@@ -22,7 +22,7 @@ export const UploadPhotos: React.FC = () => {
     <section className="bg-slate-50 border-y p-8 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
       <h1 className="md:text-xl text-lg font-semibold my-4">Upload Photos</h1>
 
-      <div className="border-2 border-dashed border-blue-variant p-12 my-6">
+      <div className="border-2 border-dashed border-blue-variant lg:p-12 md:p-6 p-4 my-6">
         <div className="flex gap-4 justify-center items-center w-full">
           <div className="p-4 rounded-full bg-slate-100 border-[0.5px]">
             <IoMdPhotos size={52} className="object-cover text-blue-variant" />

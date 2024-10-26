@@ -3,8 +3,8 @@ import { MissionVisionCard } from '../../atoms/MissionVisionCard';
 
 export const MissionVision : React.FC = () => {
   return (
-    <div className="mt-12">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+    <div className="bg-gray-50 md:px-12 md:py-16 p-4 rounded-lg">
+          <h2 className="md:text-3xl text-2xl font-bold text-center text-charcoal-gray md:mb-10 mb-6">
             Our Mission & Vision
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

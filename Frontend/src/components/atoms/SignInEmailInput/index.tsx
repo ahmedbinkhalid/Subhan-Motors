@@ -15,7 +15,7 @@ export const SignInEmailInput: React.FC<SignInEmailInputProps> = ({
   onChange,
 }) => {
   return (
-    <div className="flex p-2 px-4 border-[0.5px] border-[#37474F] rounded-md w-full h-full gap-3">
+    <div className="flex p-2 px-4 border-[0.5px] rounded-md w-full h-full gap-3">
       <MdMailLock size={28} className="" />
       <input
         type="email"

@@ -14,7 +14,7 @@ const CarInformationDropDown: React.FC<CarInformationDropDownProps> = ({ label, 
           value={value}
           onChange={onChange}
           className="mt-3 block w-full p-2 pr-10 border border-gray-300 rounded-md outline-none appearance-none"
-          // `pr-10` to add padding for the custom arrow space
+          required
         >
           <option value="">Select {label}</option>
           {options.map((option, index) => (
@@ -22,7 +22,6 @@ const CarInformationDropDown: React.FC<CarInformationDropDownProps> = ({ label, 
           ))}
         </select>
 
-        {/* Custom dropdown arrow */}
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
         <RxDropdownMenu size={24} className='font-sans font-semibold text-charcoal-gray' />
         </div>

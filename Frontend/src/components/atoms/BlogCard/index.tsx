@@ -18,7 +18,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
       : blogDescription;
 
   return (
-    <div className="flex flex-col bg-white shadow-md rounded-md my-1 w-full h-full">
+    <div className="flex flex-col bg-white shadow-md rounded-md my-1 w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
       <img
         src={blogImage}
         alt="Blog Thumbnail"

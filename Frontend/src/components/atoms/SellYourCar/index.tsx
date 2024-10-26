@@ -1,6 +1,7 @@
 import React from "react";
 import { carDeal2 } from "../../../assets/images";
 import { GiCheckMark } from "react-icons/gi";
+import { motion } from 'framer-motion';
 
 export const SellYourCar: React.FC = () => {
   return (
@@ -10,11 +11,22 @@ export const SellYourCar: React.FC = () => {
       </legend>
 
       <div className="flex flex-col p-6">
-        <img
+      <motion.img
+        src={carDeal2} // Use the variable as the source
+        alt="Car Deal"
+        className="object-contain h-auto w-auto"
+        initial={{ y: 300, opacity: 0 }} // Start below and slightly transparent
+        animate={{ x: [null, 100, 0], y: 0, opacity: 10, }}   // Move to the center and fully visible
+        transition={{
+          duration: 4, // Slow reveal
+          ease: "easeInOut" // Smooth effect
+        }}
+      />
+        {/* <img
           src={carDeal2}
           alt="Car Deal"
           className="object-contain h-auto w-auto"
-        />
+        /> */}
       </div>
 
       <div className="flex flex-col font-sans justify-center items-center gap-1 md:border-l border-charcoal-gray font-bolder max-lg:pl-6 max-md:border-t max-md:pt-3">

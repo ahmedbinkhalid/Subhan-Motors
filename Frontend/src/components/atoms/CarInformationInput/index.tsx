@@ -13,6 +13,7 @@ export const CarInformationInput : React.FC<CarInformationInputProps> = ({id_nam
       onChange={onChange}
       className="mt-3 block w-full p-2 border border-gray-300 rounded-md outline-none"
       placeholder={placeHolder}
+      required
     />
   </div>
   )
