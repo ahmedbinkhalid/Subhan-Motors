@@ -87,9 +87,9 @@
                 const response = await fetch('/api/postcar', {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Authorization': 'Bearer YOUR_JWT_TOKEN_HERE' // Update with actual JWT token
-                    }
+                    // headers: {
+                    //     // 'Authorization': 'Bearer YOUR_JWT_TOKEN_HERE' // Update with actual JWT token
+                    // }
                 });
 
                 const data = await response.json();

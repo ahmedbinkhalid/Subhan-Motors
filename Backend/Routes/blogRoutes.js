@@ -41,11 +41,23 @@ const limiter = ratelimit({
 // Applying the rate limit on all the routes in this router
 // router.use(limiter);
 
+
+// Blogger route to submit blog for approval
 router.post('/submit', verifyToken, isBlogger , upload.array('images', 10), submitBlog);
-router.post('/approve', verifyToken, isAdmin,approveBlog);
+
+// Admin Route to get all pending blogs for approval
 router.get('/pending', verifyToken, isAdmin ,getpendingBlog);
+
+// Admin route to Approve blog
+router.post('/approve', verifyToken, isAdmin,approveBlog);
+
+// Admin Route to Reject blog 
 router.post('/reject', verifyToken, isAdmin, rejectBlog);
+
+// Admin and Client route to get all Approved Blogs
 router.get('/blogs', getApprovedBlogs);
+
+// Client Route to get Approved blog by Id
 router.get('/blogs/:id', getBlogById);
 
 module.exports = router;
