@@ -1,30 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CarInformationDropDown from "../../atoms/CarInformationDropDown";
 import CarInformationSubmitButton from "../../atoms/CarInformationSubmitButton";
 import { CarInformationInput } from "../../atoms/CarInformationInput";
 import { citiesOfPakistan, yearsFrom1900ToCurrent } from "./constants";
 import { CarInformationDescription } from "../../atoms/CarInformationDescription";
-
-interface CarFormData {
-  make: string;
-  model: string;
-  year: string;
-  price: string;
-  mileage: string;
-  condition: string;
-  transmission: string;
-  engineType: string;
-  engineCapacity: string;
-  color: string;
-  location: string;
-  description: string;
-}
+import { useImageContext } from "../ImageContext";
+import { CarFormData } from "./types";
+import { useContact } from "../ContactContext";
 
 const CarInformationForm: React.FC = () => {
+  const { images } = useImageContext();
+  const { contactInfo } = useContact();
+
   const [formData, setFormData] = useState<CarFormData>({
+    sellerInfo: { sellerName: "", mobileNumber: "" },
+    images: [],
     make: "",
     model: "",
     year: "",
+    category: "",
     price: "",
     mileage: "",
     condition: "",
@@ -35,6 +29,15 @@ const CarInformationForm: React.FC = () => {
     location: "",
     description: "",
   });
+
+  // Use useEffect to update formData when images and contactInfo are loaded
+  useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      sellerInfo: contactInfo,
+      images: images,
+    }));
+  }, [images, contactInfo]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -49,8 +52,7 @@ const CarInformationForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(formData);
-    // Handle form submission logic here
+    console.log("Captured Form Data:", formData); // Log all captured values
   };
 
   return (
@@ -74,9 +76,8 @@ const CarInformationForm: React.FC = () => {
             value={formData.year}
             onChange={handleChange}
           />
-
           <CarInformationInput
-            label="Mileage"
+            label="Driven in km's"
             value={formData.mileage}
             onChange={handleChange}
             placeHolder="Enter Mileage"
@@ -96,7 +97,6 @@ const CarInformationForm: React.FC = () => {
             placeHolder="Enter Car Color"
             id_name="color"
           />
-
           <CarInformationDropDown
             label="Location"
             name="location"
@@ -141,6 +141,13 @@ const CarInformationForm: React.FC = () => {
             placeHolder="Enter Engine Capacity"
             id_name="engineCapacity"
           />
+          <CarInformationDropDown
+            label="Car Category"
+            name="category"
+            options={["Used", "Bank Released"]}
+            value={formData.category}
+            onChange={handleChange}
+          />
         </div>
 
         <div className="md:col-span-2">
@@ -154,8 +161,8 @@ const CarInformationForm: React.FC = () => {
         </div>
 
         <div className="md:col-span-2 flex justify-center my-8">
-        <CarInformationSubmitButton />
-      </div>
+          <CarInformationSubmitButton />
+        </div>
       </form>
     </div>
   );
