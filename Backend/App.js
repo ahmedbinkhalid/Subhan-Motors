@@ -86,14 +86,3 @@ MongoConnect(client =>{
     app.listen(5000);
     console.log(client);
 });
-
-// Poll the live visitor count every second
-setInterval(async () => {
-    try {
-        const liveVisitorCount = await visitorController.getLiveVisitors({ app });
-        console.log('Live Visitor Count:', liveVisitorCount.liveVisitors);
-        return liveVisitorCount;
-    } catch (error) {
-        console.error('Error fetching live visitor count:', error);
-    }
-}, 1000);
