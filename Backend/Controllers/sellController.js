@@ -10,8 +10,8 @@ exports.addCar = async (req, res, next) =>{
         const db = req.app.locals.db;
         const images = req.files.map(file => file.filename);
         const carData = {
-            Owner: OwnerId,
-            PhoneNumber : '03404232435',
+            owner: OwnerId,
+            phoneNumber : '03404232435',
             make: req.body.make,
             model: req.body.model,
             year: req.body.year,

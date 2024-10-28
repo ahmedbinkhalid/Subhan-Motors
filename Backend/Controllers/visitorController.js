@@ -51,37 +51,37 @@ exports.getDailyVisitors = async (req, res) => {
     }
  };
  
-//  exports.getLiveVisitors = async (req, res) => {
-//     try {
-//         const db = req.app.locals.db;
-//         const liveVisitors = await visitorModel.getLiveVisitorCount(db);
-
-//         // Check if liveVisitors is a valid number
-//         if (typeof liveVisitors !== 'number') {
-//             console.error("Invalid response type for live visitors:", typeof liveVisitors);
-//             return res.status(500).json({ error: "Invalid data format received" });
-//         }
-
-//         res.json({ liveVisitors });
-//     } catch (error) {
-//         console.error("Error fetching live visitors:", error);
-//         res.status(500).json({ error: "Error fetching live visitors" });
-//     }
-// };
-
-// This one is double comented
-exports.getLiveVisitors = async (req, res) => {
+ exports.getLiveVisitors = async (req, res) => {
     try {
-        const db = req.app.locals.db; // Access the database from app.locals
-        const liveVisitors = await visitorModel.getLiveVisitorCount(db); // Fetch live visitor count
-        return liveVisitors;// Send live visitor count as JSON
+        const db = req.app.locals.db;
+        const liveVisitors = await visitorModel.getLiveVisitorCount(db);
+
+        // // Check if liveVisitors is a valid number
+        // if (typeof liveVisitors !== 'number') {
+        //     console.error("Invalid response type for live visitors:", liveVisitors);
+        //     return res.status(500).json({ error: "Invalid data format received" });
+        // }
+
+        res.json({ liveVisitors });
     } catch (error) {
         console.error("Error fetching live visitors:", error);
         res.status(500).json({ error: "Error fetching live visitors" });
     }
 };
+
+// This one is double comented
+// exports.getLiveVisitors = async (req, res) => {
+//     try {
+//         const db = req.app.locals.db; // Access the database from app.locals
+//         const liveVisitors = await visitorModel.getLiveVisitorCount(db); // Fetch live visitor count
+//         return liveVisitors;// Send live visitor count as JSON
+//     } catch (error) {
+//         console.error("Error fetching live visitors:", error);
+//         res.status(500).json({ error: "Error fetching live visitors" });
+//     }
+// };
 // New function to fetch live visitors without req/res
-// exports.fetchLiveVisitors = async (req, db) => {
+// exports.getLiveVisitors = async (req, db) => {
 //     try {
 //         const db = req.app.locals.db;
 //         return await visitorModel.getLiveVisitorCount(db);
