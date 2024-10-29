@@ -45,28 +45,22 @@ exports.addCar = async (req, res, next) => {
     const OwnerId = req.user.id;
     try {
         const db = req.app.locals.db;
-        
-        // Collect filenames from uploaded files
-        const uploadedImages = req.files ? req.files.map(file => file.filename) : [];
-        
-        // Process base64 images
-        const base64Images = req.body.base64Images ? req.body.base64Images : [];
-        const base64ImagePaths = [];
 
-        if (base64Images.length > 0) {
-            for (const base64 of base64Images) {
-                const base64Data = base64.split(',')[1]; // Remove the metadata part of base64 string
-                const filename = `${Date.now()}-${Math.random()}.jpg`; // Create a unique filename
-                const filePath = path.join(__dirname, '../public/uploads', filename);
-                
-                // Write the base64 image to a file
-                fs.writeFileSync(filePath, base64Data, { encoding: 'base64' });
-                base64ImagePaths.push(filename); // Add the filename to the array
-            }
+        // Check if images are sent in base64 format
+        const base64Images = req.body.images; // this should be your base64 array
+        const images = [];
+
+        // Convert base64 images to buffer and store
+        for (let i = 0; i < base64Images.length; i++) {
+            const base64Data = base64Images[i].replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(base64Data, 'base64');
+            const filename = `image-${Date.now()}-${i}.png`; // or .jpg depending on the type
+            const filepath = path.join(__dirname, '../public/uploads', filename);
+
+            // Write the image file to the filesystem
+            fs.writeFileSync(filepath, buffer);
+            images.push(filename); // Add filename to images array
         }
-
-        // Combine uploaded images and base64 images
-        const images = [...uploadedImages, ...base64ImagePaths];
 
         const carData = {
             owner: OwnerId,
@@ -83,23 +77,21 @@ exports.addCar = async (req, res, next) => {
             color: req.body.color,
             location: req.body.location,
             description: req.body.description,
-            images: images,
+            images: images, // Updated with the saved filenames
             sellerInfo: req.body.sellerInfo,
             dateAdded: new Date(),
-            status: req.body.status // Added status for car type (Used or Bank Released)
+            status: req.body.status
         };
 
         const result = await sellModel.addCar(db, carData);
         res.status(200).json({ message: 'Car added for sale successfully', carId: result.insertedId });
 
-        // Send emails to subscribers about the new car
         await subsController.sendEmailsToSubscribers(db, carData);
-        
+
     } catch (error) {
-        console.error("Error:", error); // Log the error
+        console.error("Error:", error);
         res.status(500).json({ message: error.message });
         console.log("Request Body:", req.body);
-        console.log("Uploaded Files:", req.files); // Log the uploaded files
     }
 };
 
