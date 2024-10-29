@@ -1,17 +1,20 @@
-import React, { createContext, useContext, useState } from 'react';
-import { ContactContextType } from './types';
-
+import React, { createContext, useContext, useState } from "react";
+import { ContactContextType } from "./types";
 
 const ContactContext = createContext<ContactContextType | undefined>(undefined);
 
-export const ContactProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ContactProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [contactInfo, setContactInfo] = useState({
-    sellerName: '',
-    mobileNumber: '',
+    sellerName: "",
+    mobileNumber: "",
   });
 
   return (
-    <ContactContext.Provider value={{ contactInfo, setContactInfo }}>
+    <ContactContext.Provider
+      value={{ sellerInfo: contactInfo, setSellerInfo: setContactInfo }}
+    >
       {children}
     </ContactContext.Provider>
   );
@@ -21,7 +24,7 @@ export const ContactProvider: React.FC<{ children: React.ReactNode }> = ({ child
 export const useContact = () => {
   const context = useContext(ContactContext);
   if (!context) {
-    throw new Error('useContact must be used within a ContactProvider');
+    throw new Error("useContact must be used within a ContactProvider");
   }
   return context;
 };

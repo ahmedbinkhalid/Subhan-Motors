@@ -7,7 +7,7 @@ export interface CarFormData {
     make: string;
     model: string;
     year: string;
-    category : string;
+    status : string;
     price: string;
     mileage: string;
     condition: string;

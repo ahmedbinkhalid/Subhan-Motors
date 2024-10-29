@@ -1,9 +1,9 @@
 export interface ContactContextType {
-    contactInfo: {
+    sellerInfo: {
       sellerName: string;
       mobileNumber: string;
     };
-    setContactInfo: React.Dispatch<React.SetStateAction<{
+    setSellerInfo: React.Dispatch<React.SetStateAction<{
       sellerName: string;
       mobileNumber: string;
     }>>;

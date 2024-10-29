@@ -1,3 +1,4 @@
+// CarInformationForm.tsx
 import React, { useState, useEffect } from "react";
 import CarInformationDropDown from "../../atoms/CarInformationDropDown";
 import CarInformationSubmitButton from "../../atoms/CarInformationSubmitButton";
@@ -5,12 +6,13 @@ import { CarInformationInput } from "../../atoms/CarInformationInput";
 import { citiesOfPakistan, yearsFrom1900ToCurrent } from "./constants";
 import { CarInformationDescription } from "../../atoms/CarInformationDescription";
 import { useImageContext } from "../ImageContext";
-import { CarFormData } from "./types";
 import { useContact } from "../ContactContext";
+import { CarFormData } from "./types";
+import { postCarAd } from "../../apis/PostCarAd";
 
 const CarInformationForm: React.FC = () => {
   const { images } = useImageContext();
-  const { contactInfo } = useContact();
+  const { sellerInfo: contactInfo } = useContact();
 
   const [formData, setFormData] = useState<CarFormData>({
     sellerInfo: { sellerName: "", mobileNumber: "" },
@@ -18,7 +20,7 @@ const CarInformationForm: React.FC = () => {
     make: "",
     model: "",
     year: "",
-    category: "",
+    status: "",
     price: "",
     mileage: "",
     condition: "",
@@ -30,7 +32,7 @@ const CarInformationForm: React.FC = () => {
     description: "",
   });
 
-  // Use useEffect to update formData when images and contactInfo are loaded
+  // Populate sellerInfo and images from context
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
@@ -50,9 +52,20 @@ const CarInformationForm: React.FC = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Captured Form Data:", formData); // Log all captured values
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("User not authenticated");
+      return;
+    }
+
+    const response = await postCarAd(formData, token);
+    if (response.error) {
+      console.error("Error:", response.error);
+    } else {
+      console.log("Successfully posted car data:", formData);
+    }
   };
 
   return (
@@ -142,10 +155,10 @@ const CarInformationForm: React.FC = () => {
             id_name="engineCapacity"
           />
           <CarInformationDropDown
-            label="Car Category"
-            name="category"
-            options={["Used", "Bank Released"]}
-            value={formData.category}
+            label="Select Status"
+            name="status"
+            options={["Used", "Bank"]}
+            value={formData.status}
             onChange={handleChange}
           />
         </div>

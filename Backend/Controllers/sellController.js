@@ -6,6 +6,7 @@ const subsController = require('./subsController');
 
 exports.addCar = async (req, res, next) =>{
     const OwnerId = req.user.id;
+    const sellerInfo = JSON.parse(req.body.sellerInfo);
     try{
         const db = req.app.locals.db;
         const images = req.files.map(file => file.filename);
@@ -25,7 +26,7 @@ exports.addCar = async (req, res, next) =>{
             location: req.body.location,
             description: req.body.description,
             images: images,
-            sellerInfo: req.body.sellerInfo,
+            sellerInfo: sellerInfo,
             dateAdded: new Date(),
             status: req.body.status // Added status for car type (Used or Bank Released)
         };
