@@ -70,7 +70,7 @@
         <input type="text" name="sellerInfo" placeholder="Seller Information" required>
         <select name="status" required>
             <option value="">Select Status</option>
-            <option value="Used">Used car</option>
+            <option value="Used">Used</option>
             <option value="Bank">Bank Released</option>
         </select>
         <button type="submit">Add Car</button>
@@ -87,9 +87,9 @@
                 const response = await fetch('/api/postcar', {
                     method: 'POST',
                     body: formData,
-                    // headers: {
-                    //     // 'Authorization': 'Bearer YOUR_JWT_TOKEN_HERE' // Update with actual JWT token
-                    // }
+                    headers: {
+                        'Authorization': 'Bearer YOUR_JWT_TOKEN_HERE' // Update with actual JWT token
+                    }
                 });
 
                 const data = await response.json();

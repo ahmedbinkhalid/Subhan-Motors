@@ -164,10 +164,10 @@ exports.deleteCar = async (req, res, next)=>{
 
 // To get User cars
 exports.getUserCars = async (req, res, next)=>{
-    const OwnerId = req.user.id;
+    const owner = req.user.id;
     try{
         const db = req.app.locals.db;
-        const cars = await sellModel.getCarsByOwnerId(db, OwnerId);
+        const cars = await sellModel.getCarsByOwnerId(db, owner);
         res.status(200).json(cars);
     } catch(error){
         res.status(500).json({message: error.message});
