@@ -114,7 +114,7 @@ export const PageLinks: React.FC = () => {
               <Links path="/contact" title="Contact" />
               {isLoggedIn && (
                 <li className="group relative cursor-pointer">
-                  <Link to="/contact" className="text-white group-hover:text-yellow-400 transition duration-300">
+                  <Link to="/myAds" className="text-white group-hover:text-yellow-400 transition duration-300">
                     My Adds
                   </Link>
                   <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
@@ -123,7 +123,10 @@ export const PageLinks: React.FC = () => {
             </ul>
           </nav>
 
-          <Button btnTitle="Online Booking" />
+          <Button btnTitle="Online Booking"
+          bgColor="bg-regal-red"
+          hoverBgColor="bg-red-600"
+          onClick={() => console.log("Online Booking")} />
         </div>
         
         {/* Use the Sidebar component */}

@@ -25,13 +25,11 @@ export const UploadPhotos: React.FC = () => {
   const maxSizeMB = 5 * 1024 * 1024; // 5 MB in bytes
   const maxImages = 10; // Maximum number of images
 
-  // Function to handle image upload and apply loading overlay
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
       const newImages = Array.from(files);
 
-      // Check if the total images exceed the limit
       if (images.length + newImages.length > maxImages) {
         alert(`You can upload a maximum of ${maxImages} images.`);
         return;
@@ -55,7 +53,6 @@ export const UploadPhotos: React.FC = () => {
           const newIndex = images.length + index;
           setLoading((prevLoading) => ({ ...prevLoading, [newIndex]: true }));
 
-          // Hide loader after 3 seconds for each image individually
           setTimeout(() => {
             setLoading((prevLoading) => ({ ...prevLoading, [newIndex]: false }));
           }, 2000);

@@ -8,6 +8,7 @@ import { Blogs } from '../pages/Blogs';
 import { Contact } from '../pages/Contact';
 import { Layout } from '../components/organism/AllPagesLayout';
 import { ModalProvider } from '../components/organism/AllPagesLayout/ModalContext';
+import { MyAds } from '../pages/MyAds';
 
 export const AppRouter : React.FC = () => {
   return (
@@ -21,6 +22,7 @@ export const AppRouter : React.FC = () => {
         <Route path='/sellCar' element = {<Layout> <SellCar /> </Layout>} />
         <Route path='/blogs' element = {<Layout> <Blogs /> </Layout>} />
         <Route path='/contact' element = { <Layout><Contact /> </Layout>} />
+        <Route path='/myAds' element = { <Layout><MyAds/> </Layout>} />
     </Routes>
 </Router>
 </ModalProvider>

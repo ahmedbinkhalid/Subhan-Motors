@@ -1,13 +1,18 @@
 import React from 'react';
 import { ButtonProps } from './types';
 
-export const Button : React.FC <ButtonProps> = ({
-    btnTitle
+export const Button: React.FC<ButtonProps> = ({
+  btnTitle,
+  onClick,
+  bgColor,
+  hoverBgColor,
 }) => {
   return (
-    <button className="text-white rounded-md px-3 py-3 bg-regal-red cursor-pointer font-semibold hover:bg-red-700">
-    {btnTitle}
-  </button>
-  )
-}
-
+    <button
+      onClick={onClick}
+      className={`${bgColor} text-white rounded-md px-3 py-3 cursor-pointer font-semibold transition-colors duration-200 hover:${hoverBgColor}`}
+    >
+      {btnTitle}
+    </button>
+  );
+};
