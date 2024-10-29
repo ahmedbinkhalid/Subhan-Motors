@@ -43,23 +43,29 @@ const subsController = require('./subsController');
 
 exports.addCar = async (req, res, next) => {
     const OwnerId = req.user.id;
+    console.log("Request Body:", req.body);
+
     try {
         const db = req.app.locals.db;
-
-        // Check if images are sent in base64 format
         const base64Images = req.body.images; // this should be your base64 array
         const images = [];
 
-        // Convert base64 images to buffer and store
         for (let i = 0; i < base64Images.length; i++) {
-            const base64Data = base64Images[i].replace(/^data:image\/\w+;base64,/, '');
-            const buffer = Buffer.from(base64Data, 'base64');
-            const filename = `image-${Date.now()}-${i}.png`; // or .jpg depending on the type
+            const base64Data = base64Images[i];
+            const matches = base64Data.match(/^data:image\/(\w+);base64,/);
+
+            if (!matches) {
+                return res.status(400).json({ message: "Invalid image format." });
+            }
+
+            const imageType = matches[1];
+            const imageData = base64Data.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(imageData, 'base64');
+            const filename = `image-${Date.now()}-${i}.${imageType}`;
             const filepath = path.join(__dirname, '../public/uploads', filename);
 
-            // Write the image file to the filesystem
             fs.writeFileSync(filepath, buffer);
-            images.push(filename); // Add filename to images array
+            images.push(filename);
         }
 
         const carData = {
@@ -77,7 +83,7 @@ exports.addCar = async (req, res, next) => {
             color: req.body.color,
             location: req.body.location,
             description: req.body.description,
-            images: images, // Updated with the saved filenames
+            images: images,
             sellerInfo: req.body.sellerInfo,
             dateAdded: new Date(),
             status: req.body.status
