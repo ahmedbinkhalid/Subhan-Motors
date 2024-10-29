@@ -34,6 +34,7 @@
     "express-session": "^1.18.1",
     "fuse.js": "^7.0.0",
     "geoip-lite": "^1.4.10",
+    "html-minifier-terser": "^7.2.0",
     "jsonwebtoken": "^9.0.2",
     "mjml": "^4.15.3",
     "mongodb": "^6.9.0",
