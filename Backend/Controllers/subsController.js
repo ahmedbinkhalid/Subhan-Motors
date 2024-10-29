@@ -132,16 +132,29 @@ const transporter = nodemailer.createTransport({
 exports.sendEmailsToSubscribers = async (db, carData) => {
     const subscribers = await subsModel.getSubscriber(db);
 
-    const emailContent = `
-        <h2>New Car Added!</h2>
-        <p><strong>Make:</strong> ${carData.make}</p>
-        <p><strong>Model:</strong> ${carData.model}</p>
-        <p><strong>Description:</strong> ${carData.description}</p>
-        <p><strong>Tip:</strong> Hurry up! Visit the website to view the full details.</p>
+    // MJML template for car email
+    const mjmlContent = `
+        <mjml>
+            <mj-body background-color="#f4f4f4">
+                <mj-section>
+                    <mj-column>
+                        <mj-text font-size="24px" font-weight="bold" color="#333333">New Car Available!</mj-text>
+                        <mj-divider border-color="#cccccc" />
+                        <mj-text font-size="18px" color="#333333"><strong>Make:</strong> ${carData.make}</mj-text>
+                        <mj-text font-size="18px" color="#333333"><strong>Model:</strong> ${carData.model}</mj-text>
+                        <mj-text font-size="16px" color="#555555"><strong>Description:</strong> ${carData.description}</mj-text>
+                        <mj-text font-size="16px" color="#555555">Tip: Hurry up! Check out this car on our website for more details.</mj-text>
+                        <mj-button href="https://yourwebsite.com/cars/${carData.id}" background-color="#346DB7" color="#ffffff">View Car Details</mj-button>
+                    </mj-column>
+                </mj-section>
+            </mj-body>
+        </mjml>
     `;
 
+    const { html } = mjml2html(mjmlContent);
+
     // Minify the HTML content
-    const minifiedEmailContent = await minify(emailContent, {
+    const minifiedHtml = await minify(html, {
         collapseWhitespace: true,
         removeComments: true,
         minifyCSS: true,
@@ -152,7 +165,7 @@ exports.sendEmailsToSubscribers = async (db, carData) => {
         from: 'Subhan Motors',
         to: subscribers,
         subject: 'New Car Posted!',
-        html: minifiedEmailContent
+        html: minifiedHtml
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
