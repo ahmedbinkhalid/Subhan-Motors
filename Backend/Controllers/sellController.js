@@ -4,15 +4,73 @@ const path = require('path');
 const fs = require('fs');
 const subsController = require('./subsController');
 
-exports.addCar = async (req, res, next) =>{
+// exports.addCar = async (req, res, next) =>{
+//     const OwnerId = req.user.id;
+//     try{
+//         const db = req.app.locals.db;
+//         const images = req.files.map(file => file.filename);
+//         const carData = {
+//             owner: OwnerId,
+//             phoneNumber : '03404232435',
+//             make: req.body.make,
+//             model: req.body.model,
+//             year: req.body.year,
+//             price: req.body.price,
+//             mileage: req.body.mileage,
+//             condition: req.body.condition,
+//             transmission: req.body.transmission,
+//             engineType: req.body.engineType,
+//             engineCapacity: req.body.engineCapacity,
+//             color: req.body.color,
+//             location: req.body.location,
+//             description: req.body.description,
+//             images: images,
+//             sellerInfo: req.body.sellerInfo,
+//             dateAdded: new Date(),
+//             status: req.body.status // Added status for car type (Used or Bank Released)
+//         };
+//         const result = await sellModel.addCar(db, carData);
+//         res.status(200).json({message:'Car added for sale successfuly', carId: result.instertedId});
+//         await subsController.sendEmailsToSubscribers(db, carData);
+
+//     } catch(error){
+//         console.error("Error:", error); // Log the error
+//         res.status(500).json({ message: error.message });
+//         console.log("Request Body:", req.body);
+//         console.log("Uploaded Files:", req.files); // Log the uploaded files
+//     }
+// };
+
+exports.addCar = async (req, res, next) => {
     const OwnerId = req.user.id;
-    const sellerInfo = JSON.parse(req.body.sellerInfo);
-    try{
+    try {
         const db = req.app.locals.db;
-        const images = req.files.map(file => file.filename);
+        
+        // Collect filenames from uploaded files
+        const uploadedImages = req.files ? req.files.map(file => file.filename) : [];
+        
+        // Process base64 images
+        const base64Images = req.body.base64Images ? req.body.base64Images : [];
+        const base64ImagePaths = [];
+
+        if (base64Images.length > 0) {
+            for (const base64 of base64Images) {
+                const base64Data = base64.split(',')[1]; // Remove the metadata part of base64 string
+                const filename = `${Date.now()}-${Math.random()}.jpg`; // Create a unique filename
+                const filePath = path.join(__dirname, '../public/uploads', filename);
+                
+                // Write the base64 image to a file
+                fs.writeFileSync(filePath, base64Data, { encoding: 'base64' });
+                base64ImagePaths.push(filename); // Add the filename to the array
+            }
+        }
+
+        // Combine uploaded images and base64 images
+        const images = [...uploadedImages, ...base64ImagePaths];
+
         const carData = {
             owner: OwnerId,
-            phoneNumber : '03404232435',
+            phoneNumber: '03404232435',
             make: req.body.make,
             model: req.body.model,
             year: req.body.year,
@@ -26,15 +84,18 @@ exports.addCar = async (req, res, next) =>{
             location: req.body.location,
             description: req.body.description,
             images: images,
-            sellerInfo: sellerInfo,
+            sellerInfo: req.body.sellerInfo,
             dateAdded: new Date(),
             status: req.body.status // Added status for car type (Used or Bank Released)
         };
-        const result = await sellModel.addCar(db, carData);
-        res.status(200).json({message:'Car added for sale successfuly', carId: result.instertedId});
-        await subsController.sendEmailsToSubscribers(db, carData);
 
-    } catch(error){
+        const result = await sellModel.addCar(db, carData);
+        res.status(200).json({ message: 'Car added for sale successfully', carId: result.insertedId });
+
+        // Send emails to subscribers about the new car
+        await subsController.sendEmailsToSubscribers(db, carData);
+        
+    } catch (error) {
         console.error("Error:", error); // Log the error
         res.status(500).json({ message: error.message });
         console.log("Request Body:", req.body);
