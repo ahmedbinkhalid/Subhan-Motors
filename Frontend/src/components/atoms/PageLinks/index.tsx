@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { logo1 } from "../../../assets/images";
 import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useModal } from "../../organism/AllPagesLayout/ModalContext";
 import { TbLogout2 } from "react-icons/tb";
 import { jwtDecode } from "jwt-decode";
 import { FaUserShield } from "react-icons/fa6";
 import { Button } from "../Button";
 import { Sidebar } from "../SideBar";
+import { UserToken } from "./types";
 
-interface UserToken {
-  id: string;
-  role: string;
-  name: string;
-}
 
 interface LinksProps {
   path : string;
@@ -26,6 +22,13 @@ export const PageLinks: React.FC = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
 
+  const [userRole, setUserRole] = useState<string | null>(null);
+  const navigate = useNavigate();
+
+  const handleOnlineBooking = () => {
+    navigate("/onlineBooking");
+  }
+
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
@@ -37,11 +40,15 @@ export const PageLinks: React.FC = () => {
       try {
         const decodedToken = jwtDecode<UserToken>(token);
         setUserName(decodedToken.name);
+        setUserRole(decodedToken.role);
+        if(userRole?.includes("Admin")) {
+          navigate("/adminHome");
+        }
       } catch (error) {
         console.error("Error decoding the token:", error);
       }
     }
-  }, []);
+  }, [navigate, userRole]);
 
   const Links : React.FC<LinksProps> = ({path, title}) => (
     <li className="group relative cursor-pointer">
@@ -126,7 +133,7 @@ export const PageLinks: React.FC = () => {
           <Button btnTitle="Online Booking"
           bgColor="bg-regal-red"
           hoverBgColor="bg-red-600"
-          onClick={() => console.log("Online Booking")} />
+          onClick={handleOnlineBooking} />
         </div>
         
         {/* Use the Sidebar component */}

@@ -14,6 +14,7 @@ import team1 from "./team-1.jpg";
 import team2 from "./team-2.jpg";
 import team3 from "./team-3.jpg";
 import team4 from "./team-4.jpg";
+import logo from "./logo.png";
 
 
 export {
@@ -32,5 +33,6 @@ export {
     team1,
     team2,
     team3,
-    team4
+    team4,
+    logo
 };
