@@ -53,3 +53,42 @@ exports.getQueryById = async (req, res, next) =>{
         res.status(500).json({error: 'Server Error'});
     };
 };
+
+exports.postConact = async (req, res, next) =>{
+    const {name, email, phoneNumber, subject, message} = req.body;
+    try{
+        const db = req.app.locals.db;
+        const result = await queryModle.contactUs(db,{ name, email, phoneNumber, subject,message});
+        res.status(200).json({message: '✅ Submitted Successfuly, The Showroom will contact you soon!', conId: result.insertedId});
+
+
+    }catch(error){
+        console.error('Error While submitting', error);
+        res.status(500).json({error:'Server Error'});
+
+    }
+}
+
+exports.getContact = async (req, res, next)=>{
+    try{
+        const db = req.app.locals.db;
+        const contact = await queryModle.getContact(db);
+        res.status(200).json(contact);
+    } catch(error){
+        console.error('Error While fetching Messages', error);
+        res.status(500).json({error: 'Server error'});
+    }
+};
+
+exports.getConById = async (req, res, next) =>{
+    try{
+        const db = req.app.locals.db;
+        const conId = req.params.id;
+        const result = await queryModle.getContactById(db, conId);
+        res.status(200).json(result);
+        console.log(result);
+    } catch(error){
+        console.error('Error while fetching Messages', error);
+        res.status(500).json({error: 'Server Error'});
+    };
+};

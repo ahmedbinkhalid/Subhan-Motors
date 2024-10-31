@@ -12,4 +12,8 @@ router.get('/getQueries', verifyToken, isAdmin, queryController.getQuery);
 // Admin Route to view indiviual Query by Query Id
 router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
 
+router.post('/contact-us', verifyToken, isUser, queryController.postConact);
+router.get('/getContact', verifyToken, isAdmin, queryController.getContact);
+router.get('/contact/:id', queryController.getConById);
+
 module.exports = router;

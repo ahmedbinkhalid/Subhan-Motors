@@ -28,3 +28,4 @@ exports.createUser = async (db, userData)=>{
     const user = await db.collection('users').findOne({email});
     return user;
  }
+

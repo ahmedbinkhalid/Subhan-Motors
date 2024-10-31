@@ -1,6 +1,7 @@
 const express = require('express');
 const visitorController = require('../Controllers/visitorController');
 const { model } = require('mongoose');
+const { verifyToken } = require('../Middlewares/middleware');
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.use(visitorController.logVisitor);
 
  // Route to get monthly visitors count (for admin)
  router.get('/monthly', (req, res) => visitorController.getMonthlyVisitors(req, res));
+ 
 
 
 module.exports = router;
