@@ -17,7 +17,7 @@ export const SellCar: React.FC = () => {
         hoverBgColor='blue-600'
          />
           </section>
-        <CarInformation />
+        <CarInformation bgcolor='blue-variant' />
         </ContactProvider>
     </ImageProvider>
   );

@@ -1,9 +1,13 @@
 import React from 'react';
-import { addCar } from '../../../../assets/images';
 import { motion } from 'framer-motion';
 import { UploadPhotos } from '../../UploadPhotos';
+import { addCar } from '../../../../assets/images';
 
-export const AddCarImagePart : React.FC = () => {
+type AddCarImagePartProps = {
+  mainImage : string;
+}
+
+export const AddCarImagePart : React.FC<AddCarImagePartProps> = ({mainImage}) => {
   return (
     <section className='bg-slate-50 border-y-2 hover:border-y-0 hover:border-t-4 hover:border-t-regal-red max-w-5xl mx-auto grid md:grid-cols-3 grid-cols-1'>
        <div className='w-full flex justify-center items-center'>

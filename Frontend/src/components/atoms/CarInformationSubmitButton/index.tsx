@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 
-const CarInformationSubmitButton: React.FC = () => {
+type ButtonProps = {
+  bgColor : string;
+}
+const CarInformationSubmitButton: React.FC<ButtonProps> = ({bgColor}) => {
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
@@ -13,7 +16,7 @@ const CarInformationSubmitButton: React.FC = () => {
   return (
     <button
       onClick={handleClick}
-      className="relative w-48 h-11 border-2 border-blue-variant rounded-md text-blue-variant font-medium overflow-hidden cursor-pointer flex justify-center items-center focus:outline-none md:text-lg text-base"
+      className={`relative w-48 h-11 border-2 border-${bgColor} rounded-md text-${bgColor} font-medium overflow-hidden cursor-pointer flex justify-center items-center focus:outline-none md:text-lg text-base`}
     >
       {/* First text: "Submit" */}
       <span
@@ -36,7 +39,7 @@ const CarInformationSubmitButton: React.FC = () => {
       {/* Loader animation */}
       <div className="absolute inset-0 flex justify-center items-center overflow-hidden rounded-md z-0"> {/* Lower z-index for the loader */}
         <div
-          className={`w-full h-full bg-blue-variant rounded-md transition-transform duration-700 ease-in-out ${
+          className={`w-full h-full bg-${bgColor} rounded-md transition-transform duration-700 ease-in-out ${
             loading ? 'translate-x-0' : '-translate-x-full'
           }`}
         ></div>

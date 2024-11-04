@@ -9,8 +9,11 @@ import { useImageContext } from "../ImageContext";
 import { useContact } from "../ContactContext";
 import { CarFormData } from "./types";
 import { postCarAd } from "../../apis/PostCarAd";
+type CarInformationFormProps = {
+  bgColor : string;
+}
 
-const CarInformationForm: React.FC = () => {
+const CarInformationForm: React.FC<CarInformationFormProps> = ({bgColor}) => {
   const { images } = useImageContext();
   const { sellerInfo: contactInfo } = useContact();
 
@@ -174,7 +177,7 @@ const CarInformationForm: React.FC = () => {
         </div>
 
         <div className="md:col-span-2 flex justify-center my-8">
-          <CarInformationSubmitButton />
+          <CarInformationSubmitButton bgColor={bgColor} />
         </div>
       </form>
     </div>
