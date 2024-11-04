@@ -28,7 +28,7 @@ const upload = multer({
 });
 
 // User Route to post Ad for selling car
-router.post('/addcars', verifyToken, isUser, upload.array('images', 10), sellController.addCar);
+router.post('/addcars', verifyToken, isAdminorUser, upload.array('images', 10), sellController.addCar);
 
 // Route to get all new cars
 router.get('/newcars', sellController.getNewCars);
