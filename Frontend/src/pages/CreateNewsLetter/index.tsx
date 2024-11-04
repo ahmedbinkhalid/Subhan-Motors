@@ -1,9 +1,8 @@
 import React from 'react';
+import { NewsLetterForm } from '../../components/molecules/admin/NewsLetterForm';
 
 export const CreateNewsLetter : React.FC = () => {
   return (
-    <div>
-      CreateNewsLetter
-    </div>
+    <NewsLetterForm />
   )
 }

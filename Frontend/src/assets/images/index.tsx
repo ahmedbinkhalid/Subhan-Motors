@@ -15,6 +15,9 @@ import team2 from "./team-2.jpg";
 import team3 from "./team-3.jpg";
 import team4 from "./team-4.jpg";
 import logo from "./logo.png";
+import newsLetter from "./newLetter.jpg";
+import addNewBlog from "./addNewBlog.png";
+import addCar from "./addCar.png";
 
 
 export {
@@ -34,5 +37,8 @@ export {
     team2,
     team3,
     team4,
-    logo
+    logo,
+    newsLetter,
+    addNewBlog,
+    addCar
 };

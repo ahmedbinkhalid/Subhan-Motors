@@ -2,7 +2,7 @@ import React from 'react'
 
 export const AdminFooter : React.FC = () => {
   return (
-    <div className='px-6 py-3 bg-slate-50 border-t-[2px] mb-2'>
+    <div className='px-6 py-6 bg-slate-50 border-t-[2px]'>
  <p className="mb-3 md:mb-0 text-center">
             &copy;
             <a

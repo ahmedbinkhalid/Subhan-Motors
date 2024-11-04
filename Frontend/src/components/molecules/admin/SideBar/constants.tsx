@@ -36,9 +36,7 @@ export const SideBarLinksData: SideBarLinkProps[] = [
   {
     linkTitle: "News letter",
     LinkIcon: GiLetterBomb,
-    linkOptions: [
-      { title: "Create News Letter", path: "/createNewLetter" },
-    ],
+    linkOptions: [{ title: "Create News Letter", path: "/createNewsLetter" }],
   },
 
   {

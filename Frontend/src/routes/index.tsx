@@ -46,7 +46,7 @@ export const AppRouter : React.FC = () => {
         <Route path='/addNewBlog' element = { <AdminLayout><AddNewBlog/> </AdminLayout>} />
         <Route path='/getApprovedBlogs' element = { <AdminLayout><GetApprovedBlogs/> </AdminLayout>} />
         <Route path='/getAllQueries' element = { <AdminLayout><GetAllQueries/> </AdminLayout>} />
-        <Route path='/createNewLetter' element = { <AdminLayout><CreateNewsLetter/> </AdminLayout>} />
+        <Route path='/createNewsLetter' element = { <AdminLayout><CreateNewsLetter/> </AdminLayout>} />
         <Route path='/getAllMessages' element = { <AdminLayout><GetAllMessages/> </AdminLayout>} />
     </Routes>
 </Router>
