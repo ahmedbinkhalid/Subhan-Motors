@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const sellController = require('../Controllers/sellController');
-const {isUser, verifyToken, isAdmin, isAdminorUser} = require('../Middlewares/middleware');
+const {isUser, verifyToken, isAdmin, checkAdminOrUserRole} = require('../Middlewares/middleware');
 const multer = require('multer');
 const path = require('path');
 // Set up Multer for file storage
@@ -28,7 +28,7 @@ const upload = multer({
 });
 
 // User Route to post Ad for selling car
-router.post('/addcars', verifyToken, isAdminorUser, upload.array('images', 10), sellController.addCar);
+router.post('/addcars', verifyToken, checkAdminOrUserRole, upload.array('images', 10), sellController.addCar);
 
 // Route to get all new cars
 router.get('/newcars', sellController.getNewCars);
