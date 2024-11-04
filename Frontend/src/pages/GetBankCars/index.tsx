@@ -1,9 +1,9 @@
 import React from 'react';
+import { GetCarsLayout } from '../../components/organism/admin/GetCarsLayout';
 
 export const GetBankCars : React.FC = () => {
   return (
-    <div>
-      GetBankCars
-    </div>
+    <GetCarsLayout title='All Listed Bank Released Cars'
+    managedBy='Bank' />
   )
 }

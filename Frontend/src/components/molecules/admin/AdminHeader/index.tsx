@@ -50,16 +50,6 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ toggleSidebar }) => {
         <div className="flex gap-3 w-full md:w-2/5 items-center mt-4 md:mt-0 justify-end">
           <FaUserShield size={34} className="text-regal-red" />
           <p className="text-xl whitespace-nowrap font-semibold">Welcome, {userName || 'User'}</p>
-          <button
-            className="py-1 cursor-pointer z-10 border-b border-transparent hover:mb-1 transition duration-100"
-            onClick={() => {
-              localStorage.removeItem("token");
-              setIsLoggedIn(false);
-              setUserName(null);
-            }}
-          >
-            Logout
-          </button>
         </div>
       )}
     </header>
