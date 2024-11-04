@@ -41,10 +41,18 @@ exports.isUser = (req, res, next)=>{
     }
 }
 
-exports.isAdminorUser = (req, res, next)=>{
-    if(req.user && (req.user.role ==='User' || req.user.role ==='Admin')){
+// exports.isAdminorUser = (req, res, next)=>{
+//     if(req.user && (req.user.role ==='User' || req.user.role ==='Admin')){
+//         next();
+//     }else{
+//         res.status(403).json({error: 'Login to post add'});
+//     }
+// }
+
+exports.checkAdminOrUserRole = (req, res, next) => {
+    if (req.user && (req.user.role === 'User' || req.user.role === 'Admin')) {
         next();
-    }else{
-        res.status(403).json({error: 'Login to post add'});
+    } else {
+        res.status(403).json({ error: 'Access denied. Only users or admins can perform this action.' });
     }
-}
+};
