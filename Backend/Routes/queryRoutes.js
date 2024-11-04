@@ -12,8 +12,13 @@ router.get('/getQueries', verifyToken, isAdmin, queryController.getQuery);
 // Admin Route to view indiviual Query by Query Id
 router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
 
+// Send querry with Contact Us 
 router.post('/contact-us', verifyToken, isUser, queryController.postConact);
+
+//Get all the messasges from contact us
 router.get('/getContact', verifyToken, isAdmin, queryController.getContact);
+
+// Get detail view of contact us Message 
 router.get('/contact/:id', queryController.getConById);
 
 module.exports = router;
