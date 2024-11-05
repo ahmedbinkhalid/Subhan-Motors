@@ -22,7 +22,7 @@ export const GetApprovedBlogs: React.FC = () => {
       <GrBlog className='text-regal-red font-bold' />
       </div>
       <section className='bg-slate-50 md:p-8 p-4 border-y-2  flex flex-col'>
-        <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
+        <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
           {
             blogCardsData.length === 0 ? (
               <div className="text-center text-gray-500">No blogs available.</div>
