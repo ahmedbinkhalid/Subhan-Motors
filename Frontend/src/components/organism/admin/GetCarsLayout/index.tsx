@@ -11,11 +11,11 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
   const [currentPage, setCurrentPage] = useState(1); // Current page state
 
   return (
-    <React.Fragment>
+    <section className='lg:max-w-3xl xl:max-w-5xl mx-auto'>
       <h1 className='md:text-3xl text-2xl text-center text-charcoal-gray font-semibold font-sans md:mt-4 md:mb-8 mt-2 mb-4'>
         {title}
       </h1>
-      <section className='bg-slate-50 md:p-8 p-4 lg:max-w-6xl md:max-w-4xl sm:max-w-xl mx-auto hover:border-y-4 hover:border-regal-red rounded-md flex flex-col'>
+      <section className='bg-slate-50 md:p-8 p-4 hover:border-y-4 hover:border-regal-red rounded-md flex flex-col'>
         <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
           <CarsCardApiHandling managedBy={managedBy}>
             {(sellCarsData) => {
@@ -86,6 +86,6 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
           }}
         </CarsCardApiHandling>
       </section>
-    </React.Fragment>
+      </section>
   );
 }
