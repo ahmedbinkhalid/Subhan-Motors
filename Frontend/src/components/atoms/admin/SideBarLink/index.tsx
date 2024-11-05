@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { SideBarLinkProps } from './types';
-import { Link, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { RxDropdownMenu } from "react-icons/rx";
 
 export const SideBarLink: React.FC<SideBarLinkProps> = ({
@@ -26,10 +26,13 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
         onClick={linkOptions ? handleToggleDropdown : linkTitle === "Sign Out" ? handleLogout : undefined}
       >
         {!linkOptions && linkPath && linkTitle !== "Sign Out" ? (
-          <Link className="flex items-center gap-3 w-full" to={linkPath}>
+          <NavLink 
+            className={({ isActive }) => `flex items-center gap-3 w-full ${isActive ? 'text-regal-red' : 'text-charcoal-gray'}`} 
+            to={linkPath}
+          >
             <LinkIcon size={24} className="text-regal-red" />
             <span>{linkTitle}</span>
-          </Link>
+          </NavLink>
         ) : (
           <div className="flex items-center gap-3 w-full">
             <LinkIcon size={24} className="text-regal-red" />
@@ -46,13 +49,13 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
         <div className="mt-2 z-10">
           <div className="py-1">
             {linkOptions.map((option, index) => (
-              <Link
+              <NavLink
                 key={index}
                 to={option.path}
-                className="block px-4 py-2 text-base font-semibold text-blue-variant hover:text-regal-red transition duration-200"
+                className={({ isActive }) => `block px-4 py-2 text-base font-semibold ${isActive ? 'text-regal-red' : 'text-blue-variant'} hover:text-regal-red transition duration-200`}
               >
                 {option.title}
-              </Link>
+              </NavLink>
             ))}
           </div>
         </div>

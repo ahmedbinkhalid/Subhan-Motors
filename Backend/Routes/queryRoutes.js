@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/query',verifyToken, isUser, queryController.postQuery);
 
 // Admin Route to see all Queries
-router.get('/getQueries', verifyToken, isAdmin, queryController.getQuery);
+router.get('/getQueries', queryController.getQuery);
 
 // Admin Route to view indiviual Query by Query Id
 router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
