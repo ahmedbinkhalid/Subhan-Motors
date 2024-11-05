@@ -4,43 +4,6 @@ const path = require('path');
 const fs = require('fs');
 const subsController = require('./subsController');
 
-// exports.addCar = async (req, res, next) =>{
-//     const OwnerId = req.user.id;
-//     try{
-//         const db = req.app.locals.db;
-//         const images = req.files.map(file => file.filename);
-//         const carData = {
-//             owner: OwnerId,
-//             phoneNumber : '03404232435',
-//             make: req.body.make,
-//             model: req.body.model,
-//             year: req.body.year,
-//             price: req.body.price,
-//             mileage: req.body.mileage,
-//             condition: req.body.condition,
-//             transmission: req.body.transmission,
-//             engineType: req.body.engineType,
-//             engineCapacity: req.body.engineCapacity,
-//             color: req.body.color,
-//             location: req.body.location,
-//             description: req.body.description,
-//             images: images,
-//             sellerInfo: req.body.sellerInfo,
-//             dateAdded: new Date(),
-//             status: req.body.status // Added status for car type (Used or Bank Released)
-//         };
-//         const result = await sellModel.addCar(db, carData);
-//         res.status(200).json({message:'Car added for sale successfuly', carId: result.instertedId});
-//         await subsController.sendEmailsToSubscribers(db, carData);
-
-//     } catch(error){
-//         console.error("Error:", error); // Log the error
-//         res.status(500).json({ message: error.message });
-//         console.log("Request Body:", req.body);
-//         console.log("Uploaded Files:", req.files); // Log the uploaded files
-//     }
-// };
-
 exports.addCar = async (req, res, next) => {
     const OwnerId = req.user.id;
     console.log("Request Body:", req.body);
@@ -289,22 +252,3 @@ exports.SearchCars = async (req, res, next)=>{
     }
 
 };
-
-
-
-// exports.SearchCars = async (req, res, next)=>{
-//     const key = req.params.key;
-//     const city = req.query.city;
-//     const priceRange = req.query.priceRange;
-//     console.log(`Search Key: ${key}, City: ${city}, Price Range: ${priceRange}`);
-//     try{
-//         const db = req.app.locals.db;
-//         const results = await sellModel.SearchCars(db, city, key, priceRange);
-//         res.status(200).json({message: 'Search results', cars: results});
-//     } catch(error){
-//         res.status(500).json({ message: error.message });
-//         console.log("Search Key:", key);
-//     }
-
-// };
-

@@ -31,39 +31,50 @@
         }
         #results {
             margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap; /* Allows wrapping of cards */
-            gap: 20px; /* Space between cards */
         }
-        .car {
+        .car-entry {
+            display: flex;
+            align-items: center;
             background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            padding: 10px;
-            width: calc(25% - 20px); /* Four cards in a row with space */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 12px;
+            margin-bottom: 8px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s;
         }
-        .car:hover {
-            transform: scale(1.02); /* Slightly enlarge on hover */
+        .car-entry:hover {
+            transform: scale(1.02);
         }
-        .car img {
-            max-width: 100%; /* Responsive image */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 4px; /* Rounded corners for the image */
+        .index {
+            font-weight: bold;
+            color: #888;
+            margin-right: 15px;
+            width: 30px;
+            text-align: center;
         }
         .car-details {
-            margin-top: 10px;
-        }
-        .car-images {
             display: flex;
-            flex-wrap: wrap; /* Wrap images in multiple rows */
-            gap: 10px; /* Space between images */
+            flex-grow: 1;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        .car-images img {
-            width: 100px; /* Fixed width for the images */
-            height: auto; /* Maintain aspect ratio */
-            border-radius: 4px; /* Rounded corners for the image */
+        .car-details p {
+            margin: 0;
+            padding: 0;
+            font-size: 1em;
+        }
+        .edit-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        .edit-button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -95,26 +106,30 @@
                 const data = await response.json();
 
                 if (data.cars && data.cars.length > 0) {
-                    data.cars.forEach(car => {
-                        const carDiv = document.createElement('div');
-                        carDiv.className = 'car';
-                        carDiv.innerHTML = `
-                            <div class="car-images">
-                                ${car.images.map(image => `<img src="/public/uploads/${image}" alt="${car.make} ${car.model}" />`).join('')}
-                            </div>
+                    data.cars.forEach((car, index) => {
+                        const carEntry = document.createElement('div');
+                        carEntry.className = 'car-entry';
+                        
+                        let colorInfo;
+                        if (car.color) {
+                            colorInfo = `<p><strong>Color:</strong> ${car.color}</p>`;
+                        } else if (car.availableColors) {
+                            colorInfo = `<p><strong>Available Colors:</strong> ${car.availableColors.join(', ')}</p>`;
+                        } else {
+                            colorInfo = `<p><strong>Color:</strong> N/A</p>`;
+                        }
+
+                        carEntry.innerHTML = `
+                            <div class="index">${index + 1}</div>
                             <div class="car-details">
-                                <strong>Make:</strong> ${car.make}<br>
-                                <strong>Model:</strong> ${car.model}<br>
-                                <strong>Year:</strong> ${car.year}<br>
-                                <strong>Price:</strong> $${car.price}<br>
-                                <strong>Mileage:</strong> ${car.mileage} km<br>
-                                <strong>Color:</strong> ${car.color}<br>
-                                <strong>Description:</strong> ${car.description}<br>
-                                <strong>Status:</strong> ${car.status}<br>
-                                <strong>Location:</strong> ${car.location}<br>
+                                <p><strong>Make:</strong> ${car.make}</p>
+                                <p><strong>Model:</strong> ${car.model}</p>
+                                <p><strong>Location:</strong> ${car.location}</p>
+                                ${colorInfo}
                             </div>
+                            <button class="edit-button" onclick="editCar(${car.id})">Edit</button>
                         `;
-                        resultsDiv.appendChild(carDiv);
+                        resultsDiv.appendChild(carEntry);
                     });
                 } else {
                     resultsDiv.innerHTML = '<p>No results found.</p>';
@@ -123,6 +138,11 @@
                 console.error('Error fetching search results:', error);
                 resultsDiv.innerHTML = '<p>Error fetching search results. Please try again later.</p>';
             }
+        }
+
+        function editCar(carId) {
+            alert(`Edit car with ID: ${carId}`);
+            // Implement the edit functionality as needed
         }
     </script>
 
