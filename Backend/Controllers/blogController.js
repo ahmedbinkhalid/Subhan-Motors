@@ -7,13 +7,10 @@ const nodemailer = require('nodemailer');
 
 exports.submitBlog = async (req, res, next)=>{
     const {title, content, images} = req.body;
-    const bloggerId = req.user.id;
+    // const bloggerId = req.user.id;
 
     if(content.length< 2){
         return res.status(400).json({error: "Blog content must be atleast of 500 words"});
-    }
-    if(images.length == 0){
-        return res.status(400).json({error: "Kindly add atleast one image inside your blog"});
     }
 
     try{
@@ -22,9 +19,10 @@ exports.submitBlog = async (req, res, next)=>{
         const newBlog = await blogModel.createBlog(db, {
             title,
             content,
-            author: bloggerId,
+            // author: bloggerId,
             images: images,
         });
+        console.log(req.body);
         res.status(200).json({message:'Blog submitted', blogId: newBlog.insteredId})
     } catch(error){
         console.error('Error During blog submission' ,error);

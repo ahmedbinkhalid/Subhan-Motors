@@ -20,7 +20,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <div className="flex flex-col bg-white shadow-md rounded-md my-1 w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
       <img
-        src={blogImage}
+        src={`http://localhost:5000/public/uploads/${blogImage}`}
         alt="Blog Thumbnail"
         className="object-cover h-52 w-full rounded-t-md"
       />

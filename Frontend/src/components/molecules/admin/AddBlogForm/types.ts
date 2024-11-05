@@ -1,5 +1,5 @@
 export interface BlogFormData {
-    image: File | null;
+    image: File[];
     title: string;
     description: string;
   }
