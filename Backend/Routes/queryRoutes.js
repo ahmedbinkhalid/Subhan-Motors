@@ -16,7 +16,7 @@ router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
 router.post('/contact-us', queryController.postConact);
 
 //Get all the messasges from contact us
-router.get('/getContact', verifyToken, isAdmin, queryController.getContact);
+router.get('/getContact',  queryController.getContact);
 
 // Get detail view of contact us Message 
 router.get('/contact/:id', queryController.getConById);

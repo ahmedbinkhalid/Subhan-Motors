@@ -4,8 +4,8 @@ import { TableButton } from '../../../atoms/admin/TableButton';
 
 export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data }) => {
   return (
-    <section className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden">
-      <h1 className="text-2xl text-center text-charcoal-gray font-semibold md:my-8 my-4">{title}</h1>
+    <section className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden md:py-6 py-3">
+      <h1 className="text-2xl text-center text-charcoal-gray font-semibold md:mb-8 mb-4">{title}</h1>
       
       {/* Display Table for Desktop and Tablet */}
       <div className="hidden md:block">

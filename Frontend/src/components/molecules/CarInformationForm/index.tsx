@@ -9,11 +9,12 @@ import { useImageContext } from "../ImageContext";
 import { useContact } from "../ContactContext";
 import { CarFormData } from "./types";
 import { postCarAd } from "../../apis/PostCarAd";
-type CarInformationFormProps = {
-  bgColor : string;
-}
 
-const CarInformationForm: React.FC<CarInformationFormProps> = ({bgColor}) => {
+type CarInformationFormProps = {
+  bgColor: string;
+};
+
+const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
   const { images } = useImageContext();
   const { sellerInfo: contactInfo } = useContact();
 
@@ -34,6 +35,8 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({bgColor}) => {
     location: "",
     description: "",
   });
+
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Populate sellerInfo and images from context
   useEffect(() => {
@@ -63,6 +66,14 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({bgColor}) => {
       return;
     }
 
+    // Validate that at least two images are included
+    if (formData.images.length < 2) {
+      setErrorMessage("Please upload at least 2 images.");
+      return;
+    } else {
+      setErrorMessage(null); // Clear the error message if validation passes
+    }
+
     const response = await postCarAd(formData, token);
     if (response.error) {
       console.error("Error:", response.error);
@@ -77,6 +88,13 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({bgColor}) => {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
+        {/* Display error message if it exists */}
+        {errorMessage && (
+          <div className="md:col-span-2 text-red-500 mb-4">
+            {errorMessage}
+          </div>
+        )}
+
         <div className="space-y-4">
           <CarInformationInput
             label="Make"
