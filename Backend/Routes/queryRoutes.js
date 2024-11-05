@@ -13,7 +13,7 @@ router.get('/getQueries', queryController.getQuery);
 router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
 
 // Send querry with Contact Us 
-router.post('/contact-us', verifyToken, isUser, queryController.postConact);
+router.post('/contact-us', queryController.postConact);
 
 //Get all the messasges from contact us
 router.get('/getContact', verifyToken, isAdmin, queryController.getContact);
