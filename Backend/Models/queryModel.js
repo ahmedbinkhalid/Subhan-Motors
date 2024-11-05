@@ -27,6 +27,11 @@ exports.getQuery = async (db)=>{
     return result;
 }
 
+exports.dellQuery = async (db, queryId)=>{
+    const result = await db.collection('quries').deleteOne({_id: new MongoDb.ObjectId(queryId)})
+    return result;
+}
+
 exports.getQuerryById = async (db, queryId)=>{
     const result = await db.collection('quries').findOne({_id: new MongoDb.ObjectId(queryId)});
     return result;

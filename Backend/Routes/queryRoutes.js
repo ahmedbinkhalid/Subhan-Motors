@@ -12,6 +12,10 @@ router.get('/getQueries', queryController.getQuery);
 // Admin Route to view indiviual Query by Query Id
 router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
 
+// Route to del Query by Admin
+
+router.delete('/del-Query/:id', queryController.dellQuery);
+
 // Send querry with Contact Us 
 router.post('/contact-us', queryController.postConact);
 
