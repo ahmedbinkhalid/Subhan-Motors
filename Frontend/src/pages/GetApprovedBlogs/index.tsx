@@ -14,13 +14,14 @@ export const GetApprovedBlogs: React.FC = () => {
 
   return (
     <React.Fragment>
+      <section className='lg:max-w-3xl xl:max-w-5xl mx-auto'>
       <div className='flex justify-center items-center gap-4 md:text-2xl text-xl text-charcoal-gray font-semibold font-sans md:mt-4 md:mb-8 mt-2 mb-4'>
       <h1 className=''>
         All your Blog's 
       </h1>
       <GrBlog className='text-regal-red font-bold' />
       </div>
-      <section className='bg-slate-50 md:p-8 p-4 lg:max-w-6xl md:max-w-4xl sm:max-w-xl mx-auto border-y-2  flex flex-col'>
+      <section className='bg-slate-50 md:p-8 p-4 border-y-2  flex flex-col'>
         <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
           {
             blogCardsData.length === 0 ? (
@@ -69,6 +70,8 @@ export const GetApprovedBlogs: React.FC = () => {
             Next
           </button>
         </div>
+      </section>
+
       </section>
     </React.Fragment>
   );
