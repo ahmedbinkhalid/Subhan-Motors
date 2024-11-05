@@ -12,10 +12,6 @@ exports.submitBlog = async (req, res, next)=>{
     if(content.length< 2){
         return res.status(400).json({error: "Blog content must be atleast of 500 words"});
     }
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
     try{
         const db = req.app.locals.db;
         const images = req.files.map(file=> file.filename);
@@ -27,9 +23,11 @@ exports.submitBlog = async (req, res, next)=>{
         });
         console.log(req.body);
         res.status(200).json({message:'Blog submitted', blogId: newBlog.insteredId})
-        const { blogId } = req.body;
-        await blogModel.approveBlog(db, blogId);
-        const blog = await blogModel.getBlogById(db, blogId);
+         // Approve the blog
+         await blogModel.approveBlog(db, newBlog.insertedId); // Use the newly created blog ID
+
+         // Fetch the newly created blog for the email notification
+         const blog = await blogModel.getBlogById(db, newBlog.insertedId);
         if (blog) {
             const subs = await subsModel.getSubscriber(db);
             // Set up the email transporter using nodemailer
@@ -49,7 +47,7 @@ exports.submitBlog = async (req, res, next)=>{
                 html: `
                     <h2>${blog.title}</h2>
                     <p>${blog.content}</p>
-                    <p><a href="http://localhost:3000/blogs/${blogId}">Read the full blog here</a></p>
+                    <p><a href="http://localhost:3000/blogs/${newBlog.insertedId}">Read the full blog here</a></p>
 
                 `,
             };
@@ -69,6 +67,10 @@ exports.submitBlog = async (req, res, next)=>{
         res.status(500).json({error: 'Server error'});
     };
 };
+
+
+// This part of the code was not used because of the deadline
+
 
 // For approving the blog
 
