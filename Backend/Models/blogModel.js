@@ -8,10 +8,10 @@ const MongoDB = require("mongodb");
         content,
         author, // Bloggers id or name
         images, // Array of image urls
-        status: 'pending',
+        status: 'Approved',
         createdAt: new Date(),
     };
-    const result = await db.collection('pendingblogs').insertOne(blog);
+    const result = await db.collection('approvedblogs').insertOne(blog);
     return result;
  };
 

@@ -7,6 +7,28 @@ const ratelimit = require('express-rate-limit');
 const multer = require('multer');
 const path = require('path');
 // Set up Multer for file storage
+// const storage = multer.diskStorage({
+//     destination: function (req, file, cb) {
+//         cb(null, './public/uploads'); // Save the files in /public/uploads directory
+//     },
+//     filename: function (req, file, cb) {
+//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+//         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
+//     }
+// });
+
+// const upload = multer({
+//     storage: storage,
+//     limits: { fileSize: 5 * 1024 * 1024 }, // 5MB size limit
+//     fileFilter: function (req, file, cb) {
+//         // Accept images only
+//         if (!file.mimetype.startsWith('image/')) {
+//             return cb(new Error('Please upload only images.'));
+//         }
+//         cb(null, true);
+//     }
+// });
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploads'); // Save the files in /public/uploads directory
@@ -19,7 +41,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB size limit
+    limits: { fieldSize: 10 * 1024 * 1024, fileSize: 5 * 1024 * 1024 }, // 5MB size limit
     fileFilter: function (req, file, cb) {
         // Accept images only
         if (!file.mimetype.startsWith('image/')) {
@@ -43,7 +65,7 @@ const limiter = ratelimit({
 
 
 // Blogger route to submit blog for approval
-router.post('/submit', verifyToken, isBlogger , upload.array('images', 10), submitBlog);
+router.post('/submit' , upload.array('images', 10), submitBlog);
 
 // Admin Route to get all pending blogs for approval
 router.get('/pending', verifyToken, isAdmin ,getpendingBlog);

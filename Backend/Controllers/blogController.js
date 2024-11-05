@@ -25,7 +25,7 @@ exports.submitBlog = async (req, res, next)=>{
             author: bloggerId,
             images: images,
         });
-        res.status(200).json({message:'Blog submitted for approval', blogId: newBlog.insteredId})
+        res.status(200).json({message:'Blog submitted', blogId: newBlog.insteredId})
     } catch(error){
         console.error('Error During blog submission' ,error);
         res.status(500).json({error: 'Server error'});
