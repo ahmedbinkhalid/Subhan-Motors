@@ -3,18 +3,19 @@ import { IoMdPhotos } from "react-icons/io";
 import { MdAddToPhotos } from "react-icons/md";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { LuImageMinus } from "react-icons/lu";
-import { useImageContext } from "../ImageContext";
+import { useImageContext } from "../../ImageContext";
 
 interface PhotoLimitationsProps {
-  limitation : string;
-}  
-export const UploadPhotos: React.FC = () => {
-  const { images, setImages } = useImageContext(); 
+  limitation: string;
+}
+
+export const AddCarUploadPhotos: React.FC = () => {
+  const { images, setImages } = useImageContext();
   const [loading, setLoading] = useState<Record<number, boolean>>({});
 
   const PhotoLimitations: React.FC<PhotoLimitationsProps> = ({ limitation }) => (
     <p className="flex gap-2">
-      <IoMdCheckmarkCircleOutline size={20} className="object-cover text-blue-variant mt-[1.5px] font-bold" />
+      <IoMdCheckmarkCircleOutline size={20} className="object-cover text-regal-red mt-[1.5px] font-bold" />
       <span className="text-charcoal-gray text-sm mt-[1.5px] font-medium">{limitation}</span>
     </p>
   );
@@ -70,18 +71,18 @@ export const UploadPhotos: React.FC = () => {
   };
 
   return (
-    <section className="bg-slate-50 border-y md:p-12 p-4 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
+    <section className="bg-slate-50 border-y md:p-12 p-4 hover:border-t-4 hover:border-t-regal-red hover:shadow-lg font-sans text-charcoal-gray my-8">
       <h1 className="md:text-xl text-lg font-semibold mb-6">Upload Photos</h1>
 
-      <div className="border-2 border-dashed border-blue-variant md:p-12  p-4 ">
+      <div className="border-2 border-dashed border-regal-red md:p-12 p-4 ">
         <div className="flex md:gap-4 gap-2 justify-center items-center w-full">
           <div className="p-4 rounded-full bg-slate-100 border-[0.5px]">
-            <IoMdPhotos size={52} className="object-cover text-blue-variant"/>
+            <IoMdPhotos size={52} className="object-cover text-regal-red" />
           </div>
 
           <div className="flex flex-col gap-1 self-end">
             <label htmlFor="file-upload" className="cursor-pointer">
-              <div className="bg-blue-variant hover:bg-blue-700 py-2 md:px-6 px-3 rounded-lg text-center md:text-base text-sm text-white font-semibold h-fit self-center flex gap-2">
+              <div className="bg-regal-red hover:bg-red-700 py-2 md:px-6 px-3 rounded-lg text-center md:text-base text-sm text-white font-semibold h-fit self-center flex gap-2">
                 <MdAddToPhotos size={24} className="object-cover text-white mt-[1.5px]" />
                 <span> Add Photos </span>
               </div>
@@ -100,7 +101,7 @@ export const UploadPhotos: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid 2xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-3 grid-cols-1 gap-4 md:my-8 my-4 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center">
+        <div className="grid 2xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-1 gap-4 md:my-8 my-4 max-md:flex max-md:flex-col max-md:items-center max-md:justify-center">
           {images.map((image, index) => (
             <div key={index} className="relative w-40 h-40 bg-gray-100 rounded-md overflow-hidden flex justify-center items-center">
               <img src={image} alt={`uploaded ${index}`} className="w-full h-full object-cover" />
@@ -115,7 +116,7 @@ export const UploadPhotos: React.FC = () => {
                 onClick={() => handleDelete(index)}
                 className="absolute top-1 right-1 p-1 hover:bg-opacity-80 bg-white rounded-full"
               >
-                <LuImageMinus size={20} className="bg-blue-variant" />
+                <LuImageMinus size={20} className="text-regal-red" />
               </button>
             </div>
           ))}
@@ -132,6 +133,6 @@ export const UploadPhotos: React.FC = () => {
           </div>
         </section>
       </div>
-      </section>
+    </section>
   );
 };

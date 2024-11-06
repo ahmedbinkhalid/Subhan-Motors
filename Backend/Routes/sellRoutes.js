@@ -37,7 +37,7 @@ router.get('/newcars', sellController.getNewCars);
 router.get('/newcars/:id', sellController.getNewCarById);
 
 // Admin Route to add new car for sale
-router.post('/postcar', verifyToken, isAdmin, upload.array('images', 10), sellController.newCars);
+router.post('/postcar', upload.array('images', 10), sellController.newCars);
 
 // Route to get all cars (used and bankreleased)
 router.get('/getcars', sellController.getAllCars);

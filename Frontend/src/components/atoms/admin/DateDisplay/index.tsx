@@ -6,7 +6,7 @@ interface DateDisplayProps {
   toggleDatePicker: () => void;
 }
 
-const DateDisplay: React.FC<DateDisplayProps> = ({
+export const DateDisplay: React.FC<DateDisplayProps> = ({
   date,
   toggleDatePicker,
 }) => {
@@ -42,4 +42,3 @@ const DateDisplay: React.FC<DateDisplayProps> = ({
   );
 };
 
-export default DateDisplay;

@@ -137,15 +137,35 @@ exports.getUserCars = async (req, res, next)=>{
     }
 }
 exports.newCars = async (req, res, next)=>{
+    console.log(req.body);
     try{
         const db = req. app.locals.db;
-        const images = req.files.map(file=> file.filename);
+        const base64Images = req.body.images; // this should be your base64 array
+        const images = [];
+
+        for (let i = 0; i < base64Images.length; i++) {
+            const base64Data = base64Images[i];
+            const matches = base64Data.match(/^data:image\/(\w+);base64,/);
+
+            if (!matches) {
+                return res.status(400).json({ message: "Invalid image format." });
+            }
+
+            const imageType = matches[1];
+            const imageData = base64Data.replace(/^data:image\/\w+;base64,/, '');
+            const buffer = Buffer.from(imageData, 'base64');
+            const filename = `image-${Date.now()}-${i}.${imageType}`;
+            const filepath = path.join(__dirname, '../public/uploads', filename);
+
+            fs.writeFileSync(filepath, buffer);
+            images.push(filename);
+        }
         const carData = {
             phoneNumber : '03409889631',
             make : req.body.make,
             model : req.body.model,
             releasedDate : req.body.releasedDate,
-            transmission: req.app.transmission,
+            transmission: req.body.transmission,
             engineType: req.body.engineType,
             engineCapacity: req.body.engineCapacity,
             availableColors: req.body.availableColor,
@@ -154,11 +174,13 @@ exports.newCars = async (req, res, next)=>{
             images: images,
             dateAdded : new Date(),
             startingPrice: req.body.startingPrice,
-            maxPrice: req.body.startingPrice
+            maxPrice: req.body.maxPrice
         }
         const result = await sellModel.newCars(db, carData);
+        
         res.status(200).json({message: 'Car added for sale successfuly', carId: result.instertedId});
         await subsController.sendEmailsToSubscribers(db, carData);
+        console.log(carData);
     }catch(error){
         console.error("Error:", error); // Log the error
         res.status(500).json({ message: error.message });

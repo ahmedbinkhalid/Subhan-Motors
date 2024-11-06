@@ -11,12 +11,9 @@ export const SellCar: React.FC = () => {
         <SellCarEasySteps />
         <ContactProvider>
         <ContactInformation />
-        <section className="bg-slate-50 border-y p-8 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
+      
         <UploadPhotos
-        bgColor='blue-variant'
-        hoverBgColor='blue-600'
          />
-          </section>
         <CarInformation bgcolor='blue-variant' />
         </ContactProvider>
     </ImageProvider>

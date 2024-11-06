@@ -1,20 +1,27 @@
 import React, { useState } from "react";
-import DateDisplay from "../../../atoms/admin/DateDisplay";
 import DatePicker, { ReactDatePickerCustomHeaderProps } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export const DateCalender : React.FC = () => {
+interface DateCalenderProps {
+  onDateChange: (date: Date | null) => void; // Callback function to update the parent's state
+}
+
+export const DateCalender: React.FC<DateCalenderProps> = ({ onDateChange }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
+  
   const toggleDatePickerVisibility = () => {
     setShowDatePicker((prev) => !prev);
   };
+
   const handleDateChange = (date: Date | null) => {
     if (date) {
       setSelectedDate(date);
+      onDateChange(date); // Notify parent component
       setShowDatePicker(false);
     }
   };
+
   const renderCustomHeader = ({
     date,
     decreaseMonth,
@@ -45,35 +52,35 @@ export const DateCalender : React.FC = () => {
       </button>
     </div>
   );
+
   const customDayStyles = (date: Date) => {
     const today = new Date();
     const isToday = date.toDateString() === today.toDateString();
     return isToday
       ? "bg-blue-500 text-white"
-      : "bg-white text-gray-800 hover:bg-blue-100";
+      : "bg-white text-gray-700 hover:bg-gray-200";
   };
 
   return (
-    <div className="relative">
-      <DateDisplay
-        date={selectedDate ?? new Date()}
-        toggleDatePicker={toggleDatePickerVisibility}
-      />
-
+    <div className="relative ">
+      <div
+        onClick={toggleDatePickerVisibility}
+        className="flex justify-between items-center cursor-pointer bg-white px-3 py-2 text-charcoal-gray font-sans border rounded-md shadow-sm"
+      >
+        <span>{selectedDate ? selectedDate.toDateString() : "Select Date"}</span>
+        <button className="ml-2 text-xl">📅</button>
+      </div>
       {showDatePicker && (
-        <div className="absolute top-full z-50 right-0 w-full md:w-auto">
-          <DatePicker
-            selected={selectedDate}
-            onChange={handleDateChange}
-            inline
-            monthsShown={1}
-            renderCustomHeader={renderCustomHeader}
-            dayClassName={(date) => customDayStyles(date)}
-            calendarClassName="bg-blue p-2 rounded-lg"
-          />
-        </div>
+        <DatePicker
+          selected={selectedDate}
+          onChange={handleDateChange}
+          inline
+          renderCustomHeader={renderCustomHeader} // Fix here: renderCustomHeader should be passed directly
+          dayClassName={(date) => customDayStyles(date)}
+        />
       )}
     </div>
   );
 };
 
+export default DateCalender;
