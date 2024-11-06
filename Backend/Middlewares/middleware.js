@@ -41,14 +41,6 @@ exports.isUser = (req, res, next)=>{
     }
 }
 
-// exports.isAdminorUser = (req, res, next)=>{
-//     if(req.user && (req.user.role ==='User' || req.user.role ==='Admin')){
-//         next();
-//     }else{
-//         res.status(403).json({error: 'Login to post add'});
-//     }
-// }
-
 exports.checkAdminOrUserRole = (req, res, next) => {
     if (req.user && (req.user.role === 'User' || req.user.role === 'Admin')) {
         next();

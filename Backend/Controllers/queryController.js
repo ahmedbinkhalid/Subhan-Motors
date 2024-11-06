@@ -58,7 +58,7 @@ exports.dellQuery = async (req, res, next)=>{
     try{
         const db = req.app.locals.db;
         const queryId = req.params.id;
-        const result = await queryModle.dellQuery(db, queryId);
+        await queryModle.dellQuery(db, queryId);
         res.status(200).json({message: 'Query Deleted Successfully'});
     } catch(error){
         console.error('Error while deleting Query', error);

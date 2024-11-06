@@ -99,7 +99,7 @@ exports.approveBlog = async (req, res, next) =>{
                 html: `
                     <h2>${blog.title}</h2>
                     <p>${blog.content}</p>
-                    <p><a href="http://localhost:3000/blogs/${blogId}">Read the full blog here</a></p>
+                    <p><a href="http://localhost:5000/blogs/${blogId}">Read the full blog here</a></p>
 
                 `,
             };
