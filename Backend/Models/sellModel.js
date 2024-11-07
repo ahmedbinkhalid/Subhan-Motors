@@ -143,7 +143,10 @@ exports.SearchCars = async (db, key) => {
                 color: car.color || '',
                 description: car.description || '',
                 location: car.location || '',
-                availableColors: car.availableColors || [],  // Default to empty array
+                // availableColors: car.availableColors || [],  // Default to empty array
+                availableColors: Array.isArray(car.availableColors)
+            ? car.availableColors
+            : (typeof car.availableColors === 'string' ? [car.availableColors] : []),
                 // Add other fields as necessary
             };
         };
