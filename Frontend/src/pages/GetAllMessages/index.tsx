@@ -16,6 +16,7 @@ export const GetAllMessages: React.FC = () => {
             try {
                 const messages: Message[] = await getMessages(); // Fetch messages from the API
                 const formattedData: TableRow[] = messages.map((message: Message) => ({
+                    id: message._id,  // Assuming the API response has an `_id` field
                     subject: message.subject,
                     phoneNumber: message.phoneNumber,
                     email: message.email,
@@ -28,6 +29,7 @@ export const GetAllMessages: React.FC = () => {
                         console.log("Deleting message:", message);
                     },
                 }));
+               
                 setData(formattedData); // Set fetched data to state
             // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (err) {
@@ -42,6 +44,5 @@ export const GetAllMessages: React.FC = () => {
 
     if (loading) return <div>Loading...</div>; // Loading message
     if (error) return <div>{error}</div>; // Error message
-
     return <TableLayout title="Get All Messages" columns={columns} data={data} />;
 };

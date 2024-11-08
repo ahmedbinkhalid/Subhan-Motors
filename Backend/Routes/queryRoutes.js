@@ -25,4 +25,12 @@ router.get('/getContact',  queryController.getContact);
 // Get detail view of contact us Message 
 router.get('/contact/:id', queryController.getConById);
 
+// Backend Routes (queryRoutes.js)
+const { dellMessage } = require('../Controllers/queryController');
+
+router.delete('/messages/:id', dellMessage); // Delete message by ID
+
+module.exports = router;
+
+
 module.exports = router;

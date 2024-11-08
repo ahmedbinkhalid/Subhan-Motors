@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { FetchBlogs } from '../../components/atoms/FetchBlogs';
 import { BlogCard } from '../../components/atoms/BlogCard';
 import { GrBlog } from "react-icons/gr";
-
-export const GetApprovedBlogs: React.FC = () => {
+type GetApprovedBlogsProps = {
+  title ?: string;
+}
+export const GetApprovedBlogs: React.FC <GetApprovedBlogsProps> = ({title}) => {
   const itemsPerPage = 8; // Number of items per page
   const [currentPage, setCurrentPage] = useState(1); // Current page state
   const { blogCardsData, error } = FetchBlogs(); // Use FetchBlogs hook
@@ -17,7 +19,7 @@ export const GetApprovedBlogs: React.FC = () => {
       <section className='lg:max-w-3xl xl:max-w-5xl mx-auto'>
       <div className='flex justify-center items-center gap-4 md:text-2xl text-xl text-charcoal-gray font-semibold font-sans md:mt-4 md:mb-8 mt-2 mb-4'>
       <h1 className=''>
-        All your Blog's 
+        {!title ? "All your Blog's" : title} 
       </h1>
       <GrBlog className='text-regal-red font-bold' />
       </div>

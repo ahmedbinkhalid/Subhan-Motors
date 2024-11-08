@@ -1,17 +1,16 @@
 const queryModle = require('../Models/queryModel');
 
 exports.postQuery = async (req, res, next) =>{
-    const {title, content, minPrice, maxPrice, phoneNumber,make, model, enginecapacity, transmission, color, fromYear, toYear} = req.body;
-    const useremail = req.user.email;
+    const {title, content, minPrice, maxPrice,email, phoneNumber,make, model, enginecapacity, transmission, color, fromYear, toYear} = req.body;
     try{
         const db = req.app.locals.db;
-        const newQuery = await queryModle.addQurey(db,{
+        const querydata = {
             title,
             content,
             minPrice,
             maxPrice,
             phoneNumber,
-            email: useremail,
+            email,
             make, 
             model, 
             enginecapacity, 
@@ -19,7 +18,8 @@ exports.postQuery = async (req, res, next) =>{
             color, 
             fromYear, 
             toYear
-        });
+        };
+        const newQuery = await queryModle.addQurey(db,querydata)
         res.status(200).json({message: '✅ Query Submitted Successfuly, The Showroom will contact you soon!', queryId: newQuery.insertedId});
 
 
@@ -102,4 +102,27 @@ exports.getConById = async (req, res, next) =>{
         console.error('Error while fetching Messages', error);
         res.status(500).json({error: 'Server Error'});
     };
+};
+
+// Backend Controller (queryController.js)
+const { ObjectId } = require('mongodb');
+const { dellMessage } = require('../Models/queryModel');
+
+exports.dellMessage = async (req, res) => {
+  const { id } = req.params;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ error: 'Invalid ID format' });
+  }
+
+  try {
+    const result = await dellMessage(id);
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ error: 'Message not found' });
+    }
+    res.status(200).json({ message: 'Message deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to delete message' });
+  }
 };

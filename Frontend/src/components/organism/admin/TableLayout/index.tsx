@@ -1,8 +1,23 @@
+// src/components/organism/admin/TableLayout.tsx
 import React from 'react';
 import { TableLayoutProps } from './types';
 import { TableButton } from '../../../atoms/admin/TableButton';
+import { handleDeleteMessage } from '../../../apis/handleDeleteMessage'; // Import the API function
 
-export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data }) => {
+export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data, onDeleteSuccess }) => {
+  const handleDeleteClick = async (id: string) => {
+
+    try {
+      await handleDeleteMessage(id); // Call the API function to delete the message
+      // Call onDeleteSuccess if it exists
+      if (onDeleteSuccess) {
+        onDeleteSuccess(id);
+      }
+    } catch (error) {
+      console.error('Failed to delete row:', error);
+    }
+  };
+
   return (
     <section className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden md:py-6 py-3">
       <h1 className="text-2xl text-center text-charcoal-gray font-semibold md:mb-8 mb-4">{title}</h1>
@@ -28,7 +43,7 @@ export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data }
                   <TableButton label="View" icon="view" onClick={() => row.onView(row)} />
                 </td>
                 <td className="px-4 py-2">
-                  <TableButton label="Delete" icon="delete" onClick={() => row.onDelete(row)} />
+                  <TableButton label="Delete" icon="delete" onClick={() => handleDeleteClick(row.id)} />
                 </td>
               </tr>
             ))}
@@ -46,7 +61,7 @@ export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data }
             <p className="text-sm text-gray-600"><span className="font-semibold">Email:</span> {row.email}</p>
             <div className="flex space-x-2 mt-4">
               <TableButton label="View" icon="view" onClick={() => row.onView(row)} />
-              <TableButton label="Delete" icon="delete" onClick={() => row.onDelete(row)} />
+              <TableButton label="Delete" icon="delete" onClick={() => handleDeleteClick(row.id)} />
             </div>
           </div>
         ))}

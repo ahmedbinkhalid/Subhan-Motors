@@ -6,11 +6,13 @@ export const Button: React.FC<ButtonProps> = ({
   onClick,
   bgColor,
   hoverBgColor,
+  type,
 }) => {
   return (
     <button
       onClick={onClick}
-      className={`${bgColor} text-white rounded-md px-3 py-3 cursor-pointer font-semibold transition-colors duration-200 hover:${hoverBgColor}`}
+      type={type}
+      className={`${bgColor} text-white rounded-md px-3 py-3 cursor-pointer font-semibold transition-colors duration-200 ${hoverBgColor && `hover:${hoverBgColor}`}`}
     >
       {btnTitle}
     </button>

@@ -1,24 +1,9 @@
 const MongoDb = require('mongodb');
 
 exports.addQurey = async (db, queryData)=>{
-    const {title, content, minPrice, maxPrice,email, phoneNumber, make, model, enginecapacity, transmission, color, fromYear, toYear} = queryData;
-    const query = {
-        title,
-        content,
-        minPrice,
-        maxPrice,
-        email,
-        phoneNumber,
-        createdAt: new Date(),
-        make,
-        model, 
-        enginecapacity, 
-        transmission, 
-        color, 
-        fromYear, 
-        toYear
-    }
-    const result = await db.collection('quries').insertOne(query);
+    const {title, content, minPrice, maxPrice, phoneNumber, make, model, enginecapacity, transmission, color, fromYear, toYear} = queryData;
+    
+    const result = await db.collection('quries').insertOne(queryData);
     return result;
 };
 
@@ -59,3 +44,11 @@ exports.getContactById = async (db, conId)=>{
     const result = await db.collection('contact-us').findOne({_id: new MongoDb.ObjectId(conId)});
     return result;
 }
+
+// Backend Model (queryModel.js)
+const { ObjectId } = require('mongodb');
+
+exports.dellMessage = async (id) => {
+  const collection = db.collection('contact-us');
+  return await collection.deleteOne({ _id: new ObjectId(id) });
+};
