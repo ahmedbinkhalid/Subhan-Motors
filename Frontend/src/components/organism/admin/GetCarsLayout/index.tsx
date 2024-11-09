@@ -16,7 +16,7 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
         {title}
       </h1>
       <section className='bg-slate-50 md:p-8 p-4 md:px-2 lg:px-4 hover:border-y-4 hover:border-regal-red rounded-md flex flex-col'>
-        <div className='grid xl:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
+        <div className='grid xl:grid-cols-4 lg:grid-cols-3  sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
           <CarsCardApiHandling managedBy={managedBy}>
             {(sellCarsData) => {
               if (!sellCarsData || sellCarsData.length === 0) {

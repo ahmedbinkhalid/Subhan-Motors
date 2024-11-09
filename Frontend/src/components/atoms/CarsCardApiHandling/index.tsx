@@ -10,6 +10,7 @@ export interface CarData {
   startingPrice: string;
   maxPrice: string;
   location: string;
+  _id : string;
 }
 
 interface CarsCardApiHandlingProps {
@@ -26,7 +27,7 @@ export const CarsCardApiHandling: React.FC<CarsCardApiHandlingProps> = ({ manage
         managedBy.includes("Brand") ? "newcars" : managedBy.includes("Used") ? "usedcars" : "bankcars"
       );
       if (!response.error) {
-        setCarData(response.sellCarsData); // Set the formatted car data
+        setCarData(response.sellCarsData); 
       } else {
         console.error(response.error);
       }

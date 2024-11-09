@@ -2,14 +2,21 @@
 import React from 'react';
 import { TableLayoutProps } from './types';
 import { TableButton } from '../../../atoms/admin/TableButton';
-import { handleDeleteMessage } from '../../../apis/handleDeleteMessage'; // Import the API function
+import { handleDeleteMessage } from '../../../apis/handleDeleteMessage';
+import { DeleteQuery } from '../../../apis/DeleteQuery';
 
 export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data, onDeleteSuccess }) => {
+  
   const handleDeleteClick = async (id: string) => {
-
     try {
-      await handleDeleteMessage(id); // Call the API function to delete the message
-      // Call onDeleteSuccess if it exists
+      // Dynamically select delete function based on the title
+      if (title.includes("Queries")) {
+        await DeleteQuery(id);
+      } else {
+        await handleDeleteMessage(id);
+      }
+      
+      // Trigger success callback if provided
       if (onDeleteSuccess) {
         onDeleteSuccess(id);
       }
@@ -18,11 +25,13 @@ export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data, 
     }
   };
 
+  
+
   return (
     <section className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden md:py-6 py-3">
       <h1 className="text-2xl text-center text-charcoal-gray font-semibold md:mb-8 mb-4">{title}</h1>
       
-      {/* Display Table for Desktop and Tablet */}
+      {/* Desktop and Tablet Table Layout */}
       <div className="hidden md:block">
         <table className="w-full text-left">
           <thead>
@@ -51,7 +60,7 @@ export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data, 
         </table>
       </div>
 
-      {/* Card Layout for Mobile */}
+      {/* Mobile Card Layout */}
       <div className="md:hidden">
         {data.map((row, rowIndex) => (
           <div key={rowIndex} className="bg-gray-100 p-4 mb-4 rounded-lg shadow">

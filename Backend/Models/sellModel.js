@@ -79,10 +79,10 @@ exports.getNewCars = async (db)=>{
 
 // get new cars by id
 
-exports.getNewCarsById = async (db, id)=>{
+exports.getNewCarsById = async (db, carId)=>{
     try{
         const collection = await db.collection('newCars');
-        const result = await collection.findOne({_id: new MongoDB.ObjectId(id)});
+        const result = await collection.findOne({_id: new MongoDB.ObjectId(carId)});
         return result;
     } catch(error){
         console.log(error.message);
@@ -90,16 +90,41 @@ exports.getNewCarsById = async (db, id)=>{
     }
 };
 
-exports.getCarById = async (db, id)=>{
-    try{
-        const collection = await db.collection('cars');
-        const result = await collection.findOne({_id: new MongoDB.ObjectId(id)});
-        return result; 
-    } catch(error){
-        console.log(error.message);
-        throw new Error('Error retrieving car by Id', error.message);
+// exports.getCarById = async (db, id)=>{
+//     try{
+//         const collection = await db.collection('cars');
+//         const result = await collection.findOne({_id: new MongoDB.ObjectId(id)});
+//         return result; 
+//     } catch(error){
+//         console.log(error.message);
+//         throw new Error('Error retrieving car by Id', error.message);
         
-    };
+//     };
+// };
+
+const { ObjectId } = require('mongodb');
+
+exports.getCarById = async (db, id) => {
+    try {
+        const collectionCars = db.collection('cars');
+        const collectionNewCars = db.collection('newCars');
+        
+        // Convert carId to ObjectId
+        const objectId = new ObjectId(id);
+        
+        // First, try to find in the 'cars' collection
+        let result = await collectionCars.findOne({ _id: objectId });
+        
+        // If not found in 'cars', try 'newCars' collection
+        if (!result) {
+            result = await collectionNewCars.findOne({ _id: objectId });
+        }
+        
+        return result; // Will return null if not found in both collections
+    } catch (error) {
+        console.log(error.message);
+        throw new Error(`Error retrieving car by Id: ${error.message}`);
+    }
 };
 
 // get cars by type (Bank released)

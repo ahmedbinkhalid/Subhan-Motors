@@ -4,4 +4,5 @@ export interface FeaturedCarsCardProps {
     carModel : string;
     carPrice: string;
     carCity : string;
+    _id : string;
 }

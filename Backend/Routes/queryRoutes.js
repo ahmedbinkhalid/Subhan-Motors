@@ -10,7 +10,7 @@ router.post('/query',verifyToken, isUser, queryController.postQuery);
 router.get('/getQueries', queryController.getQuery);
 
 // Admin Route to view indiviual Query by Query Id
-router.get('/query/:id', verifyToken, isAdmin, queryController.getQueryById);
+router.get('/query/:id', queryController.getQueryById);
 
 // Route to del Query by Admin
 

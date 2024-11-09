@@ -81,6 +81,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
             <div className="flex gap-5 overflow-hidden">
               {visibleCards.map((data, index) => (
+                
                 <FeaturedCarsCard
                   key={index}
                   carImage={data.images ? data.images[0] : ""}
@@ -88,6 +89,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
                   carModel={data.model}
                   carPrice={managedBy.includes("Brand") ? `${data.startingPrice} - ${data.maxPrice}` : data.price}
                   carCity={data.location}
+                  _id = {data._id}
                 />
               ))}
             </div>

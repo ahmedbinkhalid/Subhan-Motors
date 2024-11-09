@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MyAdsCard } from '../../components/molecules/MyAddCard';
 import { myListedAds } from '../../components/apis/MyAds'; // Adjust this path as needed
 import { CarData } from '../../components/molecules/FeaturedCardsLayout';
+import { DeleteAdd } from '../../components/apis/DeleteAdd';
 
 export const MyAds: React.FC = () => {
   const [carData, setCarData] = useState<CarData[]>([]);
@@ -25,12 +26,12 @@ export const MyAds: React.FC = () => {
     fetchAds();
   }, []);
 
-  const handleEdit = () => {
-    console.log("Edit button clicked");
-  };
-
-  const handleRemove = () => {
-    console.log("Remove button clicked");
+  const handleRemove = async (id: string) => {
+    try {
+        await DeleteAdd(id);
+    } catch (error) {
+      console.error('Failed to delete Add:', error);
+    }
   };
 
   return (
@@ -46,8 +47,9 @@ export const MyAds: React.FC = () => {
             model={car.model}
             price={car.price}
             city={car.location}
-            onEdit={handleEdit}
-            onRemove={handleRemove}
+            onRemove={() => {
+              handleRemove(car._id);
+            }}
           />
         ))
       )}

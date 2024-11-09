@@ -28,6 +28,8 @@ export const myListedAds = async (token: string): Promise<UsedCarsForSaleRespons
             make : item.make,
             price: item.price,
             location: item.location,
+            _id : item._id
+
         }));
         console.log(formattedData);
         return { sellCarsData: formattedData }; // Return the correctly formatted data

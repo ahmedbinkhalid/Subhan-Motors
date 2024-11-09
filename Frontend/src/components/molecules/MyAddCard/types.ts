@@ -4,7 +4,6 @@ export interface MyAdsCardProps {
     model: string;
     price: string;
     city: string;
-    onEdit: () => void;
     onRemove: () => void;
   }
   

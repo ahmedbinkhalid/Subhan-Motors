@@ -1,6 +1,5 @@
 import React from 'react';
 import { MyAdsCardProps } from './types';
-import { TbEdit } from "react-icons/tb";
 import { AiFillDelete } from "react-icons/ai";
 
 export const MyAdsCard: React.FC<MyAdsCardProps> = ({ 
@@ -9,7 +8,6 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
   model, 
   price, 
   city, 
-  onEdit, 
   onRemove 
 }) => {
   return (
@@ -26,11 +24,6 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
       </div>
 
       <div className="flex space-x-4 self-end mx-3">
-        <button className='flex flex-col gap-[2px]' onClick={onEdit}>
-        <TbEdit className='text-blue-variant font-sans font-bold hover:text-regal-red' size={24} />
-        <p className='text-center text-blue-variant font-medium'> Edit </p>
-
-        </button>
 
         <button className='flex flex-col gap-[2px]' onClick={onRemove}>
         <AiFillDelete className='text-regal-red font-sans font-bold hover:text-blue-variant' size={24} />

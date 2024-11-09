@@ -106,16 +106,12 @@ exports.updateCar = async (req, res, next)=>{
 // To delte car by id by user
 exports.deleteCar = async (req, res, next)=>{
     const carId = req.params.id;
-    const OwnerId = req.user.id;
     const db = req.app.locals.db;
     try{
         const car = await sellModel.getCarById(db, carId);
 
     if(!car){
         return res.status(404).json({message: 'Car not found'});
-    }
-    if(car.Owner !== OwnerId){
-        return res.status(403).json({message: 'You are not the owner of this car'});
     }
     await sellModel.deleteCar(db, carId);
     res.status(200).json({message: 'Car deleted successfuly'});
@@ -161,7 +157,7 @@ exports.newCars = async (req, res, next)=>{
             images.push(filename);
         }
         const carData = {
-            phoneNumber : '03409889631',
+            PhoneNumber : '03409889631',
             make : req.body.make,
             model : req.body.model,
             releasedDate : req.body.releasedDate,

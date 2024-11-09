@@ -121,10 +121,10 @@ export const PageLinks: React.FC = () => {
               <Links path="/contact" title="Contact" />
               {isLoggedIn && (
                 <li className="group relative cursor-pointer">
-                  <Link to="/myAds" className="text-white group-hover:text-yellow-400 transition duration-300">
+                  <Link to="/myAds" className="text-white group-hover:text-regal-red transition duration-300">
                     My Adds
                   </Link>
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-regal-red transition-all duration-300  group-hover:w-full"></span>
                 </li>
               )}
             </ul>

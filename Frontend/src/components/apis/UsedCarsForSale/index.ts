@@ -1,4 +1,4 @@
-import { CarData } from "../../molecules/FeaturedCardsLayout";
+import { CarData } from "../../atoms/CarsCardApiHandling";
 
 export interface UsedCarsForSaleResponse {
     sellCarsData: CarData[]; // Ensure this is CarData[]
@@ -19,7 +19,6 @@ export const UsedCarsForSale = async (apiEnd : string): Promise<UsedCarsForSaleR
         }
 
         const data = await response.json();
-        
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const formattedData: CarData[] = data.map((item : any) => ({
             images: item.images,
@@ -29,7 +28,9 @@ export const UsedCarsForSale = async (apiEnd : string): Promise<UsedCarsForSaleR
             startingPrice : item.startingPrice,
             maxPrice : item.maxPrice,
             location: item.location,
+            _id : item._id
         }));
+
         return { sellCarsData: formattedData }; // Return the correctly formatted data
     } catch (error) {
         console.error("Error during fetching used cars:", error);
