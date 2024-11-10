@@ -12,7 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <React.Fragment>
       <Header />
-      <section className="max-w-[1200px] m-auto my-8 flex flex-col gap-4 max-lg:px-6 max-md:px-2 py-8">
+      <section className="xl:max-w-[1200px] lg:max-w-[1000px] m-auto my-8 flex flex-col gap-4 max-lg:px-6 max-md:px-2 py-8">
         {children}
       </section>
       {modalOpen && (

@@ -63,7 +63,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
         return (
           <section className="relative flex items-center justify-center gap-5 my-4 flex-col w-full bg-slate-50 rounded-lg pt-8 pb-16">
-            <div className="flex md:flex-row flex-col justify-between font-sans w-full md:px-16 max-lg:self-center max-md:gap-2 max-md:justify-center max-md:items-center py-2">
+            <div className="flex md:flex-row flex-col justify-between font-sans w-full md:px-16 lg:px-10 max-lg:self-center max-md:gap-2 max-md:justify-center max-md:items-center py-2 ">
               <h1 className="lg:text-xl text-lg text-charcoal-gray font-bold">{managedBy}</h1>
               <p className="cursor-pointer lg:text-base text-sm font-medium text-blue-variant hover:underline hover:text-charcoal-gray">
                 View All {viewAll}
@@ -72,7 +72,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
             {currentIndex > 0 && (
               <button
-                className="absolute left-0 bg-gray-300 hover:bg-gray-500 text-white p-2 rounded-full"
+                className="absolute md:left-2 left-0  bg-gray-400 hover:bg-charcoal-gray text-white p-2 rounded-full"
                 onClick={handlePrevious}
               >
                 <FaChevronLeft />
@@ -96,7 +96,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
             {currentIndex + cardsPerPage < totalCards && (
               <button
-                className="absolute right-0 bg-gray-300 hover:bg-gray-500 text-white p-2 rounded-full"
+                className="absolute md:right-2 right-0 bg-gray-300 hover:bg-charcoal-gray text-white p-2 rounded-full"
                 onClick={() => handleNext(totalCards)}
               >
                 <FaChevronRight />

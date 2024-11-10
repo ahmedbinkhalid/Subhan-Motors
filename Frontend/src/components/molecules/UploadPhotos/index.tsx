@@ -70,7 +70,7 @@ export const UploadPhotos: React.FC = () => {
   };
 
   return (
-    <section className="bg-slate-50 border-y md:p-12 p-4 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
+    <section className="bg-slate-100 border-y md:p-12 p-4 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
       <h1 className="md:text-xl text-lg font-semibold mb-6">Upload Photos</h1>
 
       <div className="border-2 border-dashed border-blue-variant md:p-12  p-4 ">

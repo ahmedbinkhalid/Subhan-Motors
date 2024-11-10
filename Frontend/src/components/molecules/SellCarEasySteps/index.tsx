@@ -4,7 +4,7 @@ import { SellCarEasyStepsCard } from '../../atoms/SellCarEasyStepsCard';
 
 export const SellCarEasySteps: React.FC = () => {
   return (
-    <section className="flex flex-col items-center justify-center px-4 py-8 font-sans gap-3 bg-slate-50 border-y my-4 md:py-12">
+    <section className="flex flex-col items-center justify-center px-4 py-8 font-sans gap-3 bg-slate-100 border-y my-4 md:py-12">
       <h1 className="text-lg font-bold text-center text-regal-red md:text-2xl lg:text-3xl">
         Sell your Car With 3 Easy & Simple Steps!
       </h1>

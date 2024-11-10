@@ -12,7 +12,7 @@ export const ContactInformation: React.FC = () => {
   };
 
   return (
-    <section className="bg-slate-50 border-y p-4 sm:p-6 md:p-8 lg:px-12 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
+    <section className="bg-slate-100 border-y p-4 sm:p-6 md:p-8 lg:px-12 hover:border-t-4 hover:border-t-blue-variant hover:shadow-lg font-sans text-charcoal-gray my-4">
       <h1 className="text-lg font-semibold my-2 sm:text-xl lg:text-2xl">
         Contact Information
       </h1>
