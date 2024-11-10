@@ -11,19 +11,20 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
   const [currentPage, setCurrentPage] = useState(1); // Current page state
 
   return (
-    <section className='lg:max-w-5xl xl:max-w-6xl mx-auto'>
-      <h1 className='md:text-3xl text-2xl text-center text-charcoal-gray font-semibold font-sans md:mt-4 md:mb-8 mt-2 mb-4'>
+    <section className='max-w-screen-xl mx-auto px-4 lg:px-8 '>
+      <h1 className='text-2xl md:text-3xl text-center text-charcoal-gray font-semibold mt-4 mb-6'>
         {title}
       </h1>
-      <section className='md:p-8 p-4 md:px-2 lg:px-4 hover:border-y-4 hover:border-regal-red rounded-lg flex flex-col bg-slate-100'>
-        <div className='grid xl:grid-cols-4 lg:grid-cols-3  sm:grid-cols-2 grid-cols-1 gap-4 flex-grow'>
+      
+      <section className='p-4  rounded-lg bg-slate-100'>
+        <div className='grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:px-8 xxl:grid-cols-4'>
           <CarsCardApiHandling managedBy={managedBy}>
             {(sellCarsData) => {
               if (!sellCarsData || sellCarsData.length === 0) {
-                return <div className="text-center text-gray-500">No cars available.</div>; // Handle empty state
+                return <div className="text-center text-gray-500">No cars available.</div>;
               }
 
-              // Calculate the total number of pages
+              // Pagination logic
               const startIndex = (currentPage - 1) * itemsPerPage;
               const endIndex = startIndex + itemsPerPage;
               const currentItems = sellCarsData.slice(startIndex, endIndex);
@@ -53,20 +54,20 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
             const totalPages = Math.ceil(totalItems / itemsPerPage);
 
             return (
-              <div className="flex flex-wrap justify-center md:justify-end items-center mt-8 gap-2">
+              <div className="flex justify-center items-center mt-6 gap-2">
                 <button
-                  className={`bg-regal-red hover:bg-red-700 text-white py-2 px-4 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`bg-regal-red text-white py-2 px-4 rounded ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-700'}`}
                   onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                   disabled={currentPage === 1}
                 >
                   Previous
                 </button>
 
-                <div className="flex flex-wrap justify-center gap-1">
+                <div className="flex gap-1">
                   {Array.from({ length: totalPages }, (_, index) => (
                     <button
                       key={index}
-                      className={`py-2 px-3 rounded ${currentPage === index + 1 ? 'bg-regal-red text-white' : 'bg-gray-200 text-gray-700'}`}
+                      className={`py-2 px-3 rounded ${currentPage === index + 1 ? 'bg-regal-red text-white' : 'bg-gray-200 text-gray-700 hover:bg-gray-300'}`}
                       onClick={() => setCurrentPage(index + 1)}
                     >
                       {index + 1}
@@ -75,7 +76,7 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
                 </div>
 
                 <button
-                  className={`bg-regal-red hover:bg-red-700 text-white py-2 px-4 rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                  className={`bg-regal-red text-white py-2 px-4 rounded ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : 'hover:bg-red-700'}`}
                   onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                   disabled={currentPage === totalPages}
                 >
@@ -86,6 +87,6 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
           }}
         </CarsCardApiHandling>
       </section>
-      </section>
+    </section>
   );
 }

@@ -17,7 +17,7 @@ export const GetApprovedBlogs: React.FC <GetApprovedBlogsProps> = ({title}) => {
   return (
     <React.Fragment>
       <section className='lg:max-w-3xl xl:max-w-5xl mx-auto'>
-      <div className='flex justify-center items-center gap-4 md:text-2xl text-xl text-charcoal-gray font-semibold font-sans md:mt-4 md:mb-8 mt-2 mb-4'>
+      <div className='flex justify-center items-center gap-4 md:text-2xl text-xl text-charcoal-gray font-semibold font-sans xxl:mt-4 md:mb-8 mt-2 mb-4'>
       <h1 className=''>
         {!title ? "All your Blog's" : title} 
       </h1>

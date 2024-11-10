@@ -73,7 +73,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="max-w-md mx-auto bg-slate-50 shadow-lg rounded-md animate-fadeIn transition-all duration-300 ease-in-out w-full flex flex-col gap-3 p-4"
+            className="md:max-w-md mx-auto bg-slate-100 shadow-lg rounded-md animate-fadeIn transition-all duration-300 ease-in-out w-full flex flex-col gap-3 p-4"
         >
             <h1 className="text-center md:text-2xl text-xl font-sans font-bold text-charcoal-gray my-2">
                 Create a New Blog

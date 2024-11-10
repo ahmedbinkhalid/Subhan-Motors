@@ -41,7 +41,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
         </button>
       </div>
 
-      <p className="text-sm font-sans font-medium text-charcoal-gray my-6 mx-6">
+      <p className="text-sm font-sans font-medium text-charcoal-gray my-4 mx-6">
         Posted: {timeAgo}
       </p>
     </div>

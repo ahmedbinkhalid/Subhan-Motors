@@ -7,7 +7,9 @@ export default {
   theme: {
     extend: {
       screens : {
-        "xs" : "375px"
+        "xs" : "375px",
+        "xxs" : "330",
+        "xxl" : "2200px"
       },
       colors : {
         "regal-red" : "#D22B2B",

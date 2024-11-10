@@ -28,12 +28,12 @@ export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data, 
   
 
   return (
-    <section className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden md:py-6 py-3">
+    <section className="w-full max-w-4xl mx-auto rounded-lg overflow-hidden xxl:py-6 py-3">
       <h1 className="text-2xl text-center text-charcoal-gray font-semibold md:mb-8 mb-4">{title}</h1>
       
       {/* Desktop and Tablet Table Layout */}
       <div className="hidden md:block">
-        <table className="w-full text-left">
+        <table className="w-full xl:text-left text-center">
           <thead>
             <tr>
               {columns.map((col, index) => (
@@ -44,16 +44,16 @@ export const TableLayout: React.FC<TableLayoutProps> = ({ title, columns, data, 
           <tbody>
             {data.map((row, rowIndex) => (
               <tr key={rowIndex} className="border-t">
-                <td className="px-4 py-2">{rowIndex + 1}</td>
-                <td className="px-4 py-2">{row.subject || row.title}</td>
-                <td className="px-4 py-2">{row.phoneNumber}</td>
-                <td className="px-4 py-2">{row.email}</td>
-                <td className="px-4 py-2">
+                <td className="xl:px-4 px-2 py-2">{rowIndex + 1}</td>
+                <td className="xl:px-4 px-2 py-2">{row.subject || row.title}</td>
+                <td className="xl:px-4 px-2 py-2">{row.phoneNumber}</td>
+                <td className="xl:px-4 px-2 py-2">{row.email}</td>
+                <td className="xl:px-4 px-2 py-2">
                   <TableButton label="View" icon="view" onClick={() => row.onView(row)} />
                 </td>
-                <td className="px-4 py-2">
+                <td className="xl:px-4 px-2 py-2">
                   <TableButton label="Delete" icon="delete" onClick={() => handleDeleteClick(row.id)} />
-                </td>
+                </td> 
               </tr>
             ))}
           </tbody>

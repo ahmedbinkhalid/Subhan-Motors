@@ -17,7 +17,7 @@ export const GetAllQueries: React.FC = () => {
     useEffect(() => {
         const loadQueries = async () => {
             try {
-                const queries: Query[] = await fetchQueries(); // Fetch queries from the API
+                const queries: Query[] = await fetchQueries(); 
                 const formattedData: TableRow[] = queries.map((query: Query) => ({
                     id: query._id,  // Assuming the API response has an `_id` field
                     title: query.title,

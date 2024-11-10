@@ -32,7 +32,7 @@ export const NewsLetterForm: React.FC<newsLetterFormProps> = ({
     };
 
     return (
-        <section className='w-full lg:my-24 md:my-16 grid md:grid-cols-2 grid-cols-1 max-w-5xl lg:gap-12 gap-8 mx-auto'>
+        <section className='w-full lg:my-24 md:my-16 my-8 grid md:grid-cols-2 grid-cols-1 max-w-5xl lg:gap-12 gap-8 mx-auto'>
             <div className="flex justify-center items-center">
                 <img
                     src={newsLetter}

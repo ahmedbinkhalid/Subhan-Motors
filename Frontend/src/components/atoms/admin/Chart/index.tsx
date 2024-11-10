@@ -7,8 +7,8 @@ import {
   fetchMonthlyVisitors,
 } from "../../../apis/FetchVisitors";
 
-// Define colors: two red and two blue
-const COLORS = ["#D22B2B", "#0047AB", "#D22B2B", "#0047AB"];
+// Define colors: red for Weekly, blue for Monthly, and charcoal-gray for Daily
+const COLORS = ["#36454F", "#0047AB", "#D22B2B"]; // Charcoal-gray added for Daily Visitors
 
 export const Chart: React.FC = () => {
   const [dailyVisitors, setDailyVisitors] = useState<number | null>(null);
@@ -57,7 +57,6 @@ export const Chart: React.FC = () => {
   // Prepare data for Pie chart
   const data = [
     { name: "Daily Visitors", value: dailyVisitors },
-    { name: "Live Visitors", value: liveVisitors },
     { name: "Weekly Visitors", value: weeklyVisitors },
     { name: "Monthly Visitors", value: monthlyVisitors },
   ];
@@ -65,22 +64,31 @@ export const Chart: React.FC = () => {
   // Dynamically adjust outerRadius based on screen size
   const getOuterRadius = () => {
     if (screenWidth <= 480) { // Mobile screens
-      return 100;
+      return 120;
     } else if (screenWidth <= 768) { // Tablet screens
       return 140;
     }
     return 180; // Default for larger screens
   };
 
+  // Dynamically adjust container height on mobile
+  const getChartHeight = () => {
+    if (screenWidth <= 480) { // Mobile screens
+      return 300; // Smaller height for mobile
+    }
+    return 450; // Default height for larger screens
+  };
+
   return (
-    <div className="max-w-2xl" style={{ width: "100%", height: "450px" }}>
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="md:max-w-2xl" style={{ width: "100%", height: "auto" }}>
+      <ResponsiveContainer width="100%" height={getChartHeight()}>
         <PieChart>
           <Pie
             dataKey="value"
             data={data}
             fill="#D22B2B"
-            label={({ name, value }) => `${name}: ${value}`} // Display label over each pie slice
+            // Only show labels on larger screens
+            label={screenWidth > 480 ? ({ name, value }) => `${name}: ${value}` : undefined}
             cx="50%"
             cy="50%"
             outerRadius={getOuterRadius()} // Dynamically set the outer radius
@@ -91,6 +99,20 @@ export const Chart: React.FC = () => {
           </Pie>
         </PieChart>
       </ResponsiveContainer>
+
+      {/* Display labels below the chart only on mobile */}
+      {screenWidth <= 480 && (
+        <div className="flex flex-col items-center mt-4 p-2">
+          {data.map((item, index) => (
+            <div key={index} className="flex justify-between w-full max-w-xs p-2">
+              <div className="font-semibold" style={{ color: COLORS[index % COLORS.length] }}>
+                {item.name}
+              </div>
+              <div>{item.value}</div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

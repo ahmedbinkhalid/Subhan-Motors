@@ -9,13 +9,13 @@ type MainProps = {
 
 export const Main: React.FC<MainProps> = ({ children, isSidebarOpen, toggleSidebar }) => {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-6 p-4">
-      {/* Sidebar is conditionally rendered based on screen size and toggle state */}
-      <div className={`xl:col-span-1 lg:col-span-2 ${isSidebarOpen ? 'block' : 'hidden'} lg:block`}>
+    <section className="w-full md:p-4 py-6 px-3 flex"> {/* Added flex here to align items in a row */}
+      {/* Sidebar */}
+      <div className={`w-3/12 xl:w-[20%] xxl:w-[15%]  ${isSidebarOpen ? 'block' : 'hidden'} lg:block`}>
         <SideBar toggleSidebar={toggleSidebar} />
       </div>
-      {/* Adjust main content width based on sidebar visibility */}
-      <div className={`xl:col-span-5 lg:col-span-4 col-span-1`}>
+      {/* Main content */}
+      <div className="xxl:w-4/5 lg:w-3/4 w-full md:p-4"> {/* Adjusted to 9/12 to take up remaining space */}
         {children}
       </div>
     </section>
