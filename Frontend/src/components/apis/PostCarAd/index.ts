@@ -21,7 +21,7 @@ export const postCarAd = async (carData: CarFormData, token: string): Promise<Po
       }
     });
 
-    const response = await fetch("http://localhost:5000/api/addcars", {
+    const response = await fetch("https://test-backend-1xtc.onrender.com/api/addcars", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,

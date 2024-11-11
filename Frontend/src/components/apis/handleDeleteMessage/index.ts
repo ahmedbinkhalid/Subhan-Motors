@@ -3,7 +3,7 @@
 export const handleDeleteMessage = async (id: string): Promise<void> => {
   try {
 
-    const response = await fetch(`http://localhost:5000/api/messages/${id}`, {
+    const response = await fetch(`https://test-backend-1xtc.onrender.com/api/messages/${id}`, {
       method: 'DELETE', // Specify the method as DELETE
       headers: {
         'Content-Type': 'application/json',

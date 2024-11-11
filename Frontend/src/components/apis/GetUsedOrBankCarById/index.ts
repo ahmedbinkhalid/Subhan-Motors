@@ -3,7 +3,7 @@ import { CarDetailProps } from "../../../pages/ViewDetailedCar/types";
 
 export const  GetCarDetailById = async (id: string): Promise<CarDetailProps> => {
     try {
-      const response = await fetch(`http://localhost:5000/api/getCarById/${id}`, {
+      const response = await fetch(`https://test-backend-1xtc.onrender.com/api/getCarById/${id}`, {
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',

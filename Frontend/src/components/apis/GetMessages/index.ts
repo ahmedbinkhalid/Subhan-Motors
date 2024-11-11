@@ -1,7 +1,7 @@
 // src/components/apis/GetMessages.ts
 export const getMessages = async () => {
     try {
-        const response = await fetch('http://localhost:5000/api/getContact'); // Adjust the URL based on your API endpoint
+        const response = await fetch('https://test-backend-1xtc.onrender.com/api/getContact'); // Adjust the URL based on your API endpoint
         if (!response.ok) {
             throw new Error('Network response was not ok'); // Handle HTTP errors
         }

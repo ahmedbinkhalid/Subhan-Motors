@@ -28,7 +28,7 @@ const ImageSlider: React.FC<{
   <div className="flex flex-col items-center lg:w-1/2 space-y-4">
     <div className="relative w-full h-96 bg-gray-200 rounded-lg shadow-xl overflow-hidden transform transition duration-500 ease-in-out hover:scale-105">
       <img
-        src={`http://localhost:5000/public/uploads/${images[selectedImageIndex]}`}
+        src={`https://test-backend-1xtc.onrender.com/public/uploads/${images[selectedImageIndex]}`}
         alt="Car Image"
         className="w-full h-full object-cover rounded-lg"
       />
@@ -42,7 +42,7 @@ const ImageSlider: React.FC<{
           onClick={() => onImageChange(index)}
         >
           <img
-            src={`http://localhost:5000/public/uploads/${image}`}
+            src={`https://test-backend-1xtc.onrender.com/public/uploads/${image}`}
             alt={`Thumbnail ${index + 1}`}
             className={`w-24 h-16 object-cover rounded-md shadow-md transition-all duration-200 ${
               selectedImageIndex === index ? "border-2 border-regal-red" : ""

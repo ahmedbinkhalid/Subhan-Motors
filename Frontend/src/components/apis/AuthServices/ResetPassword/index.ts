@@ -14,7 +14,7 @@ interface ResetPasswordRequest {
 
   export const resetPassword = async (data: ResetPasswordRequest): Promise<ForgotPasswordResponse> => {
     try {
-      const response = await fetch("http://localhost:5000/api/reset-password", {
+      const response = await fetch("https://test-backend-1xtc.onrender.com/api/reset-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

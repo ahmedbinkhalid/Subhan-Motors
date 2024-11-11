@@ -7,7 +7,7 @@ export interface UsedCarsForSaleResponse {
 
 export const UsedCarsForSale = async (apiEnd : string): Promise<UsedCarsForSaleResponse> => {
     try {
-        const response = await fetch(`http://localhost:5000/api/${apiEnd}`, {
+        const response = await fetch(`https://test-backend-1xtc.onrender.com/api/${apiEnd}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

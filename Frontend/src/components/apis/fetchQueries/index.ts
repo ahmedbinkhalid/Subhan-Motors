@@ -2,7 +2,7 @@
 
 export const fetchQueries = async () => {
     try {
-        const response = await fetch("http://localhost:5000/api/getQueries");
+        const response = await fetch("https://test-backend-1xtc.onrender.com/api/getQueries");
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }

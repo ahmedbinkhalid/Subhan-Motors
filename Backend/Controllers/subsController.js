@@ -70,7 +70,6 @@ exports.sendEmailsToSubscribers = async (db, carData) => {
         if (error) {
             return console.log('Error sending email:', error);
         }
-        console.log('Email sent:', info.response);
     });
 };
 
@@ -119,7 +118,6 @@ exports.sendNewsToSubscribers = async (req, res) => {
             if (error) {
                 return console.log('Error sending email:', error);
             }
-            console.log('Email sent:', info.response);
         });
 
         res.status(200).json({ message: "News update sent to all subscribers." });

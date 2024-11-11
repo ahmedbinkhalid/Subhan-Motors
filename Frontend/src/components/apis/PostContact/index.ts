@@ -2,7 +2,7 @@ import { ContactFormData } from "./types";
 
   export const postContact = async (data: ContactFormData): Promise<{ message: string; conId?: string }> => {
     try {
-      const response = await fetch('http://localhost:5000/api/contact-us', {
+      const response = await fetch('https://test-backend-1xtc.onrender.com/api/contact-us', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -3,7 +3,7 @@ const token = localStorage.getItem("token");
 export const DeleteAdd = async (id: string): Promise<void> => {
     try {
   
-      const response = await fetch(`http://localhost:5000/api/deletecar/${id}`, {
+      const response = await fetch(`https://test-backend-1xtc.onrender.com/api/deletecar/${id}`, {
         method: 'DELETE', 
         headers: {
           'Content-Type': 'application/json',
