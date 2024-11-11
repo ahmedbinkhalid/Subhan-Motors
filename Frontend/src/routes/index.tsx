@@ -28,14 +28,14 @@ import { AdminHome } from "../pages/AdminHome";
 import { MessagesDetailView } from "../pages/ViewDetailedMessages";
 import { ViewDetailedQuery } from "../pages/ViewDetailedQuery";
 
-// Components
 import { Layout } from "../components/organism/AllPagesLayout";
 import { ModalProvider } from "../components/organism/AllPagesLayout/ModalContext";
 
-// Protected Route Wrapper
 import RouteProtectionValidator from "./RouteProtectionValidator";
 import {jwtDecode} from "jwt-decode";
 import { UserToken } from "../components/atoms/PageLinks/types";
+import UserRouteProtectionValidator from "./UserRouteProtectionValidator";
+import { SearchProvider } from "../components/atoms/SearchContext";
 
 export const AppRouter: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -47,24 +47,24 @@ export const AppRouter: React.FC = () => {
   }
 
   return (
-    <ModalProvider>
       <Router>
+        <ModalProvider>
         <Routes>
-          {/* Normal Routes (Public) */}
-          <Route path="/" element={<Layout><Home /></Layout>} />
+          <Route path="/" element={ <SearchProvider><Layout><Home /></Layout> </SearchProvider> } />
           <Route path="/about" element={<Layout><About /></Layout>} />
           <Route path="/buyCar" element={<Layout><BuyCar /></Layout>} />
-          <Route path="/sellCar" element={<Layout><SellCar /></Layout>} />
+
+          <Route path="/sellCar" element={<UserRouteProtectionValidator element={<Layout> <SellCar />  </Layout>} />} />
+
           <Route path="/blogs" element={<Layout><Blogs /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
           <Route path="/myAds" element={<Layout><MyAds /></Layout>} />
-          <Route path="/onlineBooking" element={<OnlineBooking />} />
+          <Route path="/onlineBooking" element={<UserRouteProtectionValidator element={<Layout> <OnlineBooking /> </Layout>} />} />
           {
             role !== "Admin" && (
               <Route path="/viewDetailedCar/:id" element={<Layout> <ViewDetailedCar /> </Layout>}  />
             )
           }
-          {/* Protected Admin Routes */}
           <Route
             path="/adminHome"
             element={
@@ -90,8 +90,10 @@ export const AppRouter: React.FC = () => {
           <Route path="/getAllMessages" element={<RouteProtectionValidator element={<AdminLayout><GetAllMessages /></AdminLayout>} />} />
           <Route path="/detailedMessages/:id" element={<RouteProtectionValidator element={<AdminLayout><MessagesDetailView /></AdminLayout>} />} />
           <Route path="/detailedQuery/:id" element={<RouteProtectionValidator element={<AdminLayout><ViewDetailedQuery /></AdminLayout>} />} />
+     
         </Routes>
+        </ModalProvider>
       </Router>
-    </ModalProvider>
+    
   );
 };

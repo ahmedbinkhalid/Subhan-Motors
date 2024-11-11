@@ -42,14 +42,14 @@ PasswordInput: React.FC<PasswordInputProps> = ({
 
 
   return (
-    <div className={`flex p-2 px-4 border-[0.5px] border-[#37474F] rounded-md w-full h-full gap-14`}>
+    <div className={`flex p-2 px-4 border-[0.5px] rounded-md w-full h-full gap-14`}>
       <input
         type={visibility ? "text" : "password"}
         placeholder={placeholder}
         name={name}
         value={value}
         onChange={handleChange}
-        className={`text-base w-full bg-transparent placeholder:text-sm outline-none placeholder:opacity-75`}
+        className={`text-base w-full bg-transparent placeholder:text-sm outline-none md:placeholder:opacity-75 xxl:opacity-100`}
         autoComplete="off" 
         required
       />

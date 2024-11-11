@@ -9,7 +9,7 @@ const isAuthenticated = () => {
   if (token) {
     try {
       const decodedToken = JSON.parse(atob(token.split(".")[1]));
-      return decodedToken.role === "Admin"; // Ensure the user has the "Admin" role
+      return decodedToken.role === "Admin"; 
     } catch (error) {
       console.error("Error decoding the token:", error);
     }
@@ -19,10 +19,10 @@ const isAuthenticated = () => {
 
 const RouteProtectionValidator: React.FC<RouteProtectionValidatorProps> = ({ element }) => {
   if (!isAuthenticated()) {
-    return <Navigate to="/" replace />; // Redirect to login page if not authenticated
+    return <Navigate to="/" replace />; 
   }
 
-  return element; // Render the element if authenticated
+  return element; 
 };
 
 export default RouteProtectionValidator;

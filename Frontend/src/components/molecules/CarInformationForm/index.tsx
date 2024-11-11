@@ -1,4 +1,3 @@
-// CarInformationForm.tsx
 import React, { useState, useEffect } from "react";
 import CarInformationDropDown from "../../atoms/CarInformationDropDown";
 import CarInformationSubmitButton from "../../atoms/CarInformationSubmitButton";
@@ -9,6 +8,7 @@ import { useImageContext } from "../ImageContext";
 import { useContact } from "../ContactContext";
 import { CarFormData } from "./types";
 import { postCarAd } from "../../apis/PostCarAd";
+import { Popup } from "../../atoms/Popup";
 
 type CarInformationFormProps = {
   bgColor: string;
@@ -37,8 +37,9 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [popupMessage, setPopupMessage] = useState<string | null>(null); 
+  const [popupBgColor, setPopupBgColor] = useState<string>("bg-green-500"); 
 
-  // Populate sellerInfo and images from context
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
@@ -76,10 +77,33 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
 
     const response = await postCarAd(formData, token);
     if (response.error) {
-      console.error("Error:", response.error);
+      setPopupMessage("Failed to submit your ad. Please try again.");
+      setPopupBgColor("bg-red-500"); // Set error color for popup
     } else {
-      console.log("Successfully posted car data:", formData);
+      setPopupMessage("Your car ad has been successfully submitted!");
+      setPopupBgColor("bg-green-500"); // Set success color for popup
+      setFormData({
+        sellerInfo: { sellerName: "", mobileNumber: "" },
+        images: [],
+        make: "",
+        model: "",
+        year: "",
+        status: "",
+        price: "",
+        mileage: "",
+        condition: "",
+        transmission: "",
+        engineType: "",
+        engineCapacity: "",
+        color: "",
+        location: "",
+        description: "",
+      });
     }
+  };
+
+  const closePopup = () => {
+    setPopupMessage(null); 
   };
 
   return (
@@ -88,7 +112,6 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
         onSubmit={handleSubmit}
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
-        {/* Display error message if it exists */}
         {errorMessage && (
           <div className="md:col-span-2 text-red-500 mb-4">
             {errorMessage}
@@ -198,6 +221,14 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
           <CarInformationSubmitButton bgColor={bgColor} />
         </div>
       </form>
+
+      {popupMessage && (
+        <Popup
+          message={popupMessage}
+          onClose={closePopup}
+          bgColor={popupBgColor}
+        />
+      )}
     </div>
   );
 };

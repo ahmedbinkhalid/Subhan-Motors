@@ -54,14 +54,11 @@
             text-align: center;
         }
         .car-details {
-            display: flex;
             flex-grow: 1;
-            gap: 10px;
-            flex-wrap: wrap;
+            padding-left: 10px;
         }
         .car-details p {
             margin: 0;
-            padding: 0;
             font-size: 1em;
         }
         .edit-button {
@@ -75,6 +72,13 @@
         }
         .edit-button:hover {
             background-color: #0056b3;
+        }
+        .car-image {
+            width: 100px;
+            height: 75px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 15px;
         }
     </style>
 </head>
@@ -109,18 +113,22 @@
                     data.cars.forEach((car, index) => {
                         const carEntry = document.createElement('div');
                         carEntry.className = 'car-entry';
-                        
-                        let colorInfo;
-                        if (car.color) {
-                            colorInfo = `<p><strong>Color:</strong> ${car.color}</p>`;
-                        } else if (car.availableColors) {
-                            colorInfo = `<p><strong>Available Colors:</strong> ${car.availableColors.join(', ')}</p>`;
-                        } else {
-                            colorInfo = `<p><strong>Color:</strong> N/A</p>`;
-                        }
+
+                        const colorInfo = car.color 
+                            ? `<p><strong>Color:</strong> ${car.color}</p>` 
+                            : car.availableColors 
+                                ? `<p><strong>Available Colors:</strong> ${car.availableColors.join(', ')}</p>`
+                                : `<p><strong>Color:</strong> N/A</p>`;
 
                         carEntry.innerHTML = `
                             <div class="index">${index + 1}</div>
+                            <img 
+                                src="${car.images && car.images.length > 0 
+                                    ? `http://localhost:5000/public/uploads/${car.images[0]}` 
+                                    : 'path/to/placeholder-image.jpg'}" 
+                                alt="Car Image" 
+                                class="car-image" 
+                            />
                             <div class="car-details">
                                 <p><strong>Make:</strong> ${car.make}</p>
                                 <p><strong>Model:</strong> ${car.model}</p>

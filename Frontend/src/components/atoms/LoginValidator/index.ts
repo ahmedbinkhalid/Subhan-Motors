@@ -3,5 +3,7 @@ export const LoginValidator = () : boolean => {
     if (token) {
         return true;
       }
-      return false;
+      else{
+        return false;
+      }
 }
