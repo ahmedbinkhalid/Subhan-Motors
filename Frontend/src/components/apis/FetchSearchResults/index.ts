@@ -5,7 +5,7 @@ export const fetchSearchResults = async (searchKey: string) => {
   }
 
   try {
-    const response = await fetch(`http://localhost:5000/api/searchcars/${searchKey}`);
+    const response = await fetch(`https://test-backend-1xtc.onrender.com/api/searchcars/${searchKey}`);
     const data = await response.json();
 
     if (data.cars && data.cars.length > 0) {
