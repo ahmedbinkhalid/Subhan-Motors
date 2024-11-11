@@ -3,7 +3,7 @@ import { ViewDetailedMessages } from "../../../pages/ViewDetailedMessages/types"
 
 export const getMessageById = async (id: string): Promise<ViewDetailedMessages> => {
     try {
-      const response = await fetch(`http://localhost:5000/api/contact/${id}`, {
+      const response = await fetch(`https://test-backend-1xtc.onrender.com/api/contact/${id}`, {
         method: 'GET', 
         headers: {
           'Content-Type': 'application/json',

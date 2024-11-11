@@ -6,7 +6,7 @@ export const FeaturedCarsCard: React.FC<FeaturedCarsCardProps> = ({ carImage, ca
     <Link to={`/viewDetailedCar/${_id}`}>
       <div className="flex flex-col justify-between bg-white shadow-md italic w-64 rounded-md md:my-3 my-1">
         <img
-          src={`http://localhost:5000/public/uploads/${carImage}`}
+          src={`https://test-backend-1xtc.onrender.com/public/uploads/${carImage}`}
           alt="Featured Car"
           className="object-fill h-56 w-auto rounded-md"
         />

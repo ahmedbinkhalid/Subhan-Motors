@@ -5,7 +5,7 @@ const token = localStorage.getItem("token");
 
 export const postQuery = async (data: QueryData): Promise<{ message: string }> => {
   try {
-    const response = await fetch('http://localhost:5000/api/query', {
+    const response = await fetch('https://test-backend-1xtc.onrender.com/api/query', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

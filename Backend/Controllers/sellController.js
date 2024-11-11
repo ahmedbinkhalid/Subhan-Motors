@@ -6,7 +6,6 @@ const subsController = require('./subsController');
 
 exports.addCar = async (req, res, next) => {
     const OwnerId = req.user.id;
-    console.log("Request Body:", req.body);
 
     try {
         const db = req.app.locals.db;
@@ -60,7 +59,6 @@ exports.addCar = async (req, res, next) => {
     } catch (error) {
         console.error("Error:", error);
         res.status(500).json({ message: error.message });
-        console.log("Request Body:", req.body);
     }
 };
 
@@ -133,7 +131,6 @@ exports.getUserCars = async (req, res, next)=>{
     }
 }
 exports.newCars = async (req, res, next)=>{
-    console.log(req.body);
     try{
         const db = req. app.locals.db;
         const base64Images = req.body.images; // this should be your base64 array
@@ -176,12 +173,9 @@ exports.newCars = async (req, res, next)=>{
         
         res.status(200).json({message: 'Car added for sale successfuly', carId: result.instertedId});
         await subsController.sendEmailsToSubscribers(db, carData);
-        console.log(carData);
     }catch(error){
         console.error("Error:", error); // Log the error
         res.status(500).json({ message: error.message });
-        console.log("Request Body:", req.body);
-        console.log("Uploaded Files:", req.files);
 };
 };
 
@@ -266,7 +260,6 @@ exports.SearchCars = async (req, res, next)=>{
         res.status(200).json({message: 'Search results', cars: results});
     } catch(error){
         res.status(500).json({ message: error.message });
-        console.log("Search Key:", SearchKey);
     }
 
 };

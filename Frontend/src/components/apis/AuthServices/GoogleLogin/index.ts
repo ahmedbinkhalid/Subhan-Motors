@@ -6,7 +6,7 @@ interface LoginResponse {
 export const googleLogin = async (): Promise<LoginResponse> => {
     try {
       window.location.href = 'http://localhost:5000/api/auth/google';
-      const response = await fetch("http://localhost:5000/api/auth/google", {
+      const response = await fetch("https://test-backend-1xtc.onrender.com/api/auth/google", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

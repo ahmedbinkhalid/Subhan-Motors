@@ -14,7 +14,7 @@ export const postNewBlog = async (blogData: {
         formData.append("images", image);
     });
 
-    const response = await fetch('http://localhost:5000/api/submit', {
+    const response = await fetch('https://test-backend-1xtc.onrender.com/api/submit', {
         method: 'POST',
         body: formData,
     });

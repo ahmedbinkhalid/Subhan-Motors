@@ -1,6 +1,6 @@
 export const sendNewsletter = async (data: { title: string; news: string }) => {
     try {
-        const response = await fetch("http://localhost:5000/api/send-news", {
+        const response = await fetch("https://test-backend-1xtc.onrender.com/api/send-news", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

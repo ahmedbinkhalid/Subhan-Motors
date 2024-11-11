@@ -2,7 +2,7 @@ import { blogsCardsData, BlogsDataResponse } from "./types";
 
 export const Blogs = async (): Promise<BlogsDataResponse> => {
     try {
-        const response = await fetch("http://localhost:5000/api/blogs", {
+        const response = await fetch("https://test-backend-1xtc.onrender.com/api/blogs", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

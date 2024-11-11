@@ -3,7 +3,7 @@
 // Function to fetch daily visitors data
 export const fetchDailyVisitors = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/daily');
+      const response = await fetch('https://test-backend-1xtc.onrender.com/api/daily');
       if (!response.ok) {
         throw new Error('Failed to fetch daily visitors data');
       }

@@ -23,7 +23,7 @@ export const postAddNewCar = async (carData: addNewCarFormData): Promise<PostNew
       }
     });
 
-    const response = await fetch("http://localhost:5000/api/postcar", {
+    const response = await fetch("https://test-backend-1xtc.onrender.com/api/postcar", {
       method: "POST",
       // headers: {
       //   "Authorization": `Bearer ${token}`,
