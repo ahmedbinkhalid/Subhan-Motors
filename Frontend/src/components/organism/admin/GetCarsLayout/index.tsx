@@ -11,7 +11,7 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
   const [currentPage, setCurrentPage] = useState(1); // Current page state
 
   return (
-    <section className='max-w-screen-xl mx-auto px-4 lg:px-8 '>
+    <section className='max-w-screen-xl mx-auto px-4 lg:px-8 md:mb-4'>
       <h1 className='text-2xl md:text-3xl text-center text-charcoal-gray font-semibold mt-4 mb-6'>
         {title}
       </h1>
@@ -39,6 +39,7 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
                       carModel={data.model}
                       carPrice={managedBy.includes("Brand") ? `${data.startingPrice} - ${data.maxPrice}` : data.price}
                       carCity={data.location}
+                      _id={data._id}
                     />
                   ))}
                 </>

@@ -15,7 +15,6 @@ export const  GetCarDetailById = async (id: string): Promise<CarDetailProps> => 
       }
 
       const data = await response.json();
-      console.log(data);
       return data as CarDetailProps;
   
     } catch (error) {

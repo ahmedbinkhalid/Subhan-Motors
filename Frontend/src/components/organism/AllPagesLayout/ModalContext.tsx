@@ -4,7 +4,7 @@ type ModalType = "login" | "signup" | "forgotPassword" | "newPassword" | null;
 
 interface ModalContextType {
   modalOpen: ModalType;
-  openModal: (formType: ModalType) => void;
+  openModal: (formType: ModalType, onClose?: () => void) => void;
   closeModal: () => void;
 }
 
@@ -12,13 +12,19 @@ const ModalContext = createContext<ModalContextType | undefined>(undefined);
 
 export const ModalProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [modalOpen, setModalOpen] = useState<ModalType>(null);
+  const [postLoginCallback, setPostLoginCallback] = useState<(() => void) | null>(null);
 
-  const openModal = (formType: ModalType) => {
+  const openModal = (formType: ModalType, onClose?: () => void) => {
     setModalOpen(formType);
+    setPostLoginCallback(() => onClose || null);
   };
 
   const closeModal = () => {
     setModalOpen(null);
+    if (postLoginCallback) {
+      postLoginCallback();
+      setPostLoginCallback(null);
+    }
   };
 
   return (
@@ -34,4 +40,4 @@ export const useModal = (): ModalContextType => {
     throw new Error("useModal must be used within a ModalProvider");
   }
   return context;
-};
+}

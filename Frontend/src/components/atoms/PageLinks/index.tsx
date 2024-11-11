@@ -73,6 +73,7 @@ export const PageLinks: React.FC = () => {
                 localStorage.removeItem("token");
                 setIsLoggedIn(false);
                 setUserName(null);
+                navigate("/");
               }}
             >
               <TbLogout2 size={28} className="text-regal-red hover:text-white mt-2" />
