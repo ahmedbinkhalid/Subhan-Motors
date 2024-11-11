@@ -3,7 +3,6 @@ import { MyAdsCard } from '../../components/molecules/MyAddCard';
 import { myListedAds } from '../../components/apis/MyAds';
 import { CarData } from '../../components/molecules/FeaturedCardsLayout';
 import { DeleteAdd } from '../../components/apis/DeleteAdd';
-import { headerBg1 } from '../../assets/images';
 
 export const MyAds: React.FC = () => {
   const [carData, setCarData] = useState<CarData[]>([]);
