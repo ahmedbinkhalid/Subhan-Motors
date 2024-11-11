@@ -15,7 +15,6 @@ exports.signUp = async (req, res, next) =>{
     if(password !==confirmpassword){
         return res.status(400).json({error: 'Passwords do not match'});
     }
-    console.log("Request received:", req.body);
 
     // Validate the role 
 
@@ -40,7 +39,6 @@ exports.signUp = async (req, res, next) =>{
     }catch (error){
         console.error('Error During Signup:', error)
         res.status(500).json({error: 'Server error',error});
-        console.log(error)
     }
 
 };
@@ -49,7 +47,6 @@ exports.signUp = async (req, res, next) =>{
 
 exports.login = async (req, res, next)=>{
     const {email, password} = req.body;
-    console.log('Request Recieved: ', req.body);
 
     if (!email || !password){
         return res.status(400).json({error: "Email and Password are required"});
@@ -84,7 +81,6 @@ exports.login = async (req, res, next)=>{
 
 exports.forgotpassword = async (req, res, nex) =>{
     const {email} = req.body;
-    console.log(req.body);
     try{
         const db = req.app.locals.db;
         // Find user by Email
@@ -127,7 +123,6 @@ exports.forgotpassword = async (req, res, nex) =>{
 
 exports.resetpassword = async (req, res, next)=>{
     const {otpToken, otp, newpassword, confirmpassword} = req.body;
-    console.log(req.body);
     if(newpassword !==confirmpassword){
         res.status(500).json({error: 'Password does not match'});
     }
@@ -170,7 +165,6 @@ exports.googleLogin = async (req, res, next) => {
             token,
             user: { id: user._id, name: user.name, role: user.role }
         });
-        // res.redirect(`http://localhost:5173/?token=${token}`);
     } catch (error) {
         console.error('Error During Google Login:', error);
         res.status(500).json({ error: "Server Error" });

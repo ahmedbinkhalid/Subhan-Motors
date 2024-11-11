@@ -83,6 +83,6 @@ MongoConnect(client =>{
     app.use('/api', subsRoutes);
     app.use('/api', visitorRoutes);
 
-    app.listen(5000);
-    console.log(client);
+    app.listen(process.env.PORT);
+    // console.log(client);
 });

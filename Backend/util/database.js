@@ -1,10 +1,11 @@
 const MongoDB = require("mongodb");
 const MongoClient = MongoDB.MongoClient;
+require('dotenv').config();
 
 const MongoConnect = callback =>{
-    MongoClient.connect('mongodb+srv://myzameen:Pakistan101010.@cluster0.vsfpl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
+    MongoClient.connect(process.env.Mongo)
         .then(client =>{
-        console.log("Connected to MongoDB");
+        console.log("Connected to MongoDB", "PORT" ,process.env.PORT);
         global.db = client.db('myzameen'); 
         callback(client);
         })

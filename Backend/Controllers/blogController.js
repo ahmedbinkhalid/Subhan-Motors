@@ -72,6 +72,7 @@ exports.submitBlog = async (req, res, next)=>{
 // This part of the code was not used because of the deadline
 
 
+
 // For approving the blog
 
 exports.approveBlog = async (req, res, next) =>{
@@ -110,7 +111,6 @@ exports.approveBlog = async (req, res, next) =>{
                     console.error('Error sending email:', error);
                     return res.status(500).json({ error: 'Error sending email' });
                 }
-                console.log('Email sent:', info.response);
             });
         }
         res.status(200).json({message: 'Blog approved and Published'});
