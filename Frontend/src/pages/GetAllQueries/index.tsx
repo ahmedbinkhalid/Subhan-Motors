@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { TableLayout } from '../../components/organism/admin/TableLayout';
 import { fetchQueries } from '../../components/apis/fetchQueries'; // Import the fetch function
-import { Query } from './types'; // Import the Query interface
+import { Query } from './types';
 import { TableRow } from '../../components/organism/admin/TableLayout/types';
 import { useNavigate } from 'react-router-dom';
 
@@ -19,33 +19,31 @@ export const GetAllQueries: React.FC = () => {
             try {
                 const queries: Query[] = await fetchQueries(); 
                 const formattedData: TableRow[] = queries.map((query: Query) => ({
-                    id: query._id,  // Assuming the API response has an `_id` field
+                    id: query._id, 
                     title: query.title,
                     phoneNumber: query.phoneNumber,
                     email: query.email,
                     onView: () => {
-                        // Implement the view functionality
                         navigate(`/detailedQuery/${query._id}`);
                     },
                     onDelete: () => {
-                        // Implement the delete functionality
                         console.log("Deleting query:", query);
                     },
                 }));
                 
-                setData(formattedData); // Set fetched data to state
+                setData(formattedData); 
             } catch (err) {
-                setError('Failed to fetch queries'); // Handle error
+                setError('Failed to fetch queries');
             } finally {
-                setLoading(false); // Set loading to false
+                setLoading(false); 
             }
         };
 
         loadQueries();
-    }, [navigate]); // Empty array so it runs only once
+    }, [navigate]); 
 
-    if (loading) return <div>Loading...</div>; // Loading message
-    if (error) return <div>{error}</div>; // Error message
+    if (loading) return <div>Loading...</div>; 
+    if (error) return <div>{error}</div>;
 
     return <TableLayout title="Get All Queries" columns={columns} data={data} />;
 };
