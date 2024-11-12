@@ -13,7 +13,7 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
   return (
     <div className="flex flex-col items-center bg-white border rounded-md p-4 py-8 shadow-md gap-8 w-full hover:shadow-xl">
       <div className='flex gap-4 items-center'>
-      <img src={`https://test-backend-1xtc.onrender.com/public/uploads/${imageUrl}`} alt={`${make} ${model}`} className=" object-cover rounded-md h-40 w-40" />
+      <img src={imageUrl} alt={`${make} ${model}`} className=" object-cover rounded-md h-40 w-40" />
 
 <div className="flex flex-col flex-grow gap-1">
   <h2 className="md:text-xl text-lg font-bold">{`${make} ${model}`}</h2>

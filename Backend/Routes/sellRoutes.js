@@ -16,7 +16,7 @@ router.get('/newcars', sellController.getNewCars);
 router.get('/newcars/:id', sellController.getNewCarById);
 
 // Admin Route to add new car for sale
-router.post('/postcar', upload.array('images', 10), sellController.newCars);
+router.post('/postcar', sellController.newCars);
 
 // Route to get all cars (used and bankreleased)
 router.get('/getcars', sellController.getAllCars);
@@ -40,6 +40,6 @@ router.get('/usercars', verifyToken, isUser, sellController.getUserCars);
 router.delete('/deletecar/:id', verifyToken, isUser, sellController.deleteCar);
 
 // User route to update Car Ad
-router.put('/updatecar/:id', verifyToken, isUser, upload.array('images', 10), sellController.updateCar);
+router.put('/updatecar/:id', verifyToken, isUser, sellController.updateCar);
 
 module.exports = router;
