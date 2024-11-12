@@ -3,13 +3,19 @@ const { ObjectId } = require('mongodb');
 const path = require('path');
 const fs = require('fs');
 const subsController = require('./subsController');
+const cloudinary = require('../util/cloudinary');
 
 exports.addCar = async (req, res, next) => {
     const OwnerId = req.user.id;
 
     try {
         const db = req.app.locals.db;
-        const base64Images = req.body.images; // this should be your base64 array
+        // Ensure that req.body.images exists and is an array
+        if (!req.body.images || !Array.isArray(req.body.images)) {
+            return res.status(400).json({ message: "No images provided or invalid format." });
+        }
+
+        const base64Images = req.body.images;
         const images = [];
 
         for (let i = 0; i < base64Images.length; i++) {
@@ -20,14 +26,16 @@ exports.addCar = async (req, res, next) => {
                 return res.status(400).json({ message: "Invalid image format." });
             }
 
-            const imageType = matches[1];
             const imageData = base64Data.replace(/^data:image\/\w+;base64,/, '');
-            const buffer = Buffer.from(imageData, 'base64');
-            const filename = `image-${Date.now()}-${i}.${imageType}`;
-            const filepath = path.join(__dirname, '../public/uploads', filename);
 
-            fs.writeFileSync(filepath, buffer);
-            images.push(filename);
+            // Upload image to Cloudinary
+            const uploadResponse = await cloudinary.uploader.upload(`data:image/jpeg;base64,${imageData}`, {
+                folder: 'car_images', // Optional: Set a folder name on Cloudinary
+                public_id: `car_image_${Date.now()}_${i}`, // Optional: Set custom public ID
+                resource_type: 'image',
+            });
+
+            images.push(uploadResponse.secure_url); // Push the image URL
         }
 
         const carData = {
@@ -133,7 +141,12 @@ exports.getUserCars = async (req, res, next)=>{
 exports.newCars = async (req, res, next)=>{
     try{
         const db = req. app.locals.db;
-        const base64Images = req.body.images; // this should be your base64 array
+        // Ensure that req.body.images exists and is an array
+        if (!req.body.images || !Array.isArray(req.body.images)) {
+            return res.status(400).json({ message: "No images provided or invalid format." });
+        }
+
+        const base64Images = req.body.images;
         const images = [];
 
         for (let i = 0; i < base64Images.length; i++) {
@@ -144,14 +157,16 @@ exports.newCars = async (req, res, next)=>{
                 return res.status(400).json({ message: "Invalid image format." });
             }
 
-            const imageType = matches[1];
             const imageData = base64Data.replace(/^data:image\/\w+;base64,/, '');
-            const buffer = Buffer.from(imageData, 'base64');
-            const filename = `image-${Date.now()}-${i}.${imageType}`;
-            const filepath = path.join(__dirname, '../public/uploads', filename);
 
-            fs.writeFileSync(filepath, buffer);
-            images.push(filename);
+            // Upload image to Cloudinary
+            const uploadResponse = await cloudinary.uploader.upload(`data:image/jpeg;base64,${imageData}`, {
+                folder: 'car_images', // Optional: Set a folder name on Cloudinary
+                public_id: `car_image_${Date.now()}_${i}`, // Optional: Set custom public ID
+                resource_type: 'image',
+            });
+
+            images.push(uploadResponse.secure_url); // Push the image URL
         }
         const carData = {
             PhoneNumber : '03409889631',
