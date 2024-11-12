@@ -1,6 +1,6 @@
 import React from 'react';
 import { LeadershipCard } from '../../atoms/LeadershipCard';
-import { team1, team2, team3 } from '../../../assets/images';
+import { founder, coFounder, manager } from '../../../assets/images';
 
 export const LeaderShip : React.FC = () => {
   return (
@@ -11,19 +11,19 @@ export const LeaderShip : React.FC = () => {
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 gap-4">
         <LeadershipCard
-        leaderImage={team1}
-        leaderName='Leader 1'
-        leaderTitle='CEO'
+        leaderImage={founder}
+        leaderName='Ishfaq Butt'
+        leaderTitle='CEO and Founder'
         />
         <LeadershipCard
-        leaderImage={team2}
-        leaderName='Leader 2'
-        leaderTitle='CEO'
+        leaderImage={coFounder}
+        leaderName='Nazeer Butt'
+        leaderTitle='Co-Founder'
         />
         <LeadershipCard
-        leaderImage={team3}
-        leaderName='Leader 3'
-        leaderTitle='CEO'
+        leaderImage={manager}
+        leaderName='Pervaiz Butt'
+        leaderTitle='Manager'
         />
       </div>
     </div>

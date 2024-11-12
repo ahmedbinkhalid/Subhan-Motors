@@ -12,7 +12,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <React.Fragment>
       <Header />
-      <section className="xl:max-w-[1200px] lg:max-w-[1000px] m-auto my-8 flex flex-col gap-4 max-lg:px-6 max-md:px-2 py-8">
+      <section className="xl:max-w-[1200px] lg:max-w-[1000px] lg:m-auto my-8 flex flex-col lg:px-0 md:px-4 px-2 gap-4 py-8 xxl:min-h-[90vh] min-h-[83vh]">
         {children}
       </section>
       {modalOpen && (
@@ -25,17 +25,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <IoIosCloseCircle />
             </button>
             {modalOpen === "signup" ? (
-              <LoginSignUpForm
-              />
+              <LoginSignUpForm />
             ) : modalOpen === "login" ? (
-              <LoginSignUpForm
-              />
+              <LoginSignUpForm />
             ) : modalOpen === "forgotPassword" ? (
-              <LoginSignUpForm
-              />
+              <LoginSignUpForm />
             ) : modalOpen === "newPassword" ? (
-              <LoginSignUpForm
-              />
+              <LoginSignUpForm />
             ) : null}
           </div>
         </div>

@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-// components/ContactUsForm.tsx
-
 import React, { useState } from 'react';
 import { FullnameInput } from '../../atoms/FullnameInput';
 import { SignInEmailInput } from '../../atoms/SignInEmailInput';
@@ -11,6 +9,7 @@ import { Button } from '../../atoms/Button';
 import { postContact } from '../../apis/PostContact';
 import { AddressInfo } from '../../atoms/AddressInfo';
 import { PhoneNumber } from '../../atoms/PhoneNumber';
+import { CustomPopup } from '../../atoms/CustomPopup';
 
 export const ContactUsForm: React.FC = () => {
   const [fullName, setFullName] = useState('');
@@ -18,44 +17,51 @@ export const ContactUsForm: React.FC = () => {
   const [messageSubject, setMessageSubject] = useState('');
   const [message, setMessage] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+
+  const [popupMessage, setPopupMessage] = useState<string>('');
+  const [isPopupSuccess, setIsPopupSuccess] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const result = await postContact({
+      await postContact({
         name: fullName,
         email,
         phoneNumber,
         subject: messageSubject,
         message,
       });
-      setSuccessMessage(result.message);
-      setErrorMessage('');
-  
-      // Clear form fields after successful submission
+
+ 
+      setPopupMessage('Your message has been sent successfully!');
+      setIsPopupSuccess(true);
+      setShowPopup(true);
+
       setFullName('');
       setEmail('');
       setPhoneNumber('');
       setMessageSubject('');
       setMessage('');
     } catch (error) {
-      setErrorMessage('There was an issue submitting the form. Please try again.');
-      setSuccessMessage('');
+      setPopupMessage('There was an issue submitting the form. Please try again.');
+      setIsPopupSuccess(false);
+      setShowPopup(true);
     }
+
+    // Auto-close the popup after 4 seconds
+    setTimeout(() => setShowPopup(false), 4000);
   };
-  
 
   return (
-    <section className='grid md:grid-cols-2 lg:gap-24 gap-12'>
-      <div className='bg-slate-50 py-8 px-6 max-w-xl rounded-md'>
-        <h1 className='text-charcoal-gray md:text-2xl text-xl font-sans font-semibold mb-3'>Your Details</h1>
+    <section className="grid md:grid-cols-2 xl:gap-10 md:gap-8 gap-4">
+      <div className="bg-slate-50 py-8 px-6 max-w-xl rounded-md">
+        <h1 className="text-charcoal-gray md:text-2xl text-xl font-sans font-semibold mb-3">Your Details</h1>
 
-        <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <FullnameInput name="fullName" value={fullName} onChange={(e) => setFullName(e.target.value)} />
           <SignInEmailInput name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          <PhoneNumber name="phoneNumber" value={phoneNumber} onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setPhoneNumber(e.target.value)} />
+          <PhoneNumber name="phoneNumber" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
           <CarInformationDropDown
             label="Message Subject"
             name="messageSubject"
@@ -70,14 +76,21 @@ export const ContactUsForm: React.FC = () => {
             placeHolder="Enter your Message Here"
             onChange={(e) => setMessage(e.target.value)}
           />
-          <div>
-            <Button type="submit" bgColor='bg-regal-red' hoverBgColor='bg-red-700' btnTitle="Send" />
+          <div className="flex justify-center mt-3">
+            <Button type="submit" bgColor="bg-regal-red" hoverBgColor="bg-red-700" btnTitle="Submit" />
           </div>
         </form>
-        {errorMessage && <p className="text-regal-red">{errorMessage}</p>}
-        {successMessage && <p className="text-green-500">{successMessage}</p>}
       </div>
       <AddressInfo />
+
+      {/* Custom Popup */}
+      {showPopup && (
+        <CustomPopup
+          message={popupMessage}
+          isSuccess={isPopupSuccess}
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </section>
   );
 };

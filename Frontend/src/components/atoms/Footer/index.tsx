@@ -1,4 +1,5 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState } from "react";
 import {
   FaMapMarkerAlt,
   FaPhoneAlt,
@@ -6,31 +7,81 @@ import {
   FaTwitter,
   FaFacebookF,
   FaYoutube,
-  FaLinkedinIn,
+  FaTiktok,
 } from "react-icons/fa";
-
-import { FaAngleRight } from "react-icons/fa";
-
+import { BsTwitterX } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { subscribeToNewsletter } from "../../apis/SubscribeToNewsletter";
 
 export const Footer: React.FC = () => {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+
+  // Regular expression to check for a valid email
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    return emailRegex.test(email);
+  };
+
+  const handleSubscription = async () => {
+    // Check if the email is empty or invalid
+    if (!email) {
+      setMessage("Please enter a valid email address.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setMessage("Please enter a valid email address.");
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 3000);
+      return;
+    }
+
+    try {
+      const responseMessage = await subscribeToNewsletter(email);
+      if (responseMessage.includes("already subscribed")) {
+        setMessage("You have already subscribed to the newsletter.");
+      } else {
+        setMessage("Subscribed to the newsletter successfully!");
+      }
+
+      setEmail(""); // Clear input on success
+      setShowPopup(true); // Show popup
+
+      // Hide popup after 3 seconds
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+    } catch (error) {
+      setMessage("Error subscribing to the newsletter. Please try again.");
+      setShowPopup(true);
+
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 3000);
+    }
+  };
+
   return (
-    <div className="text-gray-300 pt-5 mt-5 font-sans px-8 bg-gradient-to-r from-black via-red-950 to-gray-950 ...">
-      <div className="container mx-auto py-5 px-4">
+    <div className="text-gray-300 pt-5 mt-5 font-sans px-8 bg-gradient-to-r from-black via-red-950 to-gray-950">
+      <div className="max-w-6xl mx-auto py-5 px-4 ">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Address Section */}
           <div className="font-medium">
             <h4 className="text-white mb-4 md:text-2xl text-xl font-medium">
               Address
             </h4>
             <p className="mb-2 flex items-center gap-3">
-              <FaMapMarkerAlt /> Location, City, Country
+              <FaMapMarkerAlt size={24} />
+              Mandyala moor pindi bypass GT road0, Gujranwala, Punjab,52250
             </p>
             <p className="mb-2 flex items-center gap-3">
-              <FaPhoneAlt /> +012 345 67890
+              <FaPhoneAlt /> +92-300-8749966
             </p>
             <p className="mb-2 flex items-center gap-3">
-              <FaEnvelope /> info@example.com
+              <FaEnvelope /> atifsubhanmotors@gmail.com
             </p>
             <div className="flex space-x-2 pt-2 my-2">
               <a
@@ -39,10 +90,10 @@ export const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
               >
-                <FaTwitter />
+                <BsTwitterX />
               </a>
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/subahnmotors/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
@@ -58,17 +109,17 @@ export const Footer: React.FC = () => {
                 <FaYoutube />
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.tiktok.com/@subhanmotors"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
               >
-                <FaLinkedinIn />
+                <FaTiktok />
               </a>
             </div>
           </div>
 
-          {/* Opening Hours Section */}
+          {/* Opening Hours */}
           <div className="font-medium">
             <h4 className="text-white mb-4 md:text-2xl text-xl">
               Opening Hours
@@ -79,85 +130,42 @@ export const Footer: React.FC = () => {
             <p>09.00 AM - 12.00 PM</p>
           </div>
 
-          {/* Services Section */}
-          <div className="font-medium">
-            <h4 className="text-white mb-4 md:text-2xl text-xl font-medium">
-              Services
-            </h4>
-            <ul>
-              <li className="flex gap-[2px] items-center">
-                <FaAngleRight size={20} />
-                <Link
-                  to="/diagnostic-test"
-                  className="text-gray-300 hover:text-regal-red"
-                >
-                  Diagnostic Test
-                </Link>
-              </li>
-              <li className="flex gap-[2px] items-center">
-                <FaAngleRight size={20} />
-                <Link
-                  to="/engine-servicing"
-                  className="text-gray-300 hover:text-regal-red"
-                >
-                  Engine Servicing
-                </Link>
-              </li>
-              <li className="flex gap-[2px] items-center">
-                <FaAngleRight size={20} />
-                <Link
-                  to="/tires-replacement"
-                  className="text-gray-300 hover:text-regal-red"
-                >
-                  Tires Replacement
-                </Link>
-              </li>
-              <li className="flex gap-[2px] items-center">
-                <FaAngleRight size={20} />
-                <Link
-                  to="/oil-changing"
-                  className="text-gray-300 hover:text-regal-red"
-                >
-                  Oil Changing
-                </Link>
-              </li>
-              <li className="flex gap-[2px] items-center">
-                <FaAngleRight size={20} />
-                <Link
-                  to="/vacuum-cleaning"
-                  className="text-gray-300 hover:text-regal-red"
-                >
-                  Vacuum Cleaning
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter Section */}
           <div>
             <h4 className="text-white mb-4 md:text-2xl text-xl font-medium">
               Newsletter
             </h4>
             <p className="font-medium">
-              Dolor amet sit justo amet elitr clita ipsum elitr est.
+              Subscribe to Subhan Motors to get the latest updates.
             </p>
-            <div className="relative mt-4">
+            <div className="flex md:flex-row flex-col mt-4 gap-2">
               <input
-                type="text"
-                className="w-full py-3 pl-4 pr-16 text-gray-900 placeholder-gray-500 focus:outline-none rounded-lg"
-                placeholder="Your email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-grow py-3 pl-4 text-gray-900 placeholder-gray-500 focus:outline-none rounded-md"
+                placeholder="example@gmail.com"
+                required
               />
-              <button className="absolute right-0 top-1 mr-2 px-4 py-2 bg-regal-red hover:bg-red-600 text-white rounded-md font-semibold">
-                Sign Up
+              <button
+                onClick={handleSubscription}
+                className="px-4  md:py-3 py-1 bg-regal-red hover:bg-red-600 text-white rounded-md font-semibold"
+              >
+                Subscribe
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Copyright Section */}
+      {/* Success or Error Popup */}
+      {showPopup && (
+        <div className="fixed top-4 right-4 bg-green-500 text-white p-4 rounded shadow-lg z-50">
+          <p>{message}</p>
+        </div>
+      )}
+
       <div className="border-t border-gray-700 py-7">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center font-medium">
+        <div className="container mx-auto px-4 flex flex-col md:flex-row justify-center items-center font-medium">
           <p className="mb-3 md:mb-0">
             &copy;
             <a
@@ -166,7 +174,7 @@ export const Footer: React.FC = () => {
             >
               subhanmotors.com.pk
             </a>
-            , All Rights Reserved. Designed by 
+            , All Rights Reserved. Designed by
             <a
               href="https://portfolio.tenzsoft.com/quote/"
               className="text-regal-red border-b border-regal-red mx-2"
@@ -174,20 +182,6 @@ export const Footer: React.FC = () => {
               tenzSoft
             </a>
           </p>
-          <div className="flex space-x-4 font-medium">
-            <Link to="/" className="text-gray-300 hover:text-regal-red">
-              Home
-            </Link>
-            <Link to="/cookies" className="text-gray-300 hover:text-regal-red">
-              Cookies
-            </Link>
-            <Link to="/help" className="text-gray-300 hover:text-regal-red">
-              Help
-            </Link>
-            <Link to="/faqs" className="text-gray-300 hover:text-regal-red">
-              Hello
-            </Link>
-          </div>
         </div>
       </div>
     </div>

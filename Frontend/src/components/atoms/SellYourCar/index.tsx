@@ -75,12 +75,16 @@ export const SellYourCar: React.FC = () => {
               </div>
             ))}
           </div>
+
+          <div className="flex justify-end">
           <button
             onClick={handleCloseResults}
-            className="bg-red-500 text-white p-2 rounded-md mt-4"
+            className="bg-red-500 text-white p-2 rounded-md mt-4 font-sans font-semibold"
           >
             Close Results
           </button>
+          </div>
+         
         </div>
       ) : (
         <fieldset className="grid md:grid-cols-2 grid-cols-1 xl:gap-2 p-4 border border-gray-500 rounded-md m-auto lg:mx-4">
@@ -101,7 +105,7 @@ export const SellYourCar: React.FC = () => {
             />
           </div>
 
-          <div className="flex flex-col font-sans justify-center items-center gap-1 md:border-l border-charcoal-gray font-bolder max-lg:pl-6 max-md:border-t max-md:pt-3">
+          <div className="flex flex-col font-sans justify-center items-center gap-1 md:border-l border-charcoal-gray font-bolder max-lg:pl-6  max-md:border-t max-md:pt-3 px-5">
             <h1 className="text-regal-red font-semibold text-2xl">
               Post your Ad on Subhan Motors
             </h1>

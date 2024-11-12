@@ -16,8 +16,8 @@ export const LeadershipCard: React.FC<LeadershipCardProps> = ({
         />
       </div>
       <div className="flex flex-col gap-2 pt-2 pb-8">
-        <h3 className="text-xl font-bold text-regal-red">{leaderName}</h3>
-        <p className="text-charcoal-gray font-medium text-2xl">{leaderTitle}</p>
+        <h3 className="md:text-2xl text-lg font-bold text-regal-red">{leaderName}</h3>
+        <p className="text-charcoal-gray font-medium text-xl">{leaderTitle}</p>
       </div>
     </div>
   );

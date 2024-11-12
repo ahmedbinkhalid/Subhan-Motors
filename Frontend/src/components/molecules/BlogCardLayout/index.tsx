@@ -12,7 +12,7 @@ export const BlogCardLayout: React.FC = () => {
 
   return (
     <section className="relative flex my-4 flex-col w-full bg-slate-50 rounded-lg pb-16 pt-4">
-      <div className="flex md:flex-row flex-col justify-between font-sans w-full md:px-16 max-lg:self-center max-md:gap-2 max-md:justify-center max-md:items-center lg:py-2">
+      <div className="flex flex-col md:flex-row justify-between items-center font-sans w-full text-center md:px-10 py-2 md:gap-0 gap-4">
         <h1 className="lg:text-xl text-lg text-charcoal-gray font-bold lg:py-4 py-2">Browse Our Blogs</h1>
         <p className="cursor-pointer lg:text-base text-sm font-medium lg:py-4 pb-6 text-blue-variant hover:underline hover:text-charcoal-gray">
           View All Blogs

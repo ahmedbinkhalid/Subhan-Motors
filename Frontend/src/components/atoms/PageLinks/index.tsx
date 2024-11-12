@@ -61,7 +61,7 @@ export const PageLinks: React.FC = () => {
 
   return (
     <header className="container mx-auto flex flex-col items-center bg-transparent px-4 py-2">
-      {/* SignUp and SignIn Container */}
+
       <div className="w-full max-w-5xl flex justify-end max-lg:justify-center items-center md:px-3 gap-3">
         {isLoggedIn ? (
           <>
@@ -103,7 +103,7 @@ export const PageLinks: React.FC = () => {
       <div className="w-full max-w-5xl flex flex-col md:flex-row items-center">
         <div className="lg:hidden flex items-center justify-between w-full px-1">
           <button onClick={toggleSidebar} className="text-white">
-            <FaBars size={14} />
+            <FaBars size={24} />
           </button>
 
           <Link to="/" className="lg:w-64 w-48 lg:h-11 mx-auto">
@@ -120,7 +120,7 @@ export const PageLinks: React.FC = () => {
             />
           </Link>
           <nav className="flex flex-row items-center justify-center">
-            <ul className="flex text-white text-base font-sans my-4 gap-10">
+            <ul className="flex text-white text-base font-sans my-4 xl:gap-10 gap-8">
               <Links path="/" title="Home" />
               <Links path="/about" title="About" />
               <Links path="/buyCar" title="Buy Car" />
@@ -167,12 +167,11 @@ export const PageLinks: React.FC = () => {
                 navigate,
                 openModal,
                 LoginValidator
-              ); // Use the utility function
+              ); 
             }}
           />
         </div>
 
-        {/* Use the Sidebar component */}
         <Sidebar isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </div>
     </header>

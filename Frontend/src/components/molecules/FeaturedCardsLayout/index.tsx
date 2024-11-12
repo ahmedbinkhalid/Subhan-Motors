@@ -1,9 +1,8 @@
-// FeaturedCarsCardLayout.tsx
 import React, { useState, useEffect } from "react";
 import { FeaturedCarsCard } from "../../atoms/FeaturedCarsCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FeaturedCardLayoutProps } from "./types";
-import {CarsCardApiHandling } from "../../atoms/CarsCardApiHandling";
+import { CarsCardApiHandling } from "../../atoms/CarsCardApiHandling";
 
 export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
   managedBy,
@@ -12,7 +11,6 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
   const [cardsPerPage, setCardsPerPage] = useState(4); // Default for extra large screens
   const [currentIndex, setCurrentIndex] = useState(0); // Index of the first visible card
 
-  // Update cardsPerPage based on window width
   useEffect(() => {
     const updateCardsPerPage = () => {
       const width = window.innerWidth;
@@ -28,27 +26,20 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
       }
     };
 
-    // Initial call
     updateCardsPerPage();
-
-    // Listen for window resize
     window.addEventListener("resize", updateCardsPerPage);
-
-    // Clean up the event listener
     return () => window.removeEventListener("resize", updateCardsPerPage);
   }, []);
 
-  // Logic to handle right button (next slide by one card)
   const handleNext = (totalCards: number) => {
     if (currentIndex + cardsPerPage < totalCards) {
-      setCurrentIndex(currentIndex + 1); // Move to the next card
+      setCurrentIndex(currentIndex + 1);
     }
   };
 
-  // Logic to handle left button (previous slide by one card)
   const handlePrevious = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1); // Move to the previous card
+      setCurrentIndex(currentIndex - 1);
     }
   };
 
@@ -63,8 +54,11 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
         return (
           <section className="relative flex items-center justify-center gap-5 my-4 flex-col w-full bg-slate-50 rounded-lg pt-8 pb-16">
-            <div className="flex md:flex-row flex-col justify-between font-sans w-full md:px-16 lg:px-10 max-lg:self-center max-md:gap-2 max-md:justify-center max-md:items-center py-2 ">
-              <h1 className="lg:text-xl text-lg text-charcoal-gray font-bold">{managedBy}</h1>
+            {/* Updated section for mobile-centered layout */}
+            <div className="flex flex-col md:flex-row justify-between items-center font-sans w-full text-center md:px-10 py-2 md:gap-0 gap-4">
+              <h1 className="lg:text-xl text-lg text-charcoal-gray font-bold">
+                {managedBy}
+              </h1>
               <p className="cursor-pointer lg:text-base text-sm font-medium text-blue-variant hover:underline hover:text-charcoal-gray">
                 View All {viewAll}
               </p>
@@ -72,7 +66,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
             {currentIndex > 0 && (
               <button
-                className="absolute md:left-2 left-0  bg-gray-400 hover:bg-charcoal-gray text-white p-2 rounded-full"
+                className="absolute md:left-2 left-0 bg-gray-400 hover:bg-charcoal-gray text-white p-2 rounded-full"
                 onClick={handlePrevious}
               >
                 <FaChevronLeft />
@@ -81,15 +75,18 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
             <div className="flex gap-5 overflow-hidden">
               {visibleCards.map((data, index) => (
-                
                 <FeaturedCarsCard
                   key={index}
                   carImage={data.images ? data.images[0] : ""}
                   carMake={data.make}
                   carModel={data.model}
-                  carPrice={managedBy.includes("Brand") ? `${data.startingPrice} - ${data.maxPrice}` : data.price}
+                  carPrice={
+                    managedBy.includes("Brand")
+                      ? `${data.startingPrice} - ${data.maxPrice}`
+                      : data.price
+                  }
                   carCity={data.location}
-                  _id = {data._id}
+                  _id={data._id}
                 />
               ))}
             </div>

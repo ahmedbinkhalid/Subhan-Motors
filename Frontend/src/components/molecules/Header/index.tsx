@@ -11,9 +11,9 @@ export const Header: React.FC = () => {
     <div className={`w-full flex flex-col h-auto lg:justify-between items-center bg-gradient-to-r from-gray-950 via-red-950 to-gray-950 text-white max-lg:px-4 ${!(location.pathname === "/") ? "pb-6" : ""}`}>
       <PageLinks />
       {location.pathname === "/" && (
-        <div className="flex flex-col text-center">
+        <div className="flex flex-col text-center px-3">
           <div className="md:pt-16">
-            <h1 className="text-2xl md:text-4xl font-bold">
+            <h1 className="text-xl md:text-4xl font-bold">
               Find Brand New and Used Cars in Pakistan
             </h1>
             <h2 className="text-lg md:text-2xl font-medium mt-4">

@@ -5,11 +5,10 @@ import { SignInEmailInput } from "../../../atoms/SignInEmailInput";
 import { PasswordInput } from "../../../atoms/PasswordInput";
 import { FormSubmissionButton } from "../../../atoms/FormSubmissionButton";
 import { useModal } from "../../../organism/AllPagesLayout/ModalContext";
-import { continueWithData } from "../../../atoms/ContinueWithButton/constants";
-import { ContinueWithButton } from "../../../atoms/ContinueWithButton";
+import { CustomPopup } from "../../../atoms/CustomPopup"; // Ensure it's imported correctly
 
 interface SignUpFormProps {
-  onSignupSuccess?: (fullname: string) => void; // Optional prop to handle signup success
+  onSignupSuccess?: (fullname: string) => void;
 }
 
 const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
@@ -19,8 +18,10 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
     password: "",
     confirmPassword: "",
   });
-  const { openModal, } = useModal();
-  let passFullname = false;
+  const [CustomPopupMessage, setCustomPopupMessage] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [showCustomPopup, setShowCustomPopup] = useState<boolean>(false);
+  const { openModal } = useModal();
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -31,36 +32,74 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
     e.preventDefault();
     const { fullname, email, password, confirmPassword } = formData;
 
+    // Check for password match
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setCustomPopupMessage("Passwords do not match");
+      setIsSuccess(false);
+      setShowCustomPopup(true);
       return;
     }
 
-    const response = await signup(fullname, email, password);
-    if (!response.error) {
-      alert("User registered successfully!");
-      openModal("login");
-      passFullname = true;
+    try {
+      const response = await signup(fullname, email, password);
+      console.log("Signup response:", response); // Debugging: Log API response
 
-      // If passFullname is true, call the onSignupSuccess prop function with fullname
-      if (onSignupSuccess && passFullname) {
-        onSignupSuccess(fullname);
+      if (!response.error) {
+        setCustomPopupMessage("User registered successfully!");
+        setIsSuccess(true);
+
+        // If a success callback is passed, execute it
+        if (onSignupSuccess) {
+          onSignupSuccess(fullname);
+        }
+
+        // Show popup for 4 seconds, then open login modal
+        setShowCustomPopup(true);
+        setTimeout(() => {
+          setShowCustomPopup(false); // Hide the popup after 4 seconds
+          openModal("login"); // Open the login modal
+        }, 1000);
+      } else {
+        setCustomPopupMessage(`Signup failed: ${response.error}`);
+        setIsSuccess(false);
+        setShowCustomPopup(true);
       }
-    } else {
-      alert(`Signup failed: ${response.error}`);
+    } catch (error) {
+      console.error("Signup error:", error); // Debugging: Log error in catch
+      setCustomPopupMessage("Error during signup. Please try again.");
+      setIsSuccess(false);
+      setShowCustomPopup(true);
     }
   };
 
   return (
     <div className="flex flex-col md:gap-2 gap-2 py-1">
-      <h1 className="self-center font-bold leading-none md:text-3xl text-2xl">Sign Up</h1>
-        <p className="self-center text-lg font-semibold leading-none py-2">
-          Join Us and Explore New Services
-        </p>
-      <form onSubmit={handleSignupSubmit} className="flex flex-col md:gap-3 gap-2">
-        <FullnameInput name="fullname" value={formData.fullname} onChange={handleInputChange} />
-        <SignInEmailInput name="email" value={formData.email} onChange={handleInputChange} />
-        <PasswordInput name="password" value={formData.password} onChange={handleInputChange} placeholder="Password" />
+      <h1 className="self-center font-bold leading-none md:text-3xl text-2xl">
+        Sign Up
+      </h1>
+      <p className="self-center text-lg font-semibold leading-none py-2">
+        Join Us and Explore New Services
+      </p>
+      <form
+        onSubmit={handleSignupSubmit}
+        className="flex flex-col md:gap-3 gap-2"
+      >
+        <FullnameInput
+          name="fullname"
+          value={formData.fullname}
+          onChange={handleInputChange}
+        />
+        <SignInEmailInput
+          name="email"
+          value={formData.email}
+          onChange={handleInputChange}
+        />
+        <PasswordInput
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+          placeholder="Password"
+        />
         <PasswordInput
           name="confirmPassword"
           value={formData.confirmPassword}
@@ -68,26 +107,26 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSignupSuccess }) => {
           placeholder="Confirm Password"
         />
         <FormSubmissionButton data="Sign Up" />
-    </form>
+      </form>
 
-    <legend className="text-center"> OR </legend>
-      {
-        continueWithData.map((objData, index) => (
-          <ContinueWithButton
-                      icon={objData.icon}
-                      btnLabel={objData.btnLabel}
-                      key={index}
-                    />
-        ))
-      }
+      <legend className="text-center"> OR </legend>
+      <button className="py-1 font-bold">
+        Already have an Account ?
+        <span
+          className="text-md:lg text-base text-regal-red hover:text-blue-variant font-sans font-semibold cursor-pointer hover:underline mx-2"
+          onClick={() => openModal("login")}
+        >
+          SignIn
+        </span>
+      </button>
 
-        <button className="py-1 font-bold">
-          Already have an Account ?
-          <span className="text-md:lg text-base text-regal-red hover:text-blue-variant font-sans font-semibold cursor-pointer hover:underline mx-2" onClick={() => openModal("login")}>
-            SignIn
-          </span>
-        </button>
-        
+      {showCustomPopup && (
+        <CustomPopup
+          message={CustomPopupMessage}
+          isSuccess={isSuccess}
+          onClose={() => setShowCustomPopup(false)}
+        />
+      )}
     </div>
   );
 };

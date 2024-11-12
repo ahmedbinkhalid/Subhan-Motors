@@ -35,7 +35,7 @@ export const MyAds: React.FC = () => {
   };
 
   return (
-    <section className='grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8 p-8 bg-gray-100 rounded-md'>
+    <section className='grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8 md:px-8 xs:py-6 px-[6px] py-3 bg-gray-50 rounded-md'>
       {error ? (
         <p className="text-regal-red">{error}</p>
       ) : carData.length === 0 ? (

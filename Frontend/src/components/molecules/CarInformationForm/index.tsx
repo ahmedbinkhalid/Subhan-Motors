@@ -15,7 +15,7 @@ type CarInformationFormProps = {
 };
 
 const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
-  const { images } = useImageContext();
+  const { images, setImages } = useImageContext(); // Destructure setImages
   const { sellerInfo: contactInfo } = useContact();
 
   const [formData, setFormData] = useState<CarFormData>({
@@ -82,6 +82,8 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
     } else {
       setPopupMessage("Your car ad has been successfully submitted!");
       setPopupBgColor("bg-green-500"); // Set success color for popup
+
+      // Reset form data
       setFormData({
         sellerInfo: { sellerName: "", mobileNumber: "" },
         images: [],
@@ -99,6 +101,9 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
         location: "",
         description: "",
       });
+
+      // Clear the uploaded images
+      setImages([]); // <-- Clear images here
     }
   };
 

@@ -18,6 +18,9 @@ import logo from "./logo.png";
 import newsLetter from "./newLetter.jpg";
 import addNewBlog from "./addNewBlog.png";
 import addCar from "./addCar.png";
+import founder from "./founder.jpg";
+import coFounder from "./coFounder.jpg";
+import manager from "./manager.jpg";
 
 
 export {
@@ -40,5 +43,8 @@ export {
     logo,
     newsLetter,
     addNewBlog,
-    addCar
+    addCar,
+    founder,
+    coFounder,
+    manager
 };

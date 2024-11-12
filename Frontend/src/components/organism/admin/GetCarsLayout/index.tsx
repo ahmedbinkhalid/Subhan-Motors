@@ -11,13 +11,13 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
   const [currentPage, setCurrentPage] = useState(1); // Current page state
 
   return (
-    <section className='max-w-screen-xl mx-auto px-4 lg:px-8 md:mb-4'>
-      <h1 className='text-2xl md:text-3xl text-center text-charcoal-gray font-semibold mt-4 mb-6'>
+    <section className='max-w-screen-xl mx-auto lg:px-8 md:mb-4'>
+      <h1 className='md:text-2xl text-lg lg:text-3xl text-center text-charcoal-gray font-semibold lg:my-10 my-8'>
         {title}
       </h1>
       
-      <section className='p-4  rounded-lg bg-slate-100'>
-        <div className='grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 md:px-8 xxl:grid-cols-4'>
+      <section className='rounded-lg bg-slate-50  lg:py-10 py-6'>
+        <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:px-8 md:max-w-xl lg:max-w-4xl mx-auto '>
           <CarsCardApiHandling managedBy={managedBy}>
             {(sellCarsData) => {
               if (!sellCarsData || sellCarsData.length === 0) {

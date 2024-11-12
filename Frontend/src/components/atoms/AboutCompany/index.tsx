@@ -1,5 +1,4 @@
 import React from 'react';
-import { about } from '../../../assets/images';
 
 export const AboutCompany : React.FC = () => {
   return (
@@ -11,7 +10,7 @@ export const AboutCompany : React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="flex">
             <img
-              src={about}
+              src='https://lh3.googleusercontent.com/p/AF1QipM1jMCGXPlKY4qpSfzy48n4QYPX7c1cZ0lL0uAv=s680-w680-h510'
               alt="Subhan Motors"
               className="rounded-lg"
             />

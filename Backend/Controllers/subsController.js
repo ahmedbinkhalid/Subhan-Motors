@@ -9,13 +9,25 @@ const minify = require('html-minifier-terser').minify;
 exports.addSubscriber = async (req, res, next) => {
     const email = req.body.email;
     const db = req.app.locals.db;
+    
     try {
+        // Check if the email already exists in the database
+        const existingSubscriber = await db.collection('subscribers').findOne({ email });
+
+        if (existingSubscriber) {
+            // If the email already exists, return an appropriate message
+            return res.status(400).json({ message: 'You have already subscribed to the newsletter.' });
+        }
+
+        // If email doesn't exist, proceed to add the new subscriber
         await subsModel.addSubscriber(db, email);
         res.status(200).json({ message: 'Subscribed to newsletter successfully' });
     } catch (error) {
+        console.error(error);
         res.status(500).json({ message: 'Error subscribing to newsletter' });
     }
 };
+
 
 // Create a reusable transporter object using the default SMTP transport
 const transporter = nodemailer.createTransport({
