@@ -1,12 +1,22 @@
 import React from "react";
 import { IoIosCloseCircle } from "react-icons/io";
-import { FaHome, FaInfoCircle, FaPenFancy, FaPhoneAlt, FaCarAlt, FaAdversal } from "react-icons/fa";
+import {
+  FaHome,
+  FaInfoCircle,
+  FaPenFancy,
+  FaPhoneAlt,
+  FaCarAlt,
+  FaAdversal,
+} from "react-icons/fa";
 import { IoCarSportSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { SidebarProps } from "./types";
 import { LoginValidator } from "../LoginValidator";
 
-export const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }) => {
+export const Sidebar: React.FC<SidebarProps> = ({
+  isSidebarOpen,
+  toggleSidebar,
+}) => {
   const navigate = useNavigate();
   if (!isSidebarOpen) return null;
 
@@ -85,21 +95,24 @@ export const Sidebar: React.FC<SidebarProps> = ({ isSidebarOpen, toggleSidebar }
           </li>
 
           {LoginValidator() && (
-                <li>
-                <Link
-                  to="/myAds"
-                  onClick={toggleSidebar}
-                  className="flex items-center gap-3 px-4 hover:bg-charcoal-gray hover:text-white hover:rounded-md w-full"
-                >
-                  <FaAdversal />
-                  <span>My Ads</span>
-                </Link>
-              </li>
-              )}
+            <li>
+              <Link
+                to="/myAds"
+                onClick={toggleSidebar}
+                className="flex items-center gap-3 px-4 hover:bg-charcoal-gray hover:text-white hover:rounded-md w-full"
+              >
+                <FaAdversal />
+                <span>My Ads</span>
+              </Link>
+            </li>
+          )}
 
-          <li className="mt-4 md:pl-7 xs:ml-3 pl-5" onClick={() => {
-            navigate("/onlineBooking");
-          }}>
+          <li
+            className="mt-4 md:pl-7 xs:ml-3 pl-5"
+            onClick={() => {
+              navigate("/onlineBooking");
+            }}
+          >
             <button className="w-full rounded-md md:px-6 px-3 bg-regal-red hover:bg-red-600 cursor-pointer text-white py-2">
               Online Booking
             </button>

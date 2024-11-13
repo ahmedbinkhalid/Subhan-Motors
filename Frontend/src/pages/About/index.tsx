@@ -1,7 +1,4 @@
-import React from 'react';
-import { AboutMain } from '../../components/organism/AboutMain';
+import React from "react";
+import { AboutMain } from "../../components/organism/AboutMain";
 
-export const About : React.FC = () => (
-  <AboutMain />
-)
-
+export const About: React.FC = () => <AboutMain />;

@@ -3,7 +3,9 @@ import { ImageContextType } from "./types";
 
 const ImageContext = createContext<ImageContextType | undefined>(undefined);
 
-export const ImageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const ImageProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [images, setImages] = useState<string[]>([]);
 
   return (

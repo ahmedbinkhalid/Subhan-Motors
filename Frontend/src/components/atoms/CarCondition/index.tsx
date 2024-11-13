@@ -1,10 +1,5 @@
-import React from 'react';
+import React from "react";
 
-export const CarCondition : React = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
-
+export const CarCondition: React = () => {
+  return <div></div>;
+};

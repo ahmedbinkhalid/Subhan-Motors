@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // src/contexts/SearchContext.tsx
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface SearchContextType {
   searchKey: string;
@@ -10,14 +10,20 @@ interface SearchContextType {
   setSearchResults: React.Dispatch<React.SetStateAction<any[]>>;
 }
 
-export const SearchContext = createContext<SearchContextType | undefined>(undefined);
+export const SearchContext = createContext<SearchContextType | undefined>(
+  undefined
+);
 
-export const SearchProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [searchKey, setSearchKey] = useState('');
+export const SearchProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [searchKey, setSearchKey] = useState("");
   const [searchResults, setSearchResults] = useState<any[]>([]); // Default to empty array
 
   return (
-    <SearchContext.Provider value={{ searchKey, setSearchKey, searchResults, setSearchResults }}>
+    <SearchContext.Provider
+      value={{ searchKey, setSearchKey, searchResults, setSearchResults }}
+    >
       {children}
     </SearchContext.Provider>
   );

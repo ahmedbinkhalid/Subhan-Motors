@@ -10,10 +10,10 @@ import { postCarAd } from "../../../apis/PostCarAd";
 import { DateCalender } from "../../../molecules/admin/DateCalender";
 import { FormProps } from "react-router-dom";
 type AddNewCarFormProps = {
-  bgColor : string;
-}
+  bgColor: string;
+};
 
-export const AddNewCarForm: React.FC<AddNewCarFormProps> = ({bgColor}) => {
+export const AddNewCarForm: React.FC<AddNewCarFormProps> = ({ bgColor }) => {
   const { images } = useImageContext();
   const { sellerInfo: contactInfo } = useContact();
 
@@ -22,9 +22,9 @@ export const AddNewCarForm: React.FC<AddNewCarFormProps> = ({bgColor}) => {
     images: [],
     make: "",
     model: "",
-    startingPrice : "",
-    maxPrice : "",
-    date : "",
+    startingPrice: "",
+    maxPrice: "",
+    date: "",
     price: "",
     transmission: "",
     engineType: "",
@@ -98,21 +98,20 @@ export const AddNewCarForm: React.FC<AddNewCarFormProps> = ({bgColor}) => {
             id_name="color"
           />
 
-<CarInformationInput
+          <CarInformationInput
             label="Starting Price"
             value={formData.color}
             onChange={handleChange}
             placeHolder="Enter Starting Price"
             id_name="startingPrice"
           />
-<CarInformationInput
+          <CarInformationInput
             label=" Maximum Price"
             value={formData.color}
             onChange={handleChange}
             placeHolder="Enter maximum Price"
             id_name="maxPrice"
           />
-
         </div>
         <div className="space-y-4">
           <CarInformationInput
@@ -139,8 +138,6 @@ export const AddNewCarForm: React.FC<AddNewCarFormProps> = ({bgColor}) => {
           <DateCalender />
         </div>
 
-
-        
         <div className="md:col-span-2">
           <CarInformationDescription
             label="Description"
@@ -158,4 +155,3 @@ export const AddNewCarForm: React.FC<AddNewCarFormProps> = ({bgColor}) => {
     </div>
   );
 };
-

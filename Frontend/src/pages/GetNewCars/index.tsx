@@ -1,9 +1,8 @@
-import React from 'react';
-import { GetCarsLayout } from '../../components/organism/admin/GetCarsLayout';
+import React from "react";
+import { GetCarsLayout } from "../../components/organism/admin/GetCarsLayout";
 
-export const GetNewCars : React.FC = () => {
+export const GetNewCars: React.FC = () => {
   return (
-    <GetCarsLayout title='All Listed New Cars'
-    managedBy='Brand' role='Admin' />
-  )
-}
+    <GetCarsLayout title="All Listed New Cars" managedBy="Brand" role="Admin" />
+  );
+};

@@ -1,13 +1,12 @@
-import React from 'react';
-import { GetCarsLayout } from '../../components/organism/admin/GetCarsLayout';
+import React from "react";
+import { GetCarsLayout } from "../../components/organism/admin/GetCarsLayout";
 
 type GetUsedCars = {
-  role : string;
-}
+  role: string;
+};
 
-export const GetUsedCars : React.FC<GetUsedCars> = ({role}) => {
+export const GetUsedCars: React.FC<GetUsedCars> = ({ role }) => {
   return (
-    <GetCarsLayout title='All Listed Used Cars'
-    managedBy='Used' role={role} />
-  )
-}
+    <GetCarsLayout title="All Listed Used Cars" managedBy="Used" role={role} />
+  );
+};

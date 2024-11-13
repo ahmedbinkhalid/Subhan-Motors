@@ -1,7 +1,13 @@
-import React from 'react';
-import { NumberInputProps } from './types';
+import React from "react";
+import { NumberInputProps } from "./types";
 
-const NumberInput: React.FC<NumberInputProps> = ({ label, name, value, onChange, required = false }) => (
+const NumberInput: React.FC<NumberInputProps> = ({
+  label,
+  name,
+  value,
+  onChange,
+  required = false,
+}) => (
   <div className="w-full">
     <label className="block text-gray-700">{label}</label>
     <input

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { SideBarLinkProps } from './types';
-import { NavLink, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { SideBarLinkProps } from "./types";
+import { NavLink, useNavigate } from "react-router-dom";
 import { RxDropdownMenu } from "react-icons/rx";
 
 export const SideBarLink: React.FC<SideBarLinkProps> = ({
@@ -17,18 +17,28 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate('/'); // Navigate to the login page after logging out
+    navigate("/"); // Navigate to the login page after logging out
   };
 
   return (
     <div className="relative">
-      <button 
+      <button
         className="flex w-full items-center text-charcoal-gray font-semibold hover:text-regal-red transition duration-200"
-        onClick={linkOptions ? handleToggleDropdown : linkTitle === "Sign Out" ? handleLogout : onClick} // Use onClick if provided
+        onClick={
+          linkOptions
+            ? handleToggleDropdown
+            : linkTitle === "Sign Out"
+            ? handleLogout
+            : onClick
+        } // Use onClick if provided
       >
         {!linkOptions && linkPath && linkTitle !== "Sign Out" ? (
-          <NavLink 
-            className={({ isActive }) => `flex items-center gap-3 w-full ${isActive ? 'text-regal-red' : 'text-charcoal-gray'}`} 
+          <NavLink
+            className={({ isActive }) =>
+              `flex items-center gap-3 w-full ${
+                isActive ? "text-regal-red" : "text-charcoal-gray"
+              }`
+            }
             to={linkPath}
           >
             <LinkIcon size={24} className="text-regal-red" />
@@ -40,10 +50,12 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
             <span>{linkTitle}</span>
           </div>
         )}
-        
-        {linkOptions && <RxDropdownMenu size={24} className="font-bold text-charcoal-gray" />}
+
+        {linkOptions && (
+          <RxDropdownMenu size={24} className="font-bold text-charcoal-gray" />
+        )}
       </button>
-      
+
       <hr className="my-2 border-gray-300" />
 
       {linkOptions && isDropdownOpen && (
@@ -53,7 +65,11 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
               <NavLink
                 key={index}
                 to={option.path}
-                className={({ isActive }) => `block px-4 py-2 text-base font-semibold ${isActive ? 'text-regal-red' : 'text-blue-variant'} hover:text-regal-red transition duration-200`}
+                className={({ isActive }) =>
+                  `block px-4 py-2 text-base font-semibold ${
+                    isActive ? "text-regal-red" : "text-blue-variant"
+                  } hover:text-regal-red transition duration-200`
+                }
                 onClick={onClick} // Close sidebar when dropdown link is clicked
               >
                 {option.title}

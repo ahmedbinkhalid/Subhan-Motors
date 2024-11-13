@@ -20,7 +20,9 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
       <section className="rounded-lg bg-slate-50  lg:py-10 py-6">
         <div
           className={`grid ${
-            role.includes("Admin") ? "lg:grid-cols-2 xl:grid-cols-3" : "lg:grid-cols-3 "
+            role.includes("Admin")
+              ? "lg:grid-cols-2 xl:grid-cols-3"
+              : "lg:grid-cols-3 "
           } md:grid-cols-2 grid-cols-1 lg:px-8 md:max-w-xl lg:max-w-4xl  mx-auto`}
         >
           <CarsCardApiHandling managedBy={managedBy}>

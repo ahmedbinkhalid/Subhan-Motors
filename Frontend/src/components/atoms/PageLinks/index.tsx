@@ -61,7 +61,6 @@ export const PageLinks: React.FC = () => {
 
   return (
     <header className="container mx-auto flex flex-col items-center bg-transparent px-4 py-2">
-
       <div className="w-full max-w-5xl flex justify-end max-lg:justify-center items-center md:px-3 gap-3">
         {isLoggedIn ? (
           <>
@@ -167,7 +166,7 @@ export const PageLinks: React.FC = () => {
                 navigate,
                 openModal,
                 LoginValidator
-              ); 
+              );
             }}
           />
         </div>

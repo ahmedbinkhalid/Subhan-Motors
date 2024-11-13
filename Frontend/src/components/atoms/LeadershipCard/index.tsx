@@ -1,10 +1,10 @@
-import React from 'react';
-import { LeadershipCardProps } from './types';
+import React from "react";
+import { LeadershipCardProps } from "./types";
 
 export const LeadershipCard: React.FC<LeadershipCardProps> = ({
   leaderImage,
   leaderName,
-  leaderTitle
+  leaderTitle,
 }) => {
   return (
     <div className="bg-white rounded-lg shadow-lg text-center hover:shadow-2xl transition duration-300">
@@ -16,7 +16,9 @@ export const LeadershipCard: React.FC<LeadershipCardProps> = ({
         />
       </div>
       <div className="flex flex-col gap-2 pt-2 pb-8">
-        <h3 className="md:text-2xl text-lg font-bold text-regal-red">{leaderName}</h3>
+        <h3 className="md:text-2xl text-lg font-bold text-regal-red">
+          {leaderName}
+        </h3>
         <p className="text-charcoal-gray font-medium text-xl">{leaderTitle}</p>
       </div>
     </div>

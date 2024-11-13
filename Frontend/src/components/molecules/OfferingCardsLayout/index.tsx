@@ -1,6 +1,6 @@
-import React from 'react';
-import { OfferingCardsData } from './constants';
-import { OfferingCard } from '../../atoms/OfferingCard';
+import React from "react";
+import { OfferingCardsData } from "./constants";
+import { OfferingCard } from "../../atoms/OfferingCard";
 
 export const OfferingCardsLayout: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ export const OfferingCardsLayout: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
         {OfferingCardsData.map((data, index) => (
           <OfferingCard
-            key={index}  // Add a key for each element in the map
+            key={index} // Add a key for each element in the map
             offeringImage={data.offeringImage}
             offeringData={data.offeringData}
           />

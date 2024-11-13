@@ -4,10 +4,9 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
-
   FaFacebookF,
   FaTiktok,
-  FaInstagram
+  FaInstagram,
 } from "react-icons/fa";
 import { subscribeToNewsletter } from "../../apis/SubscribeToNewsletter";
 
@@ -22,7 +21,6 @@ export const Footer: React.FC = () => {
   };
 
   const handleSubscription = async () => {
-
     if (!email) {
       setMessage("Please enter a valid email address.");
       setShowPopup(true);
@@ -45,10 +43,9 @@ export const Footer: React.FC = () => {
         setMessage("Subscribed to the newsletter successfully!");
       }
 
-      setEmail(""); 
-      setShowPopup(true); 
+      setEmail("");
+      setShowPopup(true);
 
-  
       setTimeout(() => {
         setShowPopup(false);
       }, 3000);
@@ -97,7 +94,7 @@ export const Footer: React.FC = () => {
               >
                 <FaFacebookF />
               </a>
-    
+
               <a
                 href="https://www.tiktok.com/@subhanmotors"
                 target="_blank"

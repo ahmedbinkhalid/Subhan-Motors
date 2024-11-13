@@ -7,8 +7,7 @@ type PasswordInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const 
-PasswordInput: React.FC<PasswordInputProps> = ({
+export const PasswordInput: React.FC<PasswordInputProps> = ({
   placeholder,
   name,
   value,
@@ -23,9 +22,13 @@ PasswordInput: React.FC<PasswordInputProps> = ({
     const hasAlphabet = /[a-zA-Z]/.test(password);
     const hasDigit = /\d/.test(password);
     const hasSpecialSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    
+
     // Check if password meets all criteria
-    const isValidPassword = password.length >= minLength && hasAlphabet && hasDigit && hasSpecialSymbol;
+    const isValidPassword =
+      password.length >= minLength &&
+      hasAlphabet &&
+      hasDigit &&
+      hasSpecialSymbol;
 
     setIsValid(isValidPassword); // Update validity state
   };
@@ -40,9 +43,10 @@ PasswordInput: React.FC<PasswordInputProps> = ({
     setVisibility(!visibility); // Toggle the visibility
   };
 
-
   return (
-    <div className={`flex p-2 px-4 border-[0.5px] rounded-md w-full h-full gap-14`}>
+    <div
+      className={`flex p-2 px-4 border-[0.5px] rounded-md w-full h-full gap-14`}
+    >
       <input
         type={visibility ? "text" : "password"}
         placeholder={placeholder}
@@ -50,7 +54,7 @@ PasswordInput: React.FC<PasswordInputProps> = ({
         value={value}
         onChange={handleChange}
         className={`text-base w-full bg-transparent placeholder:text-sm outline-none md:placeholder:opacity-75 xxl:opacity-100`}
-        autoComplete="off" 
+        autoComplete="off"
         required
       />
       <p

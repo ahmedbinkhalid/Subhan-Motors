@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
-import { PhoneNumberInputProps } from './types';
+import React, { useState } from "react";
+import { PhoneNumberInputProps } from "./types";
 
-export const PhoneNumber: React.FC<PhoneNumberInputProps> = ({ name, value, onChange }) => {
+export const PhoneNumber: React.FC<PhoneNumberInputProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const [isValid, setIsValid] = useState(true);
 
   // Regex to match 11 digits starting with "03" and followed by 9 additional digits
@@ -20,7 +24,9 @@ export const PhoneNumber: React.FC<PhoneNumberInputProps> = ({ name, value, onCh
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={name} className="text-sm font-medium text-charcoal-gray">Phone Number</label>
+      <label htmlFor={name} className="text-sm font-medium text-charcoal-gray">
+        Phone Number
+      </label>
       <input
         type="text"
         name={name}

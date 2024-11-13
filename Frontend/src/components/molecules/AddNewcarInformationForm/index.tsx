@@ -13,7 +13,9 @@ type AddNewCarInformationFormProps = {
   bgColor: string;
 };
 
-const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({ bgColor }) => {
+const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({
+  bgColor,
+}) => {
   const { images } = useImageContext();
 
   const [formData, setFormData] = useState<addNewCarFormData>({
@@ -42,7 +44,9 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({ bgC
   }, [images]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >
   ) => {
     setFormData({
       ...formData,
@@ -67,7 +71,7 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({ bgC
 
     setErrorMessage(null);
 
-  // Replace with actual token
+    // Replace with actual token
 
     try {
       console.log(formData);
@@ -87,16 +91,29 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({ bgC
   return (
     <section className="bg-slate-100 border-y md:p-8 p-1 hover:border-t-4 hover:border-t-regal-red hover:shadow-lg font-sans text-charcoal-gray my-4">
       <div className="max-w-5xl mx-auto">
-        <h1 className="md:text-2xl text-xl font-semibold mt-4 mb-1">Car Information</h1>
+        <h1 className="md:text-2xl text-xl font-semibold mt-4 mb-1">
+          Car Information
+        </h1>
         <h1 className="md:text-base text-sm font-normal">
           (All fields are mandatory, you need to provide each detail.)
         </h1>
       </div>
       <div className="max-w-6xl mx-auto p-4 my-2">
-        <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <form
+          onSubmit={handleSubmit}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           {/* Error and success messages */}
-          {errorMessage && <div className="md:col-span-2 text-red-500 mb-4">{errorMessage}</div>}
-          {successMessage && <div className="md:col-span-2 text-green-500 mb-4">{successMessage}</div>}
+          {errorMessage && (
+            <div className="md:col-span-2 text-red-500 mb-4">
+              {errorMessage}
+            </div>
+          )}
+          {successMessage && (
+            <div className="md:col-span-2 text-green-500 mb-4">
+              {successMessage}
+            </div>
+          )}
 
           {/* Form fields */}
           <div className="space-y-4">
@@ -146,10 +163,10 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({ bgC
             />
             <CarInformationInput
               label="Maximum Price"
-              value={formData.maxPrice} 
+              value={formData.maxPrice}
               onChange={handleChange}
               placeHolder="Enter Maximum Price"
-              id_name="maxPrice" 
+              id_name="maxPrice"
             />
             <CarInformationDropDown
               label="Engine Type"
@@ -166,7 +183,10 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({ bgC
               id_name="engineCapacity"
             />
             <div>
-              <p className="block text-sm font-medium text-charcoal-gray mb-3"> Release Date </p>
+              <p className="block text-sm font-medium text-charcoal-gray mb-3">
+                {" "}
+                Release Date{" "}
+              </p>
               <DateCalender onDateChange={handleDateChange} />
             </div>
           </div>

@@ -1,8 +1,11 @@
-import React from 'react';
-import { TitleInputProps } from './types';
+import React from "react";
+import { TitleInputProps } from "./types";
 
-
-export const TitleInput: React.FC<TitleInputProps> = ({ placeholder, title, onChange }) => (
+export const TitleInput: React.FC<TitleInputProps> = ({
+  placeholder,
+  title,
+  onChange,
+}) => (
   <div>
     <input
       type="text"

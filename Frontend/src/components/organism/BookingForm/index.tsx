@@ -1,33 +1,33 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
-import { CarInformationInput } from '../../atoms/CarInformationInput';
-import CarInformationDropDown from '../../atoms/CarInformationDropDown';
-import { CarInformationDescription } from '../../atoms/CarInformationDescription';
-import { Button } from '../../atoms/Button';
-import { PhoneNumber } from '../../atoms/PhoneNumber';
-import { postQuery } from '../../apis/Booking';
-import { CustomPopup } from '../../atoms/CustomPopup'; 
+import React, { useState } from "react";
+import { CarInformationInput } from "../../atoms/CarInformationInput";
+import CarInformationDropDown from "../../atoms/CarInformationDropDown";
+import { CarInformationDescription } from "../../atoms/CarInformationDescription";
+import { Button } from "../../atoms/Button";
+import { PhoneNumber } from "../../atoms/PhoneNumber";
+import { postQuery } from "../../apis/Booking";
+import { CustomPopup } from "../../atoms/CustomPopup";
 
 export const BookingForm: React.FC = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [make, setMake] = useState('');
-  const [model, setModel] = useState('');
-  const [engineCapacity, setEngineCapacity] = useState('');
-  const [transmission, setTransmission] = useState('');
-  const [color, setColor] = useState('');
-  const [fromYear, setFromYear] = useState('');
-  const [toYear, setToYear] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [make, setMake] = useState("");
+  const [model, setModel] = useState("");
+  const [engineCapacity, setEngineCapacity] = useState("");
+  const [transmission, setTransmission] = useState("");
+  const [color, setColor] = useState("");
+  const [fromYear, setFromYear] = useState("");
+  const [toYear, setToYear] = useState("");
 
-  const [CustomPopupMessage, setCustomPopupMessage] = useState<string>('');
+  const [CustomPopupMessage, setCustomPopupMessage] = useState<string>("");
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [showCustomPopup, setShowCustomPopup] = useState<boolean>(false);
 
-  const transmissionOptions = ['Automatic', 'Manual'];
-  const colorOptions = ['Red', 'Blue', 'Black', 'White', 'Silver'];
+  const transmissionOptions = ["Automatic", "Manual"];
+  const colorOptions = ["Red", "Blue", "Black", "White", "Silver"];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,31 +48,30 @@ export const BookingForm: React.FC = () => {
         toYear,
       });
 
-      setCustomPopupMessage(result.message || 'Query submitted successfully!');
+      setCustomPopupMessage(result.message || "Query submitted successfully!");
       setIsSuccess(true);
       setShowCustomPopup(true);
 
-      setTitle('');
-      setContent('');
-      setMinPrice('');
-      setMaxPrice('');
-      setPhoneNumber('');
-      setMake('');
-      setModel('');
-      setEngineCapacity('');
-      setTransmission('');
-      setColor('');
-      setFromYear('');
-      setToYear('');
+      setTitle("");
+      setContent("");
+      setMinPrice("");
+      setMaxPrice("");
+      setPhoneNumber("");
+      setMake("");
+      setModel("");
+      setEngineCapacity("");
+      setTransmission("");
+      setColor("");
+      setFromYear("");
+      setToYear("");
 
       setTimeout(() => setShowCustomPopup(false), 2000);
     } catch (error) {
-  
-      setCustomPopupMessage('Error submitting the form. Please try again.');
+      setCustomPopupMessage("Error submitting the form. Please try again.");
       setIsSuccess(false);
       setShowCustomPopup(true);
 
-      setTimeout(() => setShowCustomPopup(false), 1000); 
+      setTimeout(() => setShowCustomPopup(false), 1000);
     }
   };
 
@@ -168,7 +167,12 @@ export const BookingForm: React.FC = () => {
         </div>
 
         <div className="sm:col-span-2 text-center mt-4">
-          <Button type="submit" bgColor="bg-regal-red" hoverBgColor="bg-red-700" btnTitle="Submit Query" />
+          <Button
+            type="submit"
+            bgColor="bg-regal-red"
+            hoverBgColor="bg-red-700"
+            btnTitle="Submit Query"
+          />
         </div>
       </form>
 

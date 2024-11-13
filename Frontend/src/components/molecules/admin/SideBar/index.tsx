@@ -2,7 +2,7 @@ import React from "react";
 import { AiFillDashboard, AiFillCloseSquare } from "react-icons/ai";
 import { SideBarLinksData } from "./constants";
 import { SideBarLink } from "../../../atoms/admin/SideBarLink";
-import { useMediaQuery } from "react-responsive"; 
+import { useMediaQuery } from "react-responsive";
 
 interface SideBarProps {
   toggleSidebar: () => void;

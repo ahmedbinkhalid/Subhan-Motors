@@ -63,9 +63,11 @@ export const Chart: React.FC = () => {
 
   // Dynamically adjust outerRadius based on screen size
   const getOuterRadius = () => {
-    if (screenWidth <= 480) { // Mobile screens
+    if (screenWidth <= 480) {
+      // Mobile screens
       return 120;
-    } else if (screenWidth <= 768) { // Tablet screens
+    } else if (screenWidth <= 768) {
+      // Tablet screens
       return 140;
     }
     return 180; // Default for larger screens
@@ -73,7 +75,8 @@ export const Chart: React.FC = () => {
 
   // Dynamically adjust container height on mobile
   const getChartHeight = () => {
-    if (screenWidth <= 480) { // Mobile screens
+    if (screenWidth <= 480) {
+      // Mobile screens
       return 300; // Smaller height for mobile
     }
     return 450; // Default height for larger screens
@@ -88,13 +91,20 @@ export const Chart: React.FC = () => {
             data={data}
             fill="#D22B2B"
             // Only show labels on larger screens
-            label={screenWidth > 480 ? ({ name, value }) => `${name}: ${value}` : undefined}
+            label={
+              screenWidth > 480
+                ? ({ name, value }) => `${name}: ${value}`
+                : undefined
+            }
             cx="50%"
             cy="50%"
             outerRadius={getOuterRadius()} // Dynamically set the outer radius
           >
             {data.map((entry, index) => (
-              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
             ))}
           </Pie>
         </PieChart>
@@ -104,8 +114,14 @@ export const Chart: React.FC = () => {
       {screenWidth <= 480 && (
         <div className="flex flex-col items-center mt-4 p-2">
           {data.map((item, index) => (
-            <div key={index} className="flex justify-between w-full max-w-xs p-2">
-              <div className="font-semibold" style={{ color: COLORS[index % COLORS.length] }}>
+            <div
+              key={index}
+              className="flex justify-between w-full max-w-xs p-2"
+            >
+              <div
+                className="font-semibold"
+                style={{ color: COLORS[index % COLORS.length] }}
+              >
                 {item.name}
               </div>
               <div>{item.value}</div>

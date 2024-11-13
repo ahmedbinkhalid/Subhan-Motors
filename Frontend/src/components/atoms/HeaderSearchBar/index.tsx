@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { FaSearch } from 'react-icons/fa';
-import { useSearch } from '../SearchContext';
+import React, { useState } from "react";
+import { FaSearch } from "react-icons/fa";
+import { useSearch } from "../SearchContext";
 
 export const HeaderSearchBar: React.FC = () => {
   const { setSearchKey } = useSearch(); // Removed `searchKey` from context to avoid direct binding
-  const [inputValue, setInputValue] = useState(''); // Local state for search input
+  const [inputValue, setInputValue] = useState(""); // Local state for search input
 
   const handleSearch = (event: React.FormEvent) => {
     event.preventDefault();

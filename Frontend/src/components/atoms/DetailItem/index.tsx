@@ -1,9 +1,11 @@
-import React from 'react';
-import { DetailItemProps } from './types';
+import React from "react";
+import { DetailItemProps } from "./types";
 
-
-
-export const DetailItem: React.FC<DetailItemProps> = ({ icon, label, value }) => (
+export const DetailItem: React.FC<DetailItemProps> = ({
+  icon,
+  label,
+  value,
+}) => (
   <div className="flex items-center space-x-4">
     <div className="text-blue-variant text-xl">{icon}</div>
     <div>
@@ -12,4 +14,3 @@ export const DetailItem: React.FC<DetailItemProps> = ({ icon, label, value }) =>
     </div>
   </div>
 );
-

@@ -9,7 +9,7 @@ interface DateCalenderProps {
 export const DateCalender: React.FC<DateCalenderProps> = ({ onDateChange }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [showDatePicker, setShowDatePicker] = useState<boolean>(false);
-  
+
   const toggleDatePickerVisibility = () => {
     setShowDatePicker((prev) => !prev);
   };
@@ -67,7 +67,9 @@ export const DateCalender: React.FC<DateCalenderProps> = ({ onDateChange }) => {
         onClick={toggleDatePickerVisibility}
         className="flex justify-between items-center cursor-pointer bg-white px-3 py-2 text-charcoal-gray font-sans border rounded-md shadow-sm"
       >
-        <span>{selectedDate ? selectedDate.toDateString() : "Select Date"}</span>
+        <span>
+          {selectedDate ? selectedDate.toDateString() : "Select Date"}
+        </span>
         <button className="ml-2 text-xl">📅</button>
       </div>
       {showDatePicker && (

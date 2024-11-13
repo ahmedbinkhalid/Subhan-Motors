@@ -1,11 +1,11 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from "react";
 
 interface OTPInputProps {
   onChange: (otp: string) => void; // Add this prop
 }
 
 const OTPInput: React.FC<OTPInputProps> = ({ onChange }) => {
-  const [otp, setOtp] = useState<string[]>(['', '', '', '']);
+  const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   useEffect(() => {
@@ -18,16 +18,19 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange }) => {
     const otpCopy = [...otp];
     otpCopy[index] = value;
     setOtp(otpCopy);
-    
-    onChange(otpCopy.join('')); // Call the onChange prop
+
+    onChange(otpCopy.join("")); // Call the onChange prop
 
     if (value && index < 3) {
       inputRefs.current[index + 1]?.focus();
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-    if (e.key === 'Backspace' && !otp[index] && index > 0) {
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };

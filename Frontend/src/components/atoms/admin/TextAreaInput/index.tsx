@@ -1,7 +1,13 @@
-import React from 'react';
-import { TextAreaInputProps } from './types';
+import React from "react";
+import { TextAreaInputProps } from "./types";
 
-const TextAreaInput: React.FC<TextAreaInputProps> = ({ label, name, value, onChange, required = false }) => (
+const TextAreaInput: React.FC<TextAreaInputProps> = ({
+  label,
+  name,
+  value,
+  onChange,
+  required = false,
+}) => (
   <div className="w-full">
     <label className="block text-gray-700">{label}</label>
     <textarea

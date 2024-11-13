@@ -1,6 +1,6 @@
-import React from 'react';
-import { SellEasyStepsCardsData } from './constants';
-import { SellCarEasyStepsCard } from '../../atoms/SellCarEasyStepsCard';
+import React from "react";
+import { SellEasyStepsCardsData } from "./constants";
+import { SellCarEasyStepsCard } from "../../atoms/SellCarEasyStepsCard";
 
 export const SellCarEasySteps: React.FC = () => {
   return (

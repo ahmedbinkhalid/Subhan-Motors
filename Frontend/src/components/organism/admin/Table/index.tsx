@@ -1,6 +1,6 @@
-import React from 'react';
-import { TableRow } from '../../../molecules/admin/TableRow';
-import { Query } from '../GetAllQueries/types';
+import React from "react";
+import { TableRow } from "../../../molecules/admin/TableRow";
+import { Query } from "../GetAllQueries/types";
 
 interface TableProps {
   data: Query[];

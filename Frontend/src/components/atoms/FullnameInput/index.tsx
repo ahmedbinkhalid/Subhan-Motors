@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 type FullnameInputProps = {
   name: string;
@@ -6,7 +6,11 @@ type FullnameInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const FullnameInput: React.FC<FullnameInputProps> = ({ name, value, onChange }) => {
+export const FullnameInput: React.FC<FullnameInputProps> = ({
+  name,
+  value,
+  onChange,
+}) => {
   const [isValid, setIsValid] = useState(true);
   const [isFocused, setIsFocused] = useState(false); // Track focus state
 
@@ -18,7 +22,7 @@ export const FullnameInput: React.FC<FullnameInputProps> = ({ name, value, onCha
     const isValidInput = englishLetterCount >= 4 && englishLetterCount <= 5; // Validate count
 
     onChange(e);
-    
+
     // Update validity state
     setIsValid(isValidInput);
   };
@@ -30,7 +34,9 @@ export const FullnameInput: React.FC<FullnameInputProps> = ({ name, value, onCha
         name={name}
         value={value}
         onChange={handleChange}
-        placeholder={isValid ? "Full Name" : "Input must include 4 to 5 Alphabets."} // Change placeholder on error
+        placeholder={
+          isValid ? "Full Name" : "Input must include 4 to 5 Alphabets."
+        } // Change placeholder on error
         className={`text-base w-full placeholder:text-sm outline-none bg-transparent`} // Always set bg-white
         onFocus={() => setIsFocused(true)} // Set focus state to true on focus
         onBlur={() => {
@@ -40,7 +46,7 @@ export const FullnameInput: React.FC<FullnameInputProps> = ({ name, value, onCha
             setIsValid(!isValid); // Keep the invalid state
           }
         }}
-        autoComplete='off'
+        autoComplete="off"
         required
       />
     </div>

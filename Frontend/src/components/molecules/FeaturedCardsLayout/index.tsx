@@ -8,10 +8,10 @@ import { useNavigate } from "react-router-dom";
 export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
   managedBy,
   viewAll,
-  viewAllPath
+  viewAllPath,
 }) => {
-  const [cardsPerPage, setCardsPerPage] = useState(4); 
-  const [currentIndex, setCurrentIndex] = useState(0); 
+  const [cardsPerPage, setCardsPerPage] = useState(4);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
   };
 
   const handleViewAll = () => {
-    navigate(viewAllPath); 
+    navigate(viewAllPath);
   };
 
   return (
@@ -56,7 +56,9 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
         const totalCards = sellCarsData.length;
         const visibleCards = sellCarsData.slice(
           currentIndex,
-          currentIndex + cardsPerPage > totalCards ? totalCards : currentIndex + cardsPerPage
+          currentIndex + cardsPerPage > totalCards
+            ? totalCards
+            : currentIndex + cardsPerPage
         );
 
         return (

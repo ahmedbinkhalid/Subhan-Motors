@@ -10,14 +10,17 @@ export const OfferingCard: React.FC<OfferingCardProps> = ({
       <img
         src={offeringImage}
         alt="Offering1"
-        className="object-contain h-20 w-40" 
+        className="object-contain h-20 w-40"
       />
 
       <div className="flex flex-col font-sans py-2 italic">
         <h1 className="text-lg font-semibold text-blue-variant">
-          Subhan Motors 
+          Subhan Motors
         </h1>
-        <h3 className="text-base max-sm:text-sm font-medium text-charcoal-gray"> {offeringData} </h3>
+        <h3 className="text-base max-sm:text-sm font-medium text-charcoal-gray">
+          {" "}
+          {offeringData}{" "}
+        </h3>
       </div>
     </main>
   );

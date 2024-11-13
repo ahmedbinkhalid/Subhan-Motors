@@ -1,13 +1,20 @@
 // src/pages/admin/GetAllMessages.tsx
-import React, { useEffect, useState } from 'react';
-import { TableLayout } from '../../components/organism/admin/TableLayout';
-import { getMessages } from '../../components/apis/GetMessages';
-import { Message } from './types';
-import { TableRow } from '../../components/organism/admin/TableLayout/types';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { TableLayout } from "../../components/organism/admin/TableLayout";
+import { getMessages } from "../../components/apis/GetMessages";
+import { Message } from "./types";
+import { TableRow } from "../../components/organism/admin/TableLayout/types";
+import { useNavigate } from "react-router-dom";
 
 export const GetAllMessages: React.FC = () => {
-  const columns = ['#', 'Message Subject', 'Phone Number', 'Email', 'Actions', ''];
+  const columns = [
+    "#",
+    "Message Subject",
+    "Phone Number",
+    "Email",
+    "Actions",
+    "",
+  ];
   const [data, setData] = useState<TableRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -31,9 +38,9 @@ export const GetAllMessages: React.FC = () => {
         }));
 
         setData(formattedData);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
       } catch (err) {
-        setError('Failed to fetch messages');
+        setError("Failed to fetch messages");
       } finally {
         setLoading(false);
       }

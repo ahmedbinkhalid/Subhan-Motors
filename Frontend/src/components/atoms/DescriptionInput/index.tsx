@@ -1,7 +1,11 @@
-import React from 'react';
-import { DescriptionInputProps } from './types';
+import React from "react";
+import { DescriptionInputProps } from "./types";
 
-export const DescriptionInput: React.FC<DescriptionInputProps> = ({ placeholder, description, onChange }) => (
+export const DescriptionInput: React.FC<DescriptionInputProps> = ({
+  placeholder,
+  description,
+  onChange,
+}) => (
   <div>
     <textarea
       placeholder={`${placeholder} Description`}
@@ -12,4 +16,3 @@ export const DescriptionInput: React.FC<DescriptionInputProps> = ({ placeholder,
     />
   </div>
 );
-

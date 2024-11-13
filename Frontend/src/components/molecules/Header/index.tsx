@@ -5,10 +5,13 @@ import { PageLinks } from "../../atoms/PageLinks";
 
 export const Header: React.FC = () => {
   const location = useLocation();
-  
 
   return (
-    <div className={`w-full flex flex-col h-auto lg:justify-between items-center bg-gradient-to-r from-gray-950 via-red-950 to-gray-950 text-white max-lg:px-4 ${!(location.pathname === "/") ? "pb-6" : ""}`}>
+    <div
+      className={`w-full flex flex-col h-auto lg:justify-between items-center bg-gradient-to-r from-gray-950 via-red-950 to-gray-950 text-white max-lg:px-4 ${
+        !(location.pathname === "/") ? "pb-6" : ""
+      }`}
+    >
       <PageLinks />
       {location.pathname === "/" && (
         <div className="flex flex-col text-center px-3">

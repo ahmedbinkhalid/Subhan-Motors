@@ -2,14 +2,17 @@
 import React, { useEffect } from "react";
 import { CustomPopupProps } from "./types";
 
-
-export const CustomPopup: React.FC<CustomPopupProps> = ({ message, isSuccess, onClose }) => {
+export const CustomPopup: React.FC<CustomPopupProps> = ({
+  message,
+  isSuccess,
+  onClose,
+}) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
     }, 3000);
 
-    return () => clearTimeout(timer); 
+    return () => clearTimeout(timer);
   }, [onClose]);
 
   return (

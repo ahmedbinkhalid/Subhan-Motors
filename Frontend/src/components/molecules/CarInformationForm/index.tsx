@@ -37,8 +37,8 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [popupMessage, setPopupMessage] = useState<string | null>(null); 
-  const [popupBgColor, setPopupBgColor] = useState<string>("bg-green-500"); 
+  const [popupMessage, setPopupMessage] = useState<string | null>(null);
+  const [popupBgColor, setPopupBgColor] = useState<string>("bg-green-500");
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -108,7 +108,7 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
   };
 
   const closePopup = () => {
-    setPopupMessage(null); 
+    setPopupMessage(null);
   };
 
   return (
@@ -118,9 +118,7 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
         className="grid grid-cols-1 md:grid-cols-2 gap-6"
       >
         {errorMessage && (
-          <div className="md:col-span-2 text-red-500 mb-4">
-            {errorMessage}
-          </div>
+          <div className="md:col-span-2 text-red-500 mb-4">{errorMessage}</div>
         )}
 
         <div className="space-y-4">
