@@ -5,6 +5,7 @@ import { CarDetailsProps } from './types';
 
 
 export const CarDetailPage: React.FC<CarDetailsProps> = ({ car, id }) => {
+  console.log(car);
   return (
     <div className="min-h-screen p-4 md:p-8 bg-gray-100 flex flex-col items-center">
       <div className="w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-hidden flex flex-col md:flex-row">
@@ -12,15 +13,15 @@ export const CarDetailPage: React.FC<CarDetailsProps> = ({ car, id }) => {
         {/* Car Image Section */}
         <div className="flex flex-col items-center md:items-start w-full md:w-1/2">
           <img
-            src={`/uploads/${car.images[0]}`}
+            src= {car.images[0]}
             alt="Car Image"
             className="w-full h-auto max-h-96 object-cover rounded-lg shadow-lg"
           />
           <div className="flex mt-4 space-x-2">
-            {car.images.slice(1, 4).map((img, index) => (
+            {car.images.slice(0, 4).map((img, index) => (
               <img
                 key={index}
-                src={`/uploads/${img}`}
+                src={img}
                 alt={`Thumbnail ${index + 1}`}
                 className="w-16 h-16 object-cover rounded-lg shadow"
               />

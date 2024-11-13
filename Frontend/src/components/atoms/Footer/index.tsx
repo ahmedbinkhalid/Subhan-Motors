@@ -4,13 +4,11 @@ import {
   FaMapMarkerAlt,
   FaPhoneAlt,
   FaEnvelope,
-  FaTwitter,
+
   FaFacebookF,
-  FaYoutube,
   FaTiktok,
+  FaInstagram
 } from "react-icons/fa";
-import { BsTwitterX } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import { subscribeToNewsletter } from "../../apis/SubscribeToNewsletter";
 
 export const Footer: React.FC = () => {
@@ -18,14 +16,13 @@ export const Footer: React.FC = () => {
   const [message, setMessage] = useState("");
   const [showPopup, setShowPopup] = useState(false);
 
-  // Regular expression to check for a valid email
   const validateEmail = (email: string): boolean => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
   const handleSubscription = async () => {
-    // Check if the email is empty or invalid
+
     if (!email) {
       setMessage("Please enter a valid email address.");
       setShowPopup(true);
@@ -48,10 +45,10 @@ export const Footer: React.FC = () => {
         setMessage("Subscribed to the newsletter successfully!");
       }
 
-      setEmail(""); // Clear input on success
-      setShowPopup(true); // Show popup
+      setEmail(""); 
+      setShowPopup(true); 
 
-      // Hide popup after 3 seconds
+  
       setTimeout(() => {
         setShowPopup(false);
       }, 3000);
@@ -83,14 +80,14 @@ export const Footer: React.FC = () => {
             <p className="mb-2 flex items-center gap-3">
               <FaEnvelope /> atifsubhanmotors@gmail.com
             </p>
-            <div className="flex space-x-2 pt-2 my-2">
+            <div className="flex space-x-3 pt-2 my-2">
               <a
-                href="https://twitter.com"
+                href="https://www.instagram.com/subhanmotors/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
               >
-                <BsTwitterX />
+                <FaInstagram />
               </a>
               <a
                 href="https://www.facebook.com/subahnmotors/"
@@ -100,14 +97,7 @@ export const Footer: React.FC = () => {
               >
                 <FaFacebookF />
               </a>
-              <a
-                href="https://youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
-              >
-                <FaYoutube />
-              </a>
+    
               <a
                 href="https://www.tiktok.com/@subhanmotors"
                 target="_blank"

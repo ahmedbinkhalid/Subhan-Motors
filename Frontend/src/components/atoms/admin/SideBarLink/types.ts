@@ -11,4 +11,5 @@ export interface SideBarLinkProps {
     linkPath?: string;
     LinkIcon: IconType;
     linkOptions?: LinkOption[];
+    onClick?: () => void; 
 }

@@ -31,12 +31,11 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ toggleSidebar }) => {
 
   return (
     <header className="flex md:flex-row flex-col w-full py-4 px-8 border-b-[1px] bg-slate-50 max-sm:gap-4 items-center">
-      {/* Menu Icon for Mobile/Tablet */}
-      <div className="flex items-center w-full md:w-auto lg:hidden">
-        <FaBars size={24} className="text-regal-red mr-4 cursor-pointer" onClick={toggleSidebar} />
+
+      <div className="flex items-center w-full md:w-auto lg:hidden my-3">
+        <FaBars size={24} className="text-regal-red mr-4 cursor-pointer" onClick={toggleSidebar} />   
       </div>
 
-      {/* Logo */}
       <Link to="/adminHome" className="flex items-center w-full md:w-auto max-sm:mx-auto">
         <img src={logo} alt="logo" className="md:h-14 h-12 w-48" />
       </Link>
@@ -46,9 +45,9 @@ export const AdminHeader: React.FC<AdminHeaderProps> = ({ toggleSidebar }) => {
         Admin Dashboard
       </p>
       {isLoggedIn && (
-        <div className="flex gap-3 w-full md:w-2/5 items-center mt-4 md:mt-0 justify-end">
-          <FaUserShield size={34} className="text-regal-red" />
-          <p className="text-xl whitespace-nowrap font-semibold">Welcome, {userName || 'User'}</p>
+        <div className="flex gap-3 w-full md:w-2/5 items-center mt-4 md:mt-0 justify-end ">
+          <FaUserShield size={34} className="text-regal-red lg:block hidden" />
+          <p className="text-xl whitespace-nowrap font-semibold ">Welcome, {userName || 'User'}</p>
         </div>
       )}
     </header>

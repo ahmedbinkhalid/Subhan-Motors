@@ -30,7 +30,6 @@ export const SideBarLinksData: SideBarLinkProps[] = [
     LinkIcon: GrBlog,
     linkOptions: [
       { title: "Add New Blog", path: "/addNewBlog" },
-      { title: "Approved Blogs", path: "/getApprovedBlogs" },
     ],
   },
   {

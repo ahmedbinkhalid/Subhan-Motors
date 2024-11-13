@@ -16,14 +16,17 @@ export const Home: React.FC = () => {
         <FeaturedCarsCardLayout
           managedBy="Used Cars for Sale"
           viewAll="Used Cars for Sale"
+          viewAllPath="/allUsedCars"
         />
         <FeaturedCarsCardLayout
           managedBy="Brand New Cars for Sale"
           viewAll="Brand New Cars for Sale"
+          viewAllPath="/allNewCars"
         />
         <FeaturedCarsCardLayout
           managedBy="Bank Released Cars for Sale"
           viewAll="Bank Released Cars for Sale"
+          viewAllPath="/allBankCars"
         />
         <BlogCardLayout />
         <CompaniesCardsLayout />

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useModal } from "../../organism/AllPagesLayout/ModalContext";
 import { LoginValidator } from "../LoginValidator";
-import { handleNavigation } from "../handleNavigation";
 import { useSearch } from "../SearchContext";
 import { fetchSearchResults } from "../../apis/FetchSearchResults";
 
@@ -24,18 +23,27 @@ export const SellYourCar: React.FC = () => {
           console.error("Error fetching search results:", error);
         }
       } else {
-        setSearchResults([]);  // Clear results if no search key
+        setSearchResults([]);  
       }
     };
-    // Fetch results only if searchKey is present (after search button click)
+  
     if (searchKey) {
       fetchResults();
     }
   }, [searchKey, setSearchResults]);
 
   const handleCloseResults = () => {
-    setSearchResults([]);  // Clear the search results when the close button is clicked
+    setSearchResults([]); 
   };
+
+  const potAdHandler = () => {
+    if(LoginValidator()) {
+      navigate("/sellCar");
+    }
+    else {
+      openModal("login");
+    }
+  }
 
   return (
     <div>
@@ -47,7 +55,7 @@ export const SellYourCar: React.FC = () => {
                 key={index}
                 className="card bg-white rounded-lg shadow-lg hover:shadow-xl transition duration-300 overflow-hidden transform hover:scale-105"
               >
-                {/* Display car image if available */}
+                
                 {car.imageUrl && (
                   <img src={car.imageUrl} alt={`${car.make} ${car.model}`} className="w-full h-48 object-cover" />
                 )}
@@ -132,9 +140,7 @@ export const SellYourCar: React.FC = () => {
 
             <button
               className="text-white rounded-md px-6 py-3 hover:bg-regal-red bg-red-600 font-medium text-lg"
-              onClick={() => {
-                handleNavigation("/sellCar", navigate, openModal("login"), LoginValidator);
-              }}
+            onClick={potAdHandler}
             >
               Post Ad
             </button>

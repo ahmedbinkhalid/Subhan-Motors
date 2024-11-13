@@ -115,7 +115,7 @@ export const UploadPhotos: React.FC = () => {
                 onClick={() => handleDelete(index)}
                 className="absolute top-1 right-1 p-1 hover:bg-opacity-80 bg-white rounded-full"
               >
-                <LuImageMinus size={20} className="bg-blue-variant" />
+                <LuImageMinus size={20} className="text-blue-variant" />
               </button>
             </div>
           ))}

@@ -3,13 +3,16 @@ import { FeaturedCarsCard } from "../../atoms/FeaturedCarsCard";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { FeaturedCardLayoutProps } from "./types";
 import { CarsCardApiHandling } from "../../atoms/CarsCardApiHandling";
+import { useNavigate } from "react-router-dom";
 
 export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
   managedBy,
   viewAll,
+  viewAllPath
 }) => {
-  const [cardsPerPage, setCardsPerPage] = useState(4); // Default for extra large screens
-  const [currentIndex, setCurrentIndex] = useState(0); // Index of the first visible card
+  const [cardsPerPage, setCardsPerPage] = useState(4); 
+  const [currentIndex, setCurrentIndex] = useState(0); 
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateCardsPerPage = () => {
@@ -43,6 +46,10 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
     }
   };
 
+  const handleViewAll = () => {
+    navigate(viewAllPath); 
+  };
+
   return (
     <CarsCardApiHandling managedBy={managedBy}>
       {(sellCarsData) => {
@@ -59,9 +66,12 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
               <h1 className="lg:text-xl text-lg text-charcoal-gray font-bold">
                 {managedBy}
               </h1>
-              <p className="cursor-pointer lg:text-base text-sm font-medium text-blue-variant hover:underline hover:text-charcoal-gray">
+              <button
+                className="cursor-pointer lg:text-base text-sm font-medium text-blue-variant hover:underline hover:text-charcoal-gray"
+                onClick={handleViewAll} // Attach the handleViewAll function here
+              >
                 View All {viewAll}
-              </p>
+              </button>
             </div>
 
             {currentIndex > 0 && (

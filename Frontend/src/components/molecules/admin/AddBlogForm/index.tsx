@@ -32,24 +32,23 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files) {
             const selectedFiles = Array.from(e.target.files);
-            setImageFiles(selectedFiles); // Store all selected files
-            setError(""); // Clear error when files are selected
+            setImageFiles(selectedFiles); 
+            setError(""); 
         }
     };
 
     const handleImageDelete = (index: number) => {
-        setImageFiles(prev => prev.filter((_, i) => i !== index)); // Remove the selected image by index
+        setImageFiles(prev => prev.filter((_, i) => i !== index)); 
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsLoading(true);
-  
-        // Validate that at least one image is selected
+
         if (imageFiles.length === 0) {
             setError("Please select at least one image."); // Set error message
-            setIsLoading(false); // Reset loading state
-            return; // Exit early if validation fails
+            setIsLoading(false); 
+            return; 
         }
 
         try {
@@ -57,7 +56,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
             if (response.ok) {
                 const result = await response.json();
                 console.log('Blog submitted:', result);
-                onSubmit({ image: imageFiles.length > 0 ? imageFiles : [], title, description }); // Handle empty case
+                onSubmit({ image: imageFiles.length > 0 ? imageFiles : [], title, description }); 
                 window.location.reload();
             } else {
                 const error = await response.json();
@@ -73,7 +72,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
     return (
         <form
             onSubmit={handleSubmit}
-            className="md:max-w-md mx-auto bg-slate-100 shadow-lg rounded-md animate-fadeIn transition-all duration-300 ease-in-out w-full flex flex-col gap-3 p-4"
+            className="md:max-w-md mx-auto bg-slate-50 shadow-lg rounded-md animate-fadeIn transition-all duration-300 ease-in-out w-full flex flex-col gap-3 p-4"
         >
             <h1 className="text-center md:text-2xl text-xl font-sans font-bold text-charcoal-gray my-2">
                 Create a New Blog
@@ -100,7 +99,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
                     id="image-picker"
                     accept="image/*"
                     className="hidden"
-                    multiple // Allow multiple files
+                    multiple 
                     onChange={handleImageChange}
                 />
             </div>
@@ -135,7 +134,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
                 )}
             </div>
 
-            {error && <p className="text-red-500 text-center">{error}</p>} {/* Display error message */}
+            {error && <p className="text-red-500 text-center">{error}</p>}
 
             <TitleInput
                 placeholder="Blog Title"

@@ -5,7 +5,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
   blogImage,
   blogTitle,
   blogDescription,
-  timeAgo
+  timeAgo,
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -20,7 +20,7 @@ export const BlogCard: React.FC<BlogCardProps> = ({
   return (
     <div className="flex flex-col bg-white shadow-md rounded-md my-1 w-full h-full transition-transform duration-300 ease-in-out transform lg:hover:scale-105 hover:shadow-lg">
       <img
-        src={`https://test-backend-1xtc.onrender.com/public/uploads/${blogImage}`}
+        src={blogImage}
         alt="Blog Thumbnail"
         className="object-cover h-52 w-full rounded-t-md"
       />

@@ -15,7 +15,7 @@ export const NewsLetterForm: React.FC<newsLetterFormProps> = ({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await onSubmit({ title, description }); // Make sure it sends title and description
+            await onSubmit({ title, description }); 
             setPopupMessage("Your post has been sent successfully!");
             
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -72,7 +72,6 @@ export const NewsLetterForm: React.FC<newsLetterFormProps> = ({
                 </form>
             </div>
 
-            {/* Popup Component */}
             {popupVisible && (
                 <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
                     <div className="bg-white rounded-lg p-6 shadow-lg">

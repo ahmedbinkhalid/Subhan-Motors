@@ -8,6 +8,7 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
   linkPath,
   LinkIcon,
   linkOptions,
+  onClick, // Accept onClick as a prop
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
     <div className="relative">
       <button 
         className="flex w-full items-center text-charcoal-gray font-semibold hover:text-regal-red transition duration-200"
-        onClick={linkOptions ? handleToggleDropdown : linkTitle === "Sign Out" ? handleLogout : undefined}
+        onClick={linkOptions ? handleToggleDropdown : linkTitle === "Sign Out" ? handleLogout : onClick} // Use onClick if provided
       >
         {!linkOptions && linkPath && linkTitle !== "Sign Out" ? (
           <NavLink 
@@ -53,6 +54,7 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
                 key={index}
                 to={option.path}
                 className={({ isActive }) => `block px-4 py-2 text-base font-semibold ${isActive ? 'text-regal-red' : 'text-blue-variant'} hover:text-regal-red transition duration-200`}
+                onClick={onClick} // Close sidebar when dropdown link is clicked
               >
                 {option.title}
               </NavLink>
