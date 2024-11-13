@@ -12,17 +12,17 @@ export const LeaderShip: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 gap-4">
           <LeadershipCard
             leaderImage={founder}
-            leaderName="NA"
+            leaderName="Haji Shahbaz Ahmed"
             leaderTitle="CEO and Founder"
           />
           <LeadershipCard
             leaderImage={coFounder}
-            leaderName="NA"
+            leaderName="Shahzaib Ahmed"
             leaderTitle="Co-Founder"
           />
           <LeadershipCard
             leaderImage={manager}
-            leaderName="NA"
+            leaderName="Sajid Saeed"
             leaderTitle="Manager"
           />
         </div>

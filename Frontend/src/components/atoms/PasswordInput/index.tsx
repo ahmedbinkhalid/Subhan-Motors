@@ -30,17 +30,17 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
       hasDigit &&
       hasSpecialSymbol;
 
-    setIsValid(isValidPassword); // Update validity state
+    setIsValid(isValidPassword);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
-    onChange(e); // Call the parent onChange handler
-    validatePassword(newValue); // Validate password whenever it changes
+    onChange(e);
+    validatePassword(newValue);
   };
 
   const setPasswordVisibility = () => {
-    setVisibility(!visibility); // Toggle the visibility
+    setVisibility(!visibility);
   };
 
   return (
@@ -61,7 +61,7 @@ export const PasswordInput: React.FC<PasswordInputProps> = ({
         className="text-sm font-semibold text-red-400 cursor-pointer"
         onClick={setPasswordVisibility}
       >
-        {visibility ? "Hide" : "Show"} {/* Toggle text */}
+        {visibility ? "Hide" : "Show"}
       </p>
     </div>
   );

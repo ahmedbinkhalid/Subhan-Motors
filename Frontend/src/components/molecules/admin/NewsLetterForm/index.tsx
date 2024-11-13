@@ -1,32 +1,35 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { newsLetterFormProps } from "./types";
 import { TitleInput } from "../../../atoms/TitleInput";
 import { DescriptionInput } from "../../../atoms/DescriptionInput";
 import { newsLetter } from "../../../../assets/images";
+import { CustomPopup } from "../../../atoms/CustomPopup"; // Ensure CustomPopup is imported
 
 export const NewsLetterForm: React.FC<newsLetterFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [popupVisible, setPopupVisible] = useState(false);
-  const [popupMessage, setPopupMessage] = useState("");
+  const [showPopup, setShowPopup] = useState(false); // State to control popup visibility
+  const [popupMessage, setPopupMessage] = useState(""); // State for popup message
+  const [isSuccess, setIsSuccess] = useState(false); // To track if the form submission was successful
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       await onSubmit({ title, description });
       setPopupMessage("Your post has been sent successfully!");
-
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setIsSuccess(true);
+      setTitle("");
+      setDescription("");
     } catch (error) {
       setPopupMessage("Your post did not send successfully.");
+      setIsSuccess(false); // Mark as error
     } finally {
-      setPopupVisible(true);
+      setShowPopup(true); // Show the popup after submitting
+      setTimeout(() => {
+        setShowPopup(false); // Hide the popup after 4 seconds
+      }, 2000);
     }
-  };
-
-  const handleClosePopup = () => {
-    setPopupVisible(false);
-    window.location.reload();
   };
 
   return (
@@ -66,18 +69,13 @@ export const NewsLetterForm: React.FC<newsLetterFormProps> = ({ onSubmit }) => {
         </form>
       </div>
 
-      {popupVisible && (
-        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg p-6 shadow-lg">
-            <h2 className="text-lg font-bold">{popupMessage}</h2>
-            <button
-              className="mt-4 text-red-500 font-semibold"
-              onClick={handleClosePopup}
-            >
-              × Close
-            </button>
-          </div>
-        </div>
+      {/* CustomPopup */}
+      {showPopup && (
+        <CustomPopup
+          message={popupMessage}
+          isSuccess={isSuccess}
+          onClose={() => setShowPopup(false)} // Close the popup
+        />
       )}
     </section>
   );

@@ -71,7 +71,7 @@ export const postAddNewCar = async (carData: addNewCarFormData): Promise<PostNew
       images: imageBase64Array
     };
 
-    const response = await fetch("test-backend-1xtc.onrender.com/api/postcar", {
+    const response = await fetch("https://test-backend-1xtc.onrender.com/api/postcar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

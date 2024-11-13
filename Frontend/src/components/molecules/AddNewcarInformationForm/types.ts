@@ -1,5 +1,5 @@
 export interface addNewCarFormData{
-        images: string;         
+        images: string[];         
         make: string;             
         model: string;            
         releasedDate: string;     

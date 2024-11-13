@@ -56,12 +56,14 @@ export const ContactUsForm: React.FC = () => {
 
   return (
     <section className="grid md:grid-cols-2 xl:gap-10 md:gap-8 gap-4">
-      <div className="bg-slate-50 py-8 px-6 max-w-xl rounded-md">
-        <h1 className="text-charcoal-gray md:text-2xl text-xl font-sans font-semibold mb-3">
-          Your Details
-        </h1>
-
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+      <div>
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col gap-4 bg-slate-50 py-8 px-6 max-w-xl rounded-md"
+        >
+          <h1 className="text-charcoal-gray md:text-2xl text-xl font-sans font-semibold mb-3">
+            Your Details
+          </h1>
           <FullnameInput
             name="fullName"
             value={fullName}
@@ -101,7 +103,25 @@ export const ContactUsForm: React.FC = () => {
           </div>
         </form>
       </div>
-      <AddressInfo />
+
+      <div>
+        <AddressInfo />
+
+        <div className="mt-8 bg-slate-50 rounded-md md:p-4 p-3">
+          <h2 className="text-charcoal-gray md:text-xl text-lg font-sans font-bold md:my-6 my-4">
+            Find Us Here
+          </h2>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d843.8315786997852!2d74.17019626964502!3d32.222379132923365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDEzJzIwLjYiTiA3NMKwMTAnMTUuMCJF!5e0!3m2!1sen!2s!4v1731495400308!5m2!1sen!2s"
+            width="100%"
+            height="300"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="rounded-md shadow-lg border-none"
+          ></iframe>
+        </div>
+      </div>
 
       {/* Custom Popup */}
       {showPopup && (

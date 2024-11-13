@@ -7,6 +7,7 @@ import { motion, useAnimation } from "framer-motion";
 import { addNewBlog } from "../../../../assets/images";
 import { TitleInput } from "../../../atoms/TitleInput";
 import { DescriptionInput } from "../../../atoms/DescriptionInput";
+import { CustomPopup } from "../../../atoms/CustomPopup"; // Ensure CustomPopup is imported
 
 const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
   const [imageFiles, setImageFiles] = useState<File[]>([]); // Store image files as an array
@@ -14,6 +15,9 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [error, setError] = useState(""); // State to manage error messages
+  const [showPopup, setShowPopup] = useState<boolean>(false); // State for popup visibility
+  const [popupMessage, setPopupMessage] = useState<string>(""); // State for popup message
+  const [isSuccess, setIsSuccess] = useState<boolean>(false); // To track if submission was successful
   const controls = useAnimation();
 
   React.useEffect(() => {
@@ -46,7 +50,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
     setIsLoading(true);
 
     if (imageFiles.length === 0) {
-      setError("Please select at least one image."); // Set error message
+      setError("Please select at least one image.");
       setIsLoading(false);
       return;
     }
@@ -57,21 +61,44 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
         content: description,
         images: imageFiles,
       });
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Blog submitted:", result);
+
+      // Check for error or success in the response
+      if (response.error) {
+        setPopupMessage(`Error: ${response.error}`);
+        setIsSuccess(false);
+        setShowPopup(true);
+      } else {
+        // Assuming a successful response is when `error` is undefined or null
+        console.log("Blog submitted:", response);
         onSubmit({
           image: imageFiles.length > 0 ? imageFiles : [],
           title,
           description,
         });
-        window.location.reload();
-      } else {
-        const error = await response.json();
-        console.error("Error submitting blog:", error);
+
+        // Show success popup and clear the form
+        setPopupMessage("Blog successfully added!");
+        setIsSuccess(true);
+        setShowPopup(true);
+
+        // Clear form after success
+        setTitle("");
+        setDescription("");
+        setImageFiles([]);
+
+        setTimeout(() => {
+          setShowPopup(false); // Hide popup after 4 seconds
+        }, 4000);
       }
     } catch (error) {
       console.error("Network error:", error);
+      setPopupMessage("Error during blog submission. Please try again.");
+      setIsSuccess(false);
+      setShowPopup(true);
+
+      setTimeout(() => {
+        setShowPopup(false); // Hide popup after 4 seconds
+      }, 2000);
     }
 
     setIsLoading(false);
@@ -164,6 +191,15 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
           Add Blog
         </button>
       </div>
+
+      {/* CustomPopup */}
+      {showPopup && (
+        <CustomPopup
+          message={popupMessage}
+          isSuccess={isSuccess}
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </form>
   );
 };

@@ -26,17 +26,15 @@ const LoginForm: React.FC = () => {
       const response = await login(email, password);
 
       if (response.token) {
-        // Store the token and perform actions for successful login
         localStorage.setItem("token", response.token);
         setCustomPopupMessage("Login successful!");
         setIsSuccess(true);
 
-        // Show the success message and then transition to the desired modal after 4 seconds
         setShowCustomPopup(true);
         setTimeout(() => {
-          setShowCustomPopup(false); // Hide the popup after 4 seconds
+          setShowCustomPopup(false); 
           closeModal();
-          window.location.reload(); // Close the current modal (login modal) // Open the dashboard modal or any modal you need
+          window.location.reload(); 
         }, 1000);
       } else {
         setCustomPopupMessage(`Login failed: ${response.error}`);
@@ -52,7 +50,7 @@ const LoginForm: React.FC = () => {
       setIsSuccess(false);
       setShowCustomPopup(true);
       setTimeout(() => {
-        setShowCustomPopup(false); // Hide the popup after 4 seconds
+        setShowCustomPopup(false); 
       }, 4000);
     }
   };

@@ -33,7 +33,7 @@ export const postCarAd = async (carData: CarFormData, token: string): Promise<Po
       sellerInfo: JSON.stringify(carData.sellerInfo) // Stringify sellerInfo if it's an object
     };
 
-    const response = await fetch("test-backend-1xtc.onrender.com/api/addcars", {
+    const response = await fetch("https://test-backend-1xtc.onrender.com/api/addcars", {
       method: "POST",
       headers: {
         "Authorization": `Bearer ${token}`,

@@ -8,7 +8,7 @@ import { useImageContext } from "../ImageContext";
 import { useContact } from "../ContactContext";
 import { CarFormData } from "./types";
 import { postCarAd } from "../../apis/PostCarAd";
-import { Popup } from "../../atoms/Popup";
+import { CustomPopup } from "../../atoms/CustomPopup";
 
 type CarInformationFormProps = {
   bgColor: string;
@@ -37,8 +37,9 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
   });
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [popupMessage, setPopupMessage] = useState<string | null>(null);
-  const [popupBgColor, setPopupBgColor] = useState<string>("bg-green-500");
+  const [customPopupMessage, setCustomPopupMessage] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [showCustomPopup, setShowCustomPopup] = useState<boolean>(false);
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -61,6 +62,7 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const token = localStorage.getItem("token");
     if (!token) {
       console.error("User not authenticated");
@@ -72,18 +74,24 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
       setErrorMessage("Please upload at least 2 images.");
       return;
     } else {
-      setErrorMessage(null); // Clear the error message if validation passes
+      setErrorMessage(null); // Clear error message if validation passes
     }
 
+    // Send the data for posting the car ad
     const response = await postCarAd(formData, token);
-    if (response.error) {
-      setPopupMessage("Failed to submit your ad. Please try again.");
-      setPopupBgColor("bg-red-500"); // Set error color for popup
-    } else {
-      setPopupMessage("Your car ad has been successfully submitted!");
-      setPopupBgColor("bg-green-500"); // Set success color for popup
 
-      // Reset form data
+    if (response.error) {
+      // Show failure message and set popup color to red
+      setCustomPopupMessage("Failed to submit your ad. Please try again.");
+      setIsSuccess(false);
+      setShowCustomPopup(true);
+    } else {
+      // Show success message and set popup color to green
+      setCustomPopupMessage("Your car ad has been successfully submitted!");
+      setIsSuccess(true);
+      setShowCustomPopup(true);
+
+      // Reset form data and images after successful submission
       setFormData({
         sellerInfo: { sellerName: "", mobileNumber: "" },
         images: [],
@@ -102,13 +110,14 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
         description: "",
       });
 
-      // Clear the uploaded images
-      setImages([]); // <-- Clear images here
+      // Clear the images in the ImageContext
+      setImages([]);
     }
-  };
 
-  const closePopup = () => {
-    setPopupMessage(null);
+    // Hide the popup after 4 seconds
+    setTimeout(() => {
+      setShowCustomPopup(false); // Close the popup
+    }, 2000);
   };
 
   return (
@@ -165,6 +174,7 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
             onChange={handleChange}
           />
         </div>
+
         <div className="space-y-4">
           <CarInformationInput
             label="Model"
@@ -224,12 +234,11 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
           <CarInformationSubmitButton bgColor={bgColor} />
         </div>
       </form>
-
-      {popupMessage && (
-        <Popup
-          message={popupMessage}
-          onClose={closePopup}
-          bgColor={popupBgColor}
+      {showCustomPopup && (
+        <CustomPopup
+          message={customPopupMessage}
+          isSuccess={isSuccess}
+          onClose={() => setShowCustomPopup(false)}
         />
       )}
     </div>

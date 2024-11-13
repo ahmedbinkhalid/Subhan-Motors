@@ -9,10 +9,10 @@ export const TestimonialCard: React.FC<TestimonialCardProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="flex flex-col bg-slate-50 rounded-md shadow-md p-4 md:p-6 lg:p-8 mt-8 gap-4 w-full mx-auto h-full min-h-[220px] my-10">
+    <div className="flex flex-col bg-slate-50 rounded-md shadow-md p-4 md:p-6 lg:p-8 mt-8 gap-4 w-full mx-auto h-[320px] my-10">
       {" "}
       {/* Set min-h to enforce uniformity */}
-      <p className="mt-4 text-charcoal-gray text-justify break-words overflow-hidden flex-grow">
+      <p className="mt-4 text-charcoal-gray text-justify break-words flex-grow overflow-hidden">
         {testimonial}
       </p>
       <div className="flex items-center mt-4 justify-between border-t border-charcoal-gray pt-4">

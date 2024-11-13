@@ -3,7 +3,7 @@ export interface CarFormData {
       sellerName: string,
       mobileNumber: string,
     };
-    images : string;
+    images : string[];
     make: string;
     model: string;
     year: string;

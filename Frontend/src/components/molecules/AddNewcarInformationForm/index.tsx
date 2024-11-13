@@ -1,4 +1,3 @@
-// AddNewCarInformationForm.tsx
 import React, { useState, useEffect } from "react";
 import CarInformationDropDown from "../../atoms/CarInformationDropDown";
 import CarInformationSubmitButton from "../../atoms/CarInformationSubmitButton";
@@ -8,6 +7,7 @@ import { useImageContext } from "../ImageContext";
 import { addNewCarFormData } from "./types";
 import { DateCalender } from "../admin/DateCalender";
 import { postAddNewCar } from "../../apis/PostAddNewCar";
+import { CustomPopup } from "../../atoms/CustomPopup";
 
 type AddNewCarInformationFormProps = {
   bgColor: string;
@@ -16,7 +16,7 @@ type AddNewCarInformationFormProps = {
 const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({
   bgColor,
 }) => {
-  const { images } = useImageContext();
+  const { images, setImages } = useImageContext(); // Ensure clearImages function is available in ImageContext
 
   const [formData, setFormData] = useState<addNewCarFormData>({
     images: [],
@@ -33,8 +33,9 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({
     maxPrice: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [popupMessage, setPopupMessage] = useState<string>("");
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
 
   useEffect(() => {
     setFormData((prevData) => ({
@@ -65,26 +66,52 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({
     e.preventDefault();
 
     if (formData.images.length < 2) {
-      setErrorMessage("Please upload at least 2 images.");
+      setPopupMessage("Please upload at least 2 images.");
+      setIsSuccess(false);
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 2000);
       return;
     }
 
-    setErrorMessage(null);
-
-    // Replace with actual token
-
     try {
-      console.log(formData);
       const response = await postAddNewCar(formData);
 
       if (response.error) {
-        setErrorMessage(response.error);
+        setPopupMessage(`Submission failed: ${response.error}`);
+        setIsSuccess(false);
       } else {
-        setSuccessMessage("Car information posted successfully!");
+        setPopupMessage("Car information posted successfully!");
+        setIsSuccess(true);
+
+        // Clear form data after successful submission
+        setFormData({
+          images: [],
+          make: "",
+          model: "",
+          releasedDate: "",
+          transmission: "",
+          engineType: "",
+          engineCapacity: "",
+          availableColor: "",
+          location: "",
+          description: "",
+          startingPrice: "",
+          maxPrice: "",
+        });
+
+        // Clear images by setting it to an empty array
+        setImages([]); // This clears the images context
       }
+
+      // Display success/failure popup
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 4000); // Hide popup after 4 seconds
     } catch (error) {
       console.error("Submission error:", error);
-      setErrorMessage("An error occurred while posting car information.");
+      setPopupMessage("An error occurred while posting car information.");
+      setIsSuccess(false);
+      setShowPopup(true);
+      setTimeout(() => setShowPopup(false), 2000);
     }
   };
 
@@ -103,16 +130,13 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({
           onSubmit={handleSubmit}
           className="grid grid-cols-1 md:grid-cols-2 gap-6"
         >
-          {/* Error and success messages */}
-          {errorMessage && (
-            <div className="md:col-span-2 text-red-500 mb-4">
-              {errorMessage}
-            </div>
-          )}
-          {successMessage && (
-            <div className="md:col-span-2 text-green-500 mb-4">
-              {successMessage}
-            </div>
+          {/* CustomPopup for success/error messages */}
+          {showPopup && (
+            <CustomPopup
+              message={popupMessage}
+              isSuccess={isSuccess}
+              onClose={() => setShowPopup(false)}
+            />
           )}
 
           {/* Form fields */}
@@ -184,8 +208,7 @@ const AddNewCarInformationForm: React.FC<AddNewCarInformationFormProps> = ({
             />
             <div>
               <p className="block text-sm font-medium text-charcoal-gray mb-3">
-                {" "}
-                Release Date{" "}
+                Release Date
               </p>
               <DateCalender onDateChange={handleDateChange} />
             </div>
