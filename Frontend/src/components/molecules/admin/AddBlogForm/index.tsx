@@ -62,7 +62,6 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
         images: imageFiles,
       });
 
-      // Check for error or success in the response
       if (response.error) {
         setPopupMessage(`Error: ${response.error}`);
         setIsSuccess(false);
@@ -88,7 +87,7 @@ const AddBlogForm: React.FC<BlogFormProps> = ({ onSubmit }) => {
 
         setTimeout(() => {
           setShowPopup(false); // Hide popup after 4 seconds
-        }, 4000);
+        }, 2000);
       }
     } catch (error) {
       console.error("Network error:", error);

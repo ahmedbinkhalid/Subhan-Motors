@@ -1,27 +1,36 @@
-
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { RouteProtectionValidatorProps } from "../RouteProtectionValidator/types";
+import { UserToken } from "../../components/atoms/PageLinks/types";
+import { jwtDecode } from "jwt-decode";
+import { useModal } from "../../components/organism/AllPagesLayout/ModalContext";
+
 
 const isUserAuthenticated = () => {
   const token = localStorage.getItem("token");
   if (token) {
     try {
-      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const decodedToken = jwtDecode<UserToken>(token);
       return decodedToken.role === "User";
     } catch (error) {
       console.error("Error decoding the token:", error);
     }
   }
-  return false; 
+  return false;
 };
 
-const UserRouteProtectionValidator: React.FC<RouteProtectionValidatorProps> = ({ element }) => {
+const UserRouteProtectionValidator: React.FC<RouteProtectionValidatorProps> = ({
+  element,
+}) => {
+  const {openModal} = useModal();
+const navigate = useNavigate();
   if (!isUserAuthenticated()) {
-    return <Navigate to="/" replace />; 
+   openModal("login");
+   navigate("/");
+   
   }
 
-  return element; 
+  return element;
 };
 
 export default UserRouteProtectionValidator;

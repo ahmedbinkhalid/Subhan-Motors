@@ -72,11 +72,11 @@ exports.addCar = async (req, res, next) => {
     }
 };
 
-// Edit car data
 
 exports.updateCar = async (req, res, next)=>{
     const carId = req.params.id;
     const OwnerId = req.user.id;
+    console.log(req.body);
     try{
         const db = req.app.locals.db;
         const car = await sellModel.getCarById(db, carId);
@@ -84,9 +84,6 @@ exports.updateCar = async (req, res, next)=>{
             return res.status(404).json({ message: 'Car not found' });
         }
 
-        if (car.Owner !== OwnerId) {
-            return res.status(403).json({ message: 'You are not allowed to edit this car' });
-        }
 
         const updatedData = {
             make: req.body.make || car.make,
@@ -101,7 +98,7 @@ exports.updateCar = async (req, res, next)=>{
             color: req.body.color || car.color,
             location: req.body.location || car.location,
             description: req.body.description || car.description,
-            sellerInfo: req.body.sellerInfo || car.sellerInfo,
+            status: req.body.status || car.status,
         };
 
         await sellModel.updateCar(db, carId, updatedData);

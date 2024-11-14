@@ -17,7 +17,6 @@ export const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
 
   return (
     <React.Fragment>
-      {/* Pass the toggleSidebar function and isSidebarOpen state as props */}
       <AdminHeader toggleSidebar={toggleSidebar} />
       <Main isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar}>
         {children}

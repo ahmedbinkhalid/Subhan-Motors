@@ -19,13 +19,13 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
       const width = window.innerWidth;
 
       if (width >= 1440) {
-        setCardsPerPage(4); // Extra large screens (e.g., desktops 1440px+)
+        setCardsPerPage(4); 
       } else if (width >= 1024) {
-        setCardsPerPage(3); // Large screens (desktop)
+        setCardsPerPage(3); 
       } else if (width >= 768) {
-        setCardsPerPage(2); // Tablets
+        setCardsPerPage(2); 
       } else {
-        setCardsPerPage(1); // Mobile screens
+        setCardsPerPage(1); 
       }
     };
 
@@ -63,14 +63,13 @@ export const FeaturedCarsCardLayout: React.FC<FeaturedCardLayoutProps> = ({
 
         return (
           <section className="relative flex items-center justify-center gap-5 my-4 flex-col w-full bg-slate-50 rounded-lg pt-8 pb-16">
-            {/* Updated section for mobile-centered layout */}
             <div className="flex flex-col md:flex-row justify-between items-center font-sans w-full text-center md:px-10 py-2 md:gap-0 gap-4">
               <h1 className="lg:text-xl text-lg text-charcoal-gray font-bold">
                 {managedBy}
               </h1>
               <button
                 className="cursor-pointer lg:text-base text-sm font-medium text-blue-variant hover:underline hover:text-charcoal-gray"
-                onClick={handleViewAll} // Attach the handleViewAll function here
+                onClick={handleViewAll} 
               >
                 View All {viewAll}
               </button>

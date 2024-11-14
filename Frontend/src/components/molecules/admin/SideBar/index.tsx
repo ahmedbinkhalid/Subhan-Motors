@@ -9,11 +9,11 @@ interface SideBarProps {
 }
 
 export const SideBar: React.FC<SideBarProps> = ({ toggleSidebar }) => {
-  const isMobileOrTablet = useMediaQuery({ maxWidth: 1024 }); // Optional: Detect if screen is mobile/tablet
+  const isMobileOrTablet = useMediaQuery({ maxWidth: 1024 });
 
   const handleLinkClick = () => {
     if (isMobileOrTablet) {
-      toggleSidebar(); // Close sidebar only on mobile and tablet
+      toggleSidebar();
     }
   };
 
@@ -43,7 +43,7 @@ export const SideBar: React.FC<SideBarProps> = ({ toggleSidebar }) => {
             linkPath={data.linkPath}
             LinkIcon={data.LinkIcon}
             linkOptions={data.linkOptions}
-            onClick={handleLinkClick} // Close sidebar when link is clicked
+            onClick={handleLinkClick}
           />
         ))}
       </div>

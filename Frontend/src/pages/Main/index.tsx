@@ -23,8 +23,8 @@ export const Home: React.FC = () => {
         viewAllPath="/allNewCars"
       />
       <FeaturedCarsCardLayout
-        managedBy="Bank Released Cars for Sale"
-        viewAll="Bank Released Cars for Sale"
+        managedBy="Imported Cars for Sale"
+        viewAll="Imported  Cars for Sale"
         viewAllPath="/allBankCars"
       />
       <BlogCardLayout />

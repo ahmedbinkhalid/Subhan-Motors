@@ -9,8 +9,6 @@ import { FaUserShield } from "react-icons/fa6";
 import { Button } from "../Button";
 import { Sidebar } from "../SideBar";
 import { UserToken } from "./types";
-import { handleNavigation } from "../handleNavigation";
-import { LoginValidator } from "../LoginValidator";
 
 interface LinksProps {
   path: string;
@@ -126,12 +124,7 @@ export const PageLinks: React.FC = () => {
               <li
                 className="group relative cursor-pointer"
                 onClick={() => {
-                  handleNavigation(
-                    "/sellCar",
-                    navigate,
-                    openModal,
-                    LoginValidator
-                  );
+                  navigate("/sellCar");
                 }}
               >
                 <span className="text-white group-hover:text-regal-red transition duration-300">
@@ -161,12 +154,7 @@ export const PageLinks: React.FC = () => {
             bgColor="bg-regal-red"
             hoverBgColor="bg-red-600"
             onClick={() => {
-              handleNavigation(
-                "/onlineBooking",
-                navigate,
-                openModal,
-                LoginValidator
-              );
+             navigate("/onlineBooking");
             }}
           />
         </div>

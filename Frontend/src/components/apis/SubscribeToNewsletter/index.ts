@@ -2,7 +2,7 @@
 
 export const subscribeToNewsletter = async (email: string) => {
     try {
-      const response = await fetch("test-backend-1xtc.onrender.com/api/subscribe", {
+      const response = await fetch("https://test-backend-1xtc.onrender.com/api/subscribe", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -38,6 +38,7 @@ import { SearchProvider } from "../components/atoms/SearchContext";
 import { AllUsedCars } from "../pages/AllUsedCars";
 import { AllBankCars } from "../pages/AllBankCars";
 import { AllNewCars } from "../pages/AllNewCars";
+import { AdUpdation } from "../pages/AdUpdation";
 
 export const AppRouter: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -109,11 +110,12 @@ export const AppRouter: React.FC = () => {
               </Layout>
             }
           />
+
           <Route
-            path="/myAds"
+            path="/adUpdation/:id"
             element={
               <Layout>
-                <MyAds />
+                <AdUpdation />
               </Layout>
             }
           />
@@ -168,6 +170,31 @@ export const AppRouter: React.FC = () => {
               }
             />
           )}
+
+          {role !== "Admin" ? (
+            <Route
+              path="/myAds"
+              element={
+                <Layout>
+                  <MyAds />
+                </Layout>
+              }
+            />
+          ) : (
+            <Route
+              path="/myAds"
+              element={
+                <RouteProtectionValidator
+                  element={
+                    <AdminLayout>
+                      <MyAds />
+                    </AdminLayout>
+                  }
+                />
+              }
+            />
+          )}
+
           <Route
             path="/adminHome"
             element={

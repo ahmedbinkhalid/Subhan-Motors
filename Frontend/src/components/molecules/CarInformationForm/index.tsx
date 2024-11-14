@@ -9,14 +9,16 @@ import { useContact } from "../ContactContext";
 import { CarFormData } from "./types";
 import { postCarAd } from "../../apis/PostCarAd";
 import { CustomPopup } from "../../atoms/CustomPopup";
+import { useNavigate } from "react-router-dom";
 
 type CarInformationFormProps = {
   bgColor: string;
 };
 
 const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
-  const { images, setImages } = useImageContext(); // Destructure setImages
-  const { sellerInfo: contactInfo } = useContact();
+  const { images, setImages } = useImageContext();
+  const { sellerInfo: contactInfo, setSellerInfo } = useContact();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<CarFormData>({
     sellerInfo: { sellerName: "", mobileNumber: "" },
@@ -42,12 +44,13 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
   const [showCustomPopup, setShowCustomPopup] = useState<boolean>(false);
 
   useEffect(() => {
+    // Synchronize form data with contact info and images when they change
     setFormData((prevData) => ({
       ...prevData,
       sellerInfo: contactInfo,
       images: images,
     }));
-  }, [images, contactInfo]);
+  }, [images, contactInfo]); // Add contactInfo as a dependency to update when it changes
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -91,7 +94,7 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
       setIsSuccess(true);
       setShowCustomPopup(true);
 
-      // Reset form data and images after successful submission
+      // Reset form data, contact info, and images after successful submission
       setFormData({
         sellerInfo: { sellerName: "", mobileNumber: "" },
         images: [],
@@ -110,8 +113,9 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
         description: "",
       });
 
-      // Clear the images in the ImageContext
+      setSellerInfo({ sellerName: "", mobileNumber: "" });
       setImages([]);
+      navigate("/myAds");
     }
 
     // Hide the popup after 4 seconds
@@ -214,7 +218,7 @@ const CarInformationForm: React.FC<CarInformationFormProps> = ({ bgColor }) => {
           <CarInformationDropDown
             label="Select Status"
             name="status"
-            options={["Used", "Bank"]}
+            options={["Used", "Imported"]}
             value={formData.status}
             onChange={handleChange}
           />

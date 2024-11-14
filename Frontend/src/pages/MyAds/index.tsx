@@ -16,6 +16,7 @@ export const MyAds: React.FC = () => {
         return;
       }
       const response = await myListedAds(token);
+      console.log(response);
       if (response.error) {
         setError(response.error);
       } else {
@@ -35,7 +36,7 @@ export const MyAds: React.FC = () => {
   };
 
   return (
-    <section className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8 md:px-8 xs:py-6 px-[6px] py-3 bg-gray-50 rounded-md">
+    <section className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8 md:px-3 xs:py-6 px-[6px] py-3 bg-gray-50 rounded-md">
       {error ? (
         <p className="text-regal-red">{error}</p>
       ) : carData.length === 0 ? (
@@ -51,6 +52,7 @@ export const MyAds: React.FC = () => {
             model={car.model}
             price={car.price}
             city={car.location}
+            _id = {car._id}
             onRemove={() => {
               handleRemove(car._id);
             }}

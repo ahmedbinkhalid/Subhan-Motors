@@ -2,8 +2,9 @@ import React, { useState } from "react";
 
 type ButtonProps = {
   bgColor: string;
+  btnTitle ?: string;
 };
-const CarInformationSubmitButton: React.FC<ButtonProps> = ({ bgColor }) => {
+const CarInformationSubmitButton: React.FC<ButtonProps> = ({ bgColor, btnTitle }) => {
   const [loading, setLoading] = useState(false);
 
   const handleClick = () => {
@@ -18,13 +19,12 @@ const CarInformationSubmitButton: React.FC<ButtonProps> = ({ bgColor }) => {
       onClick={handleClick}
       className={`relative w-48 h-11 border-2 border-${bgColor} rounded-md text-${bgColor} font-medium overflow-hidden cursor-pointer flex justify-center items-center focus:outline-none md:text-lg text-base`}
     >
-      {/* First text: "Submit" */}
       <span
         className={`absolute transition-transform ease-in-out duration-500 ${
           loading ? "-translate-y-12 opacity-0" : "translate-y-0 opacity-100"
         }`}
       >
-        Add For Sale
+         {btnTitle ? btnTitle : "Add car for sale"}
       </span>
 
       {/* Second text: "Added for sale!" */}

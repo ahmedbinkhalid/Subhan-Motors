@@ -12,18 +12,21 @@ import { IoCarSportSharp } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { SidebarProps } from "./types";
 import { LoginValidator } from "../LoginValidator";
+import { handleNavigation } from "../handleNavigation";
+import { useModal } from "../../organism/AllPagesLayout/ModalContext";
 
 export const Sidebar: React.FC<SidebarProps> = ({
   isSidebarOpen,
   toggleSidebar,
 }) => {
   const navigate = useNavigate();
+  const {openModal} = useModal();
   if (!isSidebarOpen) return null;
+
 
   return (
     <div className="lg:hidden fixed inset-0 bg-gray-800 bg-opacity-75 z-30">
       <div className="absolute top-3 left-0 md:w-1/3 w-[65%] h-auto bg-white px-4 py-8 shadow-lg rounded-lg">
-        {/* Close Button */}
         <button
           onClick={toggleSidebar}
           className="cursor-pointer absolute top-4 right-4 text-charcoal-gray text-2xl"
@@ -66,7 +69,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
           <li>
             <Link
               to="/sellCar"
-              onClick={toggleSidebar}
+              onClick={() => {
+                toggleSidebar();
+              }}
               className="flex items-center gap-3 px-4 hover:bg-charcoal-gray hover:text-white hover:rounded-md w-full"
             >
               <FaCarAlt />

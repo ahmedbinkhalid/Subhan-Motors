@@ -4,6 +4,7 @@ import { FiPhoneCall } from "react-icons/fi";
 import { CarDetailProps } from "./types";
 import { GetCarDetailById } from "../../components/apis/GetUsedOrBankCarById";
 import { getCarDetails } from "./constants";
+import { FaWhatsapp } from "react-icons/fa";
 
 const CarDetail: React.FC<{
   Icon: React.ElementType;
@@ -26,11 +27,11 @@ const ImageSlider: React.FC<{
   onImageChange: (index: number) => void;
 }> = ({ images, selectedImageIndex, onImageChange }) => (
   <div className="flex flex-col items-center lg:w-1/2 space-y-4">
-    <div className="relative w-full h-96 bg-gray-200 rounded-lg shadow-xl overflow-hidden transform transition duration-500 ease-in-out hover:scale-105">
+    <div className="relative w-full h-full bg-inherit rounded-lg shadow-xl overflow-hidden transform transition duration-500 ease-in-out hover:scale-105">
       <img
         src={images[selectedImageIndex]}
         alt="Car Image"
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full h-full object-contain rounded-lg"
       />
     </div>
 
@@ -127,19 +128,29 @@ const ViewDetailedCar: React.FC = () => {
               Contact @SubhanMotors for more Details.
             </div>
 
-            <div className="flex justify-center">
+            <div className="flex md:flex-row flex-col justify-center md:gap-4 gap-2">
               <button
-                onClick={() => alert(`Dialing ${carData.PhoneNumber}`)}
-                className="flex items-center space-x-2 px-6 py-2 bg-regal-red hover:bg-green-600 text-white rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
+                className="flex items-center space-x-2 px-6 py-2 bg-regal-red hover:bg-[#25D366] text-white rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105 md:self-start self-center"
               >
                 <FiPhoneCall className="text-2xl" />
                 <div className="text-lg">
-                  <span className="block text-sm font-medium">Owner Phone</span>
+                  <span className="block text-sm font-medium"> Phone</span>
                   <span className="font-semibold">
                     {carData.PhoneNumber || "N/A"}
                   </span>
                 </div>
               </button>
+
+              <a href="https://wa.me/923008749966?text=Hi%2C%20I'm%20interested%20in%20buying%20a%20car%20from%20your%20dealership.%20Could%20you%20please%20provide%20more%20details%3F" 
+   target="_blank" className="inline-block self-center ">
+    <button 
+        className="flex items-center space-x-3 px-6 py-3 bg-[#25D366] hover:bg-regal-red text-white rounded-lg shadow-lg transition-all duration-300 transform hover:scale-110">
+        <i className="fab fa-whatsapp text-2xl"> <FaWhatsapp /></i>
+          <span className=" text-lg block font-medium">WhatsApp</span>
+    </button>
+</a>
+
+
             </div>
           </div>
         </div>

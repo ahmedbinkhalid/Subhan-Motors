@@ -18,13 +18,13 @@ export const getCarDetails = (carData: CarDetailProps) => [
     ? {
         Icon: FaDollarSign,
         label: "Price Range",
-        value: `${carData.startingPrice} - ${carData.maxPrice} USD`,
+        value: `Rs. ${carData.startingPrice} - ${carData.maxPrice}`,
         iconClass: "text-regal-red",
       }
     : {
         Icon: FaDollarSign,
         label: "Price",
-        value: carData.price ? `${carData.price} USD` : "N/A",
+        value: carData.price ? ` Rs. ${carData.price}` : "N/A",
         iconClass: "text-regal-red",
       },
 
@@ -69,7 +69,7 @@ export const getCarDetails = (carData: CarDetailProps) => [
   {
     Icon: FaTachometerAlt,
     label: "Mileage",
-    value: carData.mileage || "N/A",
+    value: carData.mileage ? `${carData.mileage} L` : "N/A",
     iconClass: "text-regal-red",
   },
   {
@@ -81,7 +81,7 @@ export const getCarDetails = (carData: CarDetailProps) => [
   {
     Icon: FaTachometerAlt,
     label: "Engine Capacity",
-    value: carData.engineCapacity || "N/A",
+    value:  carData.engineCapacity  ? `${carData.engineCapacity} cc` : "N/A",
     iconClass: "text-regal-red",
   },
   {

@@ -70,7 +70,7 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
                     isActive ? "text-regal-red" : "text-blue-variant"
                   } hover:text-regal-red transition duration-200`
                 }
-                onClick={onClick} // Close sidebar when dropdown link is clicked
+                onClick={onClick} 
               >
                 {option.title}
               </NavLink>
