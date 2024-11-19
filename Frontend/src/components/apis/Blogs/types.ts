@@ -4,6 +4,7 @@ export interface blogsCardsData {
     title: string,
     content: string,
     timeAgo: string,
+    _id: string
 }
 
 export interface BlogsDataResponse {

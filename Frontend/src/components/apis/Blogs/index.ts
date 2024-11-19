@@ -22,6 +22,7 @@ export const Blogs = async (): Promise<BlogsDataResponse> => {
             title: item.title,
             content: item.content,
             timeAgo: item.timeAgo,
+            _id : item._id,
         }));
 
         // console.log(formattedData);

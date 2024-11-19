@@ -11,15 +11,15 @@ export const TestimonialCardsLayout: React.FC = () => {
   return (
     <section className="w-full px-4 rounded-lg py-6 my-4">
       <Swiper
-        spaceBetween={20} // Space between slides can be adjusted
+        spaceBetween={20} 
         slidesPerView={1}
-        navigation={false} // Disable navigation buttons
-        pagination={{ clickable: true }} // Enable pagination
+        navigation={false}
+        pagination={{ clickable: true }} 
         autoplay={{
-          delay: 2000, // Slide interval of 2 seconds
-          disableOnInteraction: false, // Keep autoplay after user interaction
+          delay: 2000, 
+          disableOnInteraction: false, 
         }}
-        loop={true} // Enable loop to cycle through slides continuously
+        loop={true} 
         breakpoints={{
           640: {
             slidesPerView: 1, // 1 card on mobile

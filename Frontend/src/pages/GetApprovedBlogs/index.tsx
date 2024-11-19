@@ -42,6 +42,7 @@ export const GetApprovedBlogs: React.FC<GetApprovedBlogsProps> = ({
                     blogTitle={data.title}
                     blogDescription={data.content}
                     timeAgo={data.timeAgo}
+                    _id={data._id}
                   />
                 ))
             )}

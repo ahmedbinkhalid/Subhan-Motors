@@ -9,7 +9,7 @@ export const fetchSearchResults = async (searchKey: string) => {
     const data = await response.json();
 
     if (data.cars && data.cars.length > 0) {
-        console.log(data);
+        console.log("data",data.cars);
       return data.cars;
     } else {
       throw new Error(data.message || 'No cars found');

@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { BlogCardProps } from "./types";
+import { useNavigate } from "react-router-dom";
 
 export const BlogCard: React.FC<BlogCardProps> = ({
   blogImage,
   blogTitle,
   blogDescription,
   timeAgo,
+  _id,
 }) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+   const navigate = useNavigate();
 
-  const toggleReadMore = () => setIsExpanded(!isExpanded);
 
   // Truncate the description if necessary
   const shortDescription =
@@ -17,6 +18,9 @@ export const BlogCard: React.FC<BlogCardProps> = ({
       ? blogDescription.slice(0, 100) + "..."
       : blogDescription;
 
+  const readMoreHandler = () => {
+    navigate(`/detailedBlog/${_id}`);
+  };
   return (
     <div className="flex flex-col bg-white shadow-md rounded-md my-1 w-full h-full transition-transform duration-300 ease-in-out transform lg:hover:scale-105 hover:shadow-lg">
       <img
@@ -30,14 +34,14 @@ export const BlogCard: React.FC<BlogCardProps> = ({
         </h1>
 
         <p className="text-base md:text-lg text-charcoal-gray font-medium">
-          {isExpanded ? blogDescription : shortDescription}
+          {shortDescription}
         </p>
 
         <button
-          onClick={toggleReadMore}
+          onClick={readMoreHandler}
           className="hover:underline text-blue-variant font-semibold cursor-pointer hover:text-charcoal-gray"
         >
-          {isExpanded ? "Read Less" : "Read More"}
+          Read More
         </button>
       </div>
 

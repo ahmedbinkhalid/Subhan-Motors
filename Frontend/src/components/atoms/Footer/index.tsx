@@ -8,6 +8,7 @@ import {
   FaTiktok,
   FaInstagram,
 } from "react-icons/fa";
+import { FaYoutube } from "react-icons/fa6";
 import { subscribeToNewsletter } from "../../apis/SubscribeToNewsletter";
 
 export const Footer: React.FC = () => {
@@ -75,7 +76,8 @@ export const Footer: React.FC = () => {
               <FaPhoneAlt /> +92-300-8749966
             </p>
             <p className="mb-2 flex items-center gap-3">
-              <FaEnvelope /> atifsubhanmotors@gmail.com
+              <FaEnvelope />
+              subhan.motorsgrw@gmail.com
             </p>
             <div className="flex space-x-3 pt-2 my-2">
               <a
@@ -93,6 +95,14 @@ export const Footer: React.FC = () => {
                 className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
               >
                 <FaFacebookF />
+              </a>
+              <a
+                href="https://www.youtube.com/@subhanmotors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white hover:text-regal-red rounded-full border-[0.5px] border-white p-2 hover:border-regal-red"
+              >
+                <FaYoutube />
               </a>
 
               <a

@@ -21,30 +21,37 @@ import addCar from "./addCar.png";
 import founder from "./founder.jpg";
 import coFounder from "./coFounder.jpg";
 import manager from "./manager.jpg";
-
+import test1 from "./test1.jpeg";
+import test2 from "./test2.jpeg";
+import test3 from "./test3.jpeg";
+import test4 from "./test4.jpeg";
 
 export {
-    logo1,
-    carouselBg2,
-    carouselBg1,
-    carousal1,
-    carousal2,
-    about,
-    service1,
-    service4,
-    headerBg1,
-    carDeal,
-    testimonial1,
-    carDeal2,
-    team1,
-    team2,
-    team3,
-    team4,
-    logo,
-    newsLetter,
-    addNewBlog,
-    addCar,
-    founder,
-    coFounder,
-    manager
+  logo1,
+  carouselBg2,
+  carouselBg1,
+  carousal1,
+  carousal2,
+  about,
+  service1,
+  service4,
+  headerBg1,
+  carDeal,
+  testimonial1,
+  carDeal2,
+  team1,
+  team2,
+  team3,
+  team4,
+  logo,
+  newsLetter,
+  addNewBlog,
+  addCar,
+  founder,
+  coFounder,
+  manager,
+  test1,
+  test2,
+  test3,
+  test4,
 };

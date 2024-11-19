@@ -39,6 +39,7 @@ import { AllUsedCars } from "../pages/AllUsedCars";
 import { AllBankCars } from "../pages/AllBankCars";
 import { AllNewCars } from "../pages/AllNewCars";
 import { AdUpdation } from "../pages/AdUpdation";
+import DetailedBlog from "../pages/DetailedBlog";
 
 export const AppRouter: React.FC = () => {
   const token = localStorage.getItem("token");
@@ -111,14 +112,28 @@ export const AppRouter: React.FC = () => {
             }
           />
 
-          <Route
-            path="/adUpdation/:id"
-            element={
-              <Layout>
-                <AdUpdation />
-              </Layout>
-            }
-          />
+          {role === "User" ? (
+            <Route
+              path="/adUpdation/:id"
+              element={
+                <Layout>
+                  <AdUpdation />
+                </Layout>
+              }
+            />
+          ) : (
+            role === "Admin" && (
+              <Route
+                path="/adUpdation/:id"
+                element={
+                  <AdminLayout>
+                    <AdUpdation />
+                  </AdminLayout>
+                }
+              />
+            )
+          )}
+
           <Route
             path="/onlineBooking"
             element={
@@ -158,6 +173,14 @@ export const AppRouter: React.FC = () => {
               </Layout>
             }
           />
+          <Route
+            path="/detailedBlog/:id"
+            element={
+              <Layout>
+                <DetailedBlog />
+              </Layout>
+            }
+          />
 
           {role !== "Admin" && (
             <Route
@@ -171,7 +194,7 @@ export const AppRouter: React.FC = () => {
             />
           )}
 
-          {role !== "Admin" ? (
+          {role === "User" ? (
             <Route
               path="/myAds"
               element={
@@ -181,18 +204,16 @@ export const AppRouter: React.FC = () => {
               }
             />
           ) : (
-            <Route
-              path="/myAds"
-              element={
-                <RouteProtectionValidator
-                  element={
-                    <AdminLayout>
-                      <MyAds />
-                    </AdminLayout>
-                  }
-                />
-              }
-            />
+            role === "Admin" && (
+              <Route
+                path="/myAds"
+                element={
+                  <AdminLayout>
+                    <MyAds />
+                  </AdminLayout>
+                }
+              />
+            )
           )}
 
           <Route
@@ -212,13 +233,9 @@ export const AppRouter: React.FC = () => {
             <Route
               path="/viewDetailedCar/:id"
               element={
-                <RouteProtectionValidator
-                  element={
-                    <AdminLayout>
-                      <ViewDetailedCar />
-                    </AdminLayout>
-                  }
-                />
+                <AdminLayout>
+                  <ViewDetailedCar />
+                </AdminLayout>
               }
             />
           )}

@@ -3,4 +3,5 @@ export interface BlogCardProps {
     blogTitle : string;
     blogDescription : string;
     timeAgo : string;
+    _id : string;
 }

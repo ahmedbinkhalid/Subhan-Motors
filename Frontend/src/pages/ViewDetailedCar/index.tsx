@@ -86,7 +86,7 @@ const ViewDetailedCar: React.FC = () => {
     return <div>Loading...</div>;
   }
 
-  const carDetails = getCarDetails(carData); // Use the imported function to generate carDetails
+  const carDetails = getCarDetails(carData); 
 
   return (
     <div className="container mx-auto p-6">

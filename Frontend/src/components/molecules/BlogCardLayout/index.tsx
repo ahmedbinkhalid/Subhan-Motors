@@ -38,6 +38,7 @@ export const BlogCardLayout: React.FC = () => {
               blogTitle={data.title}
               blogDescription={data.content}
               timeAgo={data.timeAgo}
+              _id={data._id}
             />
           ))}
         </div>
@@ -50,6 +51,7 @@ export const BlogCardLayout: React.FC = () => {
               blogTitle={data.title}
               blogDescription={data.content}
               timeAgo={data.timeAgo}
+              _id={data._id}
             />
           ))}
         </div>

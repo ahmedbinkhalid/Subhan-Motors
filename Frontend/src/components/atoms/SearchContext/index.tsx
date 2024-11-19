@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// src/contexts/SearchContext.tsx
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface SearchContextType {

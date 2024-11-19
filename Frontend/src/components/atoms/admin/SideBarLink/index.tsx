@@ -17,7 +17,8 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/"); // Navigate to the login page after logging out
+    navigate("/");
+    window.location.reload();
   };
 
   return (
@@ -70,7 +71,7 @@ export const SideBarLink: React.FC<SideBarLinkProps> = ({
                     isActive ? "text-regal-red" : "text-blue-variant"
                   } hover:text-regal-red transition duration-200`
                 }
-                onClick={onClick} 
+                onClick={onClick}
               >
                 {option.title}
               </NavLink>

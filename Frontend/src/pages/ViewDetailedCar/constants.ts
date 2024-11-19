@@ -68,7 +68,7 @@ export const getCarDetails = (carData: CarDetailProps) => [
 
   {
     Icon: FaTachometerAlt,
-    label: "Mileage",
+    label: "Driven",
     value: carData.mileage ? `${carData.mileage} L` : "N/A",
     iconClass: "text-regal-red",
   },
