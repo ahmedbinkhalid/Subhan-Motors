@@ -3,14 +3,19 @@ import { MyAdsCard } from "../../components/molecules/MyAddCard";
 import { myListedAds } from "../../components/apis/MyAds";
 import { CarData } from "../../components/molecules/FeaturedCardsLayout";
 import { DeleteAdd } from "../../components/apis/DeleteAdd";
+import { CustomPopup } from "../../components/atoms/CustomPopup";
+import DataLoader from "../../components/atoms/DataLoader";
 
 export const MyAds: React.FC = () => {
   const itemsPerPage = 6; // Number of items per page
   const [carData, setCarData] = useState<CarData[]>([]);
   const [currentPage, setCurrentPage] = useState(1); // Current page state
   const [error, setError] = useState<string | null>(null);
-
+  const [customPopupMessage, setCustomPopupMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
+    setLoading(true);
     const fetchAds = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -18,6 +23,7 @@ export const MyAds: React.FC = () => {
         return;
       }
       const response = await myListedAds(token);
+      setLoading(false);
       if (response.error) {
         setError(response.error);
       } else {
@@ -29,13 +35,14 @@ export const MyAds: React.FC = () => {
   }, []);
 
   const handleRemove = async (id: string) => {
-    try {
-      await DeleteAdd(id);
-      // Update UI after deletion
-      setCarData((prevData) => prevData.filter((car) => car._id !== id));
-    } catch (error) {
-      console.error("Failed to delete Ad:", error);
-    }
+      const result = await DeleteAdd(id);
+      setCustomPopupMessage(result.message);
+      if (result.success) {
+        setIsSuccess(true);
+      }
+      else {
+        setIsSuccess(false);
+      }
   };
 
   // Pagination logic
@@ -45,8 +52,21 @@ export const MyAds: React.FC = () => {
   const totalPages = Math.ceil(carData.length / itemsPerPage);
 
   return (
-    <section className="max-w-screen-xl mx-auto px-6 py-4 bg-gray-50 rounded-md">
-      {error ? (
+    <section className="max-w-screen-lg mx-auto px-6 py-4 bg-gray-50 rounded-md">
+        {customPopupMessage && (
+        <CustomPopup
+          message={customPopupMessage}
+          isSuccess={isSuccess}
+          onClose={() => setCustomPopupMessage("")}
+        />
+      )}
+
+      {
+        loading ? (
+             <DataLoader loadingTitle="Listed Ad's" />
+        ) : (
+          <>
+              {error ? (
         <p className="text-regal-red">{error}</p>
       ) : carData.length === 0 ? (
         <p className="md:text-xl text-lg text-center text-regal-red col-span-full font-sans font-semibold">
@@ -54,7 +74,6 @@ export const MyAds: React.FC = () => {
         </p>
       ) : (
         <>
-          {/* Display current items */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 grid-cols-1 gap-8">
             {currentItems.map((car, index) => (
               <MyAdsCard
@@ -118,6 +137,11 @@ export const MyAds: React.FC = () => {
           </div>
         </>
       )}
+          </>
+        )
+      }
+
+   
     </section>
   );
 };

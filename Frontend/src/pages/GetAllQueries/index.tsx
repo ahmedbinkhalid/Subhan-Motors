@@ -45,5 +45,13 @@ export const GetAllQueries: React.FC = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-  return <TableLayout title="Get All Queries" columns={columns} data={data} />;
+  return (
+    data.length > 0 ? (
+      <TableLayout title="Get All Queries" columns={columns} data={data} />
+    ) : (
+      <div className="h-3/4 flex justify-center items-center w-full">
+        <h1 className="text-center xl:text-xl text-lg text-red-500 font-semibold"> No Query Found </h1>
+      </div>
+    )
+  )
 };

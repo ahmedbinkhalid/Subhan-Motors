@@ -75,6 +75,7 @@ export const postAddNewCar = async (carData: addNewCarFormData): Promise<PostNew
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Authorization" : `Bearer ${localStorage.getItem("token")}`
       },
       body: JSON.stringify(dataToSend),
     });

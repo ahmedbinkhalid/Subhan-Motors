@@ -15,6 +15,8 @@ export const myListedAds = async (token: string): Promise<UsedCarsForSaleRespons
             },
         });
 
+        console.log("My Listed Adds : ",response);
+
         if (!response.ok) {
             throw new Error("Failed to fetch");
         }
@@ -29,9 +31,7 @@ export const myListedAds = async (token: string): Promise<UsedCarsForSaleRespons
             price: item.price,
             location: item.location,
             _id : item._id
-
         }));
-        console.log(formattedData);
         return { sellCarsData: formattedData }; // Return the correctly formatted data
     } catch (error) {
         console.error("Error during fetching Ads Cars Data:", error);

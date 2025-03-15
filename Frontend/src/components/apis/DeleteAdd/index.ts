@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 const token = localStorage.getItem("token");
-export const DeleteAdd = async (id: string): Promise<void> => {
+export const DeleteAdd = async (id: string) => {
     try {
   
       const response = await fetch(`https://test-backend-1xtc.onrender.com/api/deletecar/${id}`, {
@@ -8,18 +9,17 @@ export const DeleteAdd = async (id: string): Promise<void> => {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
-
         },
       });
-  
+
+      const data = await response.json();
       if (!response.ok) {
-        throw new Error('Failed to delete Car Add');
+       return {success : false, message : data.message};
       }
+      return {success : true, message : data.message};
   
-      window.location.reload();
     } catch (error) {
-      console.error('Error while Car Add', error);
-      throw new Error('Failed to delete Car Add');
+      return {success : false, message : "An Unknown Error Occurred During Deleting Car !"};
     }
   };
   

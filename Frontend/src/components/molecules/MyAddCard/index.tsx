@@ -1,10 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from "react";
 import { MyAdsCardProps } from "./types";
 import { MdOutlineModeEdit, MdDeleteOutline } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { GiBleedingEye } from "react-icons/gi";
-import { CustomPopup } from "../../atoms/CustomPopup"; // Assuming you have a custom popup component
 
 export const MyAdsCard: React.FC<MyAdsCardProps> = ({
   imageUrl,
@@ -17,8 +15,6 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
 }) => {
   const navigate = useNavigate();
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-  const [customPopupMessage, setCustomPopupMessage] = useState("");
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const onEditHandler = () => {
     navigate(`/adUpdation/${_id}`);
@@ -29,15 +25,8 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
   };
 
   const handleDeleteConfirmation = () => {
-    setShowDeleteConfirm(false); // Hide confirmation dialog
-    try {
-      onRemove(_id); // Proceed with deletion
-      setCustomPopupMessage("Ad deleted successfully!");
-      setIsSuccess(true);
-    } catch (error) {
-      setCustomPopupMessage("Error deleting ad. Please try again.");
-      setIsSuccess(false);
-    }
+    setShowDeleteConfirm(false); 
+    onRemove(_id);
   };
 
   const handleCancelDelete = () => {
@@ -45,7 +34,7 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
   };
 
   return (
-    <div className="flex flex-col shadow-md rounded-md hover:shadow-xl ">
+    <div className="flex flex-col shadow-md rounded-md hover:shadow-xl">
       <img
         src={imageUrl}
         alt={`${make} ${model}`}
@@ -117,13 +106,7 @@ export const MyAdsCard: React.FC<MyAdsCardProps> = ({
         </div>
       )}
 
-      {customPopupMessage && (
-        <CustomPopup
-          message={customPopupMessage}
-          isSuccess={isSuccess}
-          onClose={() => setCustomPopupMessage("")}
-        />
-      )}
+  
     </div>
 
     // <div className="flex flex-col items-center bg-white border rounded-md p-2 py-8 shadow-md gap-8 w-full hover:shadow-xl ">

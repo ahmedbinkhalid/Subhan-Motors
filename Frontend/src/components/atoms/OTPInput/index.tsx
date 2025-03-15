@@ -13,13 +13,13 @@ const OTPInput: React.FC<OTPInputProps> = ({ onChange }) => {
   }, []);
 
   const handleChange = (value: string, index: number) => {
-    if (/\D/.test(value)) return; // Only allow numeric input
+    if (/\D/.test(value)) return; 
 
     const otpCopy = [...otp];
     otpCopy[index] = value;
     setOtp(otpCopy);
 
-    onChange(otpCopy.join("")); // Call the onChange prop
+    onChange(otpCopy.join("")); 
 
     if (value && index < 3) {
       inputRefs.current[index + 1]?.focus();

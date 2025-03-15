@@ -18,10 +18,10 @@ export const FeaturedCarsCard: React.FC<FeaturedCarsCardProps> = ({
           className="object-fill h-56 w-auto rounded-md"
         />
         <div className="mx-4 gap-6 py-4">
-          <h1 className="md:text-xl text-lg text-charcoal-gray font-semibold">
+          <h1 className="md:text-xl text-lg text-charcoal-gray font-semibold truncate">
             {carMake}, {carModel}
           </h1>
-          <p className="md:text-lg text-base text-blue-variant font-medium">
+          <p className="md:text-lg text-base text-blue-variant truncate font-medium">
             {" "}
             Rs. {carPrice}{" "}
           </p>

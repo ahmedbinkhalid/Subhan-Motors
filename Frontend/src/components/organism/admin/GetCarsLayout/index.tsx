@@ -13,11 +13,11 @@ export const GetCarsLayout: React.FC<GetCarsLayoutProps> = ({
 
   return (
     <section className="max-w-screen-xl mx-auto lg:px-8 md:mb-4">
-      <h1 className="md:text-2xl text-lg lg:text-3xl text-center text-charcoal-gray font-semibold lg:my-10 my-8">
+      <h1 className="md:text-2xl text-lg lg:text-3xl text-center text-charcoal-gray font-semibold mt-6">
         {title}
       </h1>
 
-      <section className="rounded-lg bg-slate-50  lg:py-10 py-6">
+      <section className="rounded-lg bg-slate-50 py-6">
         <div
           className={`grid ${
             role.includes("Admin")

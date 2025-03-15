@@ -10,6 +10,7 @@ export const CustomPopup: React.FC<CustomPopupProps> = ({
   useEffect(() => {
     const timer = setTimeout(() => {
       onClose();
+      window.location.reload();
     }, 3000);
 
     return () => clearTimeout(timer);
