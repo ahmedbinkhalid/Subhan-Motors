@@ -1,7 +1,7 @@
 import React from "react";
-import { NewsLetterForm } from "../../components/molecules/admin/NewsLetterForm";
-import { sendNewsletter } from "../../components/apis/PostNewsLetter";
-import { newsLetterFormData } from "../../components/molecules/admin/NewsLetterForm/types";
+import { NewsLetterForm } from "../../../components/molecules/admin/NewsLetterForm";
+import { sendNewsletter } from "../../../components/apis/PostNewsLetter";
+import { newsLetterFormData } from "../../../components/molecules/admin/NewsLetterForm/types";
 
 export const CreateNewsLetter: React.FC = () => {
   const handleSubmit = async (data: newsLetterFormData) => {

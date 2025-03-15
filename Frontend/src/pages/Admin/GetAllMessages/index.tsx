@@ -1,9 +1,9 @@
 // src/pages/admin/GetAllMessages.tsx
 import React, { useEffect, useState } from "react";
-import { TableLayout } from "../../components/organism/admin/TableLayout";
-import { getMessages } from "../../components/apis/GetMessages";
+import { TableLayout } from "../../../components/organism/admin/TableLayout";
+import { getMessages } from "../../../components/apis/GetMessages";
 import { Message } from "./types";
-import { TableRow } from "../../components/organism/admin/TableLayout/types";
+import { TableRow } from "../../../components/organism/admin/TableLayout/types";
 import { useNavigate } from "react-router-dom";
 
 export const GetAllMessages: React.FC = () => {

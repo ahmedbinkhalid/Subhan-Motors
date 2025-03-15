@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // src/pages/admin/GetAllQueries.tsx
 import React, { useEffect, useState } from "react";
-import { TableLayout } from "../../components/organism/admin/TableLayout";
-import { fetchQueries } from "../../components/apis/fetchQueries"; // Import the fetch function
+import { TableLayout } from "../../../components/organism/admin/TableLayout";
+import { fetchQueries } from "../../../components/apis/fetchQueries"; // Import the fetch function
 import { Query } from "./types";
-import { TableRow } from "../../components/organism/admin/TableLayout/types";
+import { TableRow } from "../../../components/organism/admin/TableLayout/types";
 import { useNavigate } from "react-router-dom";
 
 export const GetAllQueries: React.FC = () => {

@@ -6,7 +6,7 @@ const DataLoader : React.FC <DataLoaderTypes> = ({
   loadingTitle
 }) => {
   return (
-    <div className="h-[80vh] flex justify-center items-center">
+    <div className="h-[70vh] flex justify-center items-center">
       <div className="flex-col">
                   <DNA
                     visible={true}

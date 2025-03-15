@@ -1,8 +1,8 @@
 import React from "react";
-import { ImageProvider } from "../../components/molecules/ImageContext";
-import { AddCarUploadPhotos } from "../../components/molecules/admin/AddCarUploadPhotos";
-import { ContactProvider } from "../../components/molecules/ContactContext";
-import AddNewCarInformationForm from "../../components/molecules/AddNewcarInformationForm";
+import { ImageProvider } from "../../../components/molecules/ImageContext";
+import { AddCarUploadPhotos } from "../../../components/molecules/admin/AddCarUploadPhotos";
+import { ContactProvider } from "../../../components/molecules/ContactContext";
+import AddNewCarInformationForm from "../../../components/molecules/AddNewcarInformationForm";
 export const AddNewCar: React.FC = () => {
   return (
     <ImageProvider>

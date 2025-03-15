@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetUsedCars } from '../GetUsedCars';
+import { GetUsedCars } from '../../GetUsedCars';
 
 export const AllUsedCars : React.FC = () => {
   return (

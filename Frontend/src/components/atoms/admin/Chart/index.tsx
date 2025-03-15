@@ -6,11 +6,14 @@ import {
   fetchWeeklyVisitors,
   fetchMonthlyVisitors,
 } from "../../../apis/FetchVisitors";
+import { ChartProps } from "./types";
 
 // Define colors: red for Weekly, blue for Monthly, and charcoal-gray for Daily
 const COLORS = ["#36454F", "#0047AB", "#D22B2B"]; // Charcoal-gray added for Daily Visitors
 
-export const Chart: React.FC = () => {
+export const Chart: React.FC <ChartProps> = ({
+  setChartLoading
+}) => {
   const [dailyVisitors, setDailyVisitors] = useState<number | null>(null);
   const [liveVisitors, setLiveVisitors] = useState<number | null>(null);
   const [weeklyVisitors, setWeeklyVisitors] = useState<number | null>(null);
@@ -18,12 +21,13 @@ export const Chart: React.FC = () => {
   const [screenWidth, setScreenWidth] = useState<number>(window.innerWidth);
 
   useEffect(() => {
-    // Fetch data from the backend
     const fetchData = async () => {
+      // setChartLoading(true);
       const dailyData = await fetchDailyVisitors();
       const liveData = await fetchLiveVisitors();
       const weeklyData = await fetchWeeklyVisitors();
       const monthlyData = await fetchMonthlyVisitors();
+      // setChartLoading(false);
 
       setDailyVisitors(dailyData);
       setLiveVisitors(liveData);
@@ -42,7 +46,7 @@ export const Chart: React.FC = () => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  });
 
   // Check if the data is loaded (non-null)
   if (
@@ -100,7 +104,7 @@ export const Chart: React.FC = () => {
             cy="50%"
             outerRadius={getOuterRadius()} // Dynamically set the outer radius
           >
-            {data.map((entry, index) => (
+            {data.map((_entry, index) => (
               <Cell
                 key={`cell-${index}`}
                 fill={COLORS[index % COLORS.length]}
